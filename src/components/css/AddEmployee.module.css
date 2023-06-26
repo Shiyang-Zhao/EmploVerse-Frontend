@@ -1,0 +1,63 @@
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 100px;
+    max-width: 80vw;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-gap: 20px;
+}
+
+.container h2 {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.addEmployeeForm {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.addEmployeeForm .form-column {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.addEmployeeForm label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.addEmployeeForm input,
+.addEmployeeForm button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.addEmployeeForm button {
+    background-color: #222;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.addEmployeeForm button:hover {
+    background-color: #545454;
+}
+
+.requiredText {
+    color: red;
+}

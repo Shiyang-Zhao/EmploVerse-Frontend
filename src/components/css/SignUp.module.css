@@ -1,0 +1,96 @@
+.container {
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.header p {
+  font-size: 14px;
+  color: #888;
+}
+
+.signUpForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.inputContainer {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.inputContainer label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.inputContainer input[type='text'],
+.inputContainer input[type='password'],
+.inputContainer input[type='email'],
+.inputContainer input[type='date'],
+.inputContainer input[type='tel'],
+.inputContainer select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.inputContainer input[type='text']:focus,
+.inputContainer input[type='password']:focus,
+.inputContainer input[type='email']:focus,
+.inputContainer input[type='date']:focus,
+.inputContainer input[type='tel']:focus,
+.inputContainer select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.buttonContainer {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.buttonContainer button {
+  width: 200px;
+  margin-left: 60%;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttonContainer button:hover {
+  background-color: #0056b3;
+}
+
+.requiredText{
+  color: red;
+}
