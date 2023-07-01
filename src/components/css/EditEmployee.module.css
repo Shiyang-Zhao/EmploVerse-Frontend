@@ -51,9 +51,11 @@
     color: #fff;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    margin: 0 50%;
 }
 
 .editEmployeeForm button:hover {
     background-color: #545454;
+    transform: scale(1.3);
 }

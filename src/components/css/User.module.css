@@ -1,4 +1,5 @@
 .container {
+    min-width: 650px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px;
@@ -14,20 +15,19 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: top;
 }
 
 .user-photo img {
     display: block;
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .user-info {
-    display: flex;
-    flex-direction: column;
+    grid-column: 2;
+    grid-row: 1 / span 3;
 }
 
 .user-name {
@@ -49,16 +49,17 @@
     margin-top: 20px;
 }
 
-.section-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #545454;
-}
 
 .section-content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #545454;
 }
 
 .grid-item {
@@ -87,6 +88,8 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+    grid-column: 1;
+    grid-row: 2;
 }
 
 .button:hover {

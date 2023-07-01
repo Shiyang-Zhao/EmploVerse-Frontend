@@ -32,6 +32,7 @@ export default function User({ state }) {
     <main>
       <div className={styles.container}>
         <div className={styles['user-photo']}><img src={img} alt="User Photo" /></div>
+        <Link to="edituser" className={styles.button}>Edit Profile</Link>
         <div className={styles['user-info']}>
           <h1 className={styles['user-name']}>{user.firstName} {user.lastName}</h1>
           <section className={`${styles['personal-info']} ${styles['grid-section']}`}>
@@ -111,7 +112,7 @@ export default function User({ state }) {
               </div>
             </div>
           </section>
-          <Link to="edituser" className={styles.button}>Edit</Link>
+          
         </div>
       </div>
     </main>

@@ -87,7 +87,7 @@
 
   &:hover span:nth-child(3) {
     opacity: 1;
-    transition: opacity 700ms ease;
+    transition: all 0.7s ease;
   }
 
   & span:nth-child(1),
@@ -96,7 +96,7 @@
     top: 0;
     left: 0;
     color: #ffffff;
-    transition: 0.5s;
+    transition: all 0.5s ease;
     overflow: hidden;
   }
 
@@ -114,7 +114,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
-    transition: opacity 350ms ease;
+    transition: all 350ms ease;
     font-size: 1.8rem;
     color: #fff;
     background: #66e3be;
@@ -200,7 +200,7 @@
   border-radius: 10px;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
@@ -244,7 +244,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
   opacity: 0.8;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
@@ -298,7 +298,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0 10px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 

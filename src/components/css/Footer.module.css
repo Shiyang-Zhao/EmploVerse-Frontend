@@ -40,7 +40,7 @@
 
 .footerSection ul li a {
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   color: #a3a3a3;
   opacity: 0.7;
 }
@@ -67,7 +67,7 @@
   height: 40px;
   border-radius: 50%;
   background-color: #333;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .socialIcons a:hover {
@@ -89,7 +89,7 @@
 .footerText a {
   color: #aaa;
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .footerText a:hover {

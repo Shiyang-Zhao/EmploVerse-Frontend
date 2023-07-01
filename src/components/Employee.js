@@ -15,10 +15,10 @@ export default function Employee({ state }) {
       try {
         console.log("Selected Employee ID:", selectedEmployeeId);
         const response = await axios.get(`${API_URL}/employees/getEmployeeById/${selectedEmployeeId}`, {
-            headers: {
-              'Authorization': state.cookies.jwt
-            }
-          });
+          headers: {
+            'Authorization': state.cookies.jwt
+          }
+        });
         setEmployee(response.data);
         console.log(response.data);
       } catch (error) {
@@ -34,6 +34,13 @@ export default function Employee({ state }) {
         <div className={styles['employee-photo']}>
           <img src={img} alt='Employee Photo' />
         </div>
+        <button className={styles.button} onClick={() => {
+          if (state.cookies.selectedRole[0] !== 'ROLE_ADMIN' && state.cookies.selectedRole[0] !== 'ROLE_MANAGER') {
+            alert("You don't have the privileges to edit employees");
+          } else {
+            navigate('/employees/editemployee');
+          }
+        }}>Edit Employee</button>
         <div className={styles['employee-info']}>
           <h1 className={styles['employee-name']}>{employee.firstName} {employee.lastName}</h1>
 
@@ -118,14 +125,6 @@ export default function Employee({ state }) {
               </div>
             </div>
           </div>
-
-          <button className={styles.button} onClick={() => {
-            if (state.cookies.selectedRole[0] !== 'ROLE_ADMIN' && state.cookies.selectedRole[0] !== 'ROLE_MANAGER') {
-              alert("You don't have the privileges to edit employees");
-            } else {
-              navigate('/employees/editemployee');
-            }
-          }}>Edit</button>
         </div>
       </div>
     </main>

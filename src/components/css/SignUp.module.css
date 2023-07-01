@@ -55,7 +55,7 @@
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
 }
 
 .inputContainer input[type='text']:focus,
@@ -84,7 +84,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
 }
 
 .buttonContainer button:hover {

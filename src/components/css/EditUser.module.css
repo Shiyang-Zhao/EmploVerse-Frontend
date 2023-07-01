@@ -29,8 +29,7 @@
     font-size: 18px;
 }
 
-.editUserForm input,
-.editUserForm button {
+.editUserForm input {
     display: block;
     width: 100%;
     padding: 12px;
@@ -42,12 +41,17 @@
 }
 
 .editUserForm button {
+    grid-column: span 2; /* Span two columns to take up the full width */
+    border-radius: 5px;
     background-color: #222;
     color: #fff;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    margin: 0 25%;
+    padding: 10px;
 }
 
 .editUserForm button:hover {
     background-color: #545454;
+    transform: scale(1.3);
 }
