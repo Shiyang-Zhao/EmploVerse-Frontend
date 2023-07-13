@@ -59,7 +59,7 @@
 - Utilize the employee directory to search and view employee details.
 - Generate reports and analyze employee data using the provided analytics tools.
 
-### UI
+<!---### UI
 
 <img src="https://github.com/Shiyang-Zhao/Shiyang-Zhao/blob/main/static/EmploVerse1.gif" alt="EmploVerse">
 
@@ -69,7 +69,7 @@
 
 ### Sign in as Admin (Manager and Admin have the same privileges so far)
 
-<img src="https://github.com/Shiyang-Zhao/Shiyang-Zhao/blob/main/static/EmploVerse3.gif" alt="EmploVerse">
+<img src="https://github.com/Shiyang-Zhao/Shiyang-Zhao/blob/main/static/EmploVerse3.gif" alt="EmploVerse">--->
 
 # 🤝 Contributing
 
