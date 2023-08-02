@@ -58,7 +58,7 @@ export default function EditEmployee({ state }) {
         <form className={styles.editEmployeeForm} onSubmit={handleSubmit}>
           {Object.entries(formData).map(([name, value]) => (
             <div className={styles['input-container']} key={name}>
-              <label htmlFor={`employee-${name}`}>{formatLabel(name)}</label>
+              <label htmlFor={`employee-${name}`}>{formatLabel(name)}{name !== 'address2' && name !== 'endDate' ? <text className="requiredText">*</text> : ''}</label>
               <input
                 id={`employee-${name}`}
                 name={name}

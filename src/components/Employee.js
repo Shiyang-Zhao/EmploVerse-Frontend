@@ -32,7 +32,7 @@ export default function Employee({ state }) {
     <main>
       <div className={styles.container}>
         <div className={styles['employee-photo']}>
-          <img src={img} alt='Employee Photo' />
+          <img src={img} alt='Employee' />
         </div>
         <button className={styles.button} onClick={() => {
           if (state.cookies.selectedRole[0] !== 'ROLE_ADMIN' && state.cookies.selectedRole[0] !== 'ROLE_MANAGER') {
@@ -48,23 +48,23 @@ export default function Employee({ state }) {
             <h2>Personal Information</h2>
             <div className={styles['info-grid']}>
               <div className={styles['info-item']}>
-                <p><strong>Employee ID:</strong></p>
+                <p><strong>Employee ID</strong></p>
                 <p>{employee.id}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Email:</strong></p>
+                <p><strong>Email</strong></p>
                 <p>{employee.email}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Phone:</strong></p>
+                <p><strong>Phone</strong></p>
                 <p>{employee.phoneNumber}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Birthday:</strong></p>
+                <p><strong>Birthday</strong></p>
                 <p>{employee.birthday}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Address:</strong></p>
+                <p><strong>Address</strong></p>
                 <p>{employee.address1} {employee.address2 ?? ''}, {employee.city}, {employee.state} {employee.zipCode}, {employee.country}</p>
               </div>
             </div>
@@ -74,35 +74,35 @@ export default function Employee({ state }) {
             <h2>Company Information</h2>
             <div className={styles['info-grid']}>
               <div className={styles['info-item']}>
-                <p><strong>Company:</strong></p>
+                <p><strong>Company</strong></p>
                 <p>{employee.company}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Start Date:</strong></p>
+                <p><strong>Start Date</strong></p>
                 <p>{employee.startDate}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>End Date:</strong></p>
+                <p><strong>End Date</strong></p>
                 <p>{employee.endDate}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Department:</strong></p>
+                <p><strong>Department</strong></p>
                 <p>{employee.department}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Supervisor:</strong></p>
+                <p><strong>Supervisor</strong></p>
                 <p>{employee.supervisor}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Job Titles:</strong></p>
+                <p><strong>Job Titles</strong></p>
                 <p>{employee.jobTitles}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Work Schedule:</strong></p>
+                <p><strong>Work Schedule</strong></p>
                 <p>{employee.workSchedule}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Status:</strong></p>
+                <p><strong>Status</strong></p>
                 <p>{employee.status}</p>
               </div>
             </div>
@@ -112,15 +112,15 @@ export default function Employee({ state }) {
             <h2>Education Information</h2>
             <div className={styles['info-grid']}>
               <div className={styles['info-item']}>
-                <p><strong>University:</strong></p>
+                <p><strong>University</strong></p>
                 <p>{employee.university}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Degree:</strong></p>
+                <p><strong>Degree</strong></p>
                 <p>{employee.degree}</p>
               </div>
               <div className={styles['info-item']}>
-                <p><strong>Major:</strong></p>
+                <p><strong>Major</strong></p>
                 <p>{employee.major}</p>
               </div>
             </div>

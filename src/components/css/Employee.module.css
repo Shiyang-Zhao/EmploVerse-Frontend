@@ -45,9 +45,26 @@
     color: #666;
 }
 
+/* Style the info sections */
 .info-section {
+    border: 1px solid #ccc;
+    padding: 20px;
     margin-top: 20px;
+    border-radius: 10px;
+    /* Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Add a subtle box-shadow for a 3D effect */
+    transition: all 0.3s ease;
+    /* Add transition for smooth hover effect */
 }
+
+/* Change border color on hover */
+.info-section:hover {
+    transform: translateY(-5px);
+    border-color: #3498db;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 .info-grid {
     display: grid;

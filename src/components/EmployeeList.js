@@ -3,7 +3,7 @@ import "./components.css";
 import styles from "./css/EmployeeList.module.css";
 import Footer from "./Footer";
 import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
@@ -324,71 +324,75 @@ export default function EmployeeList({ state }) {
         />
 
 
-        <h3>Search Result</h3>
-        <table className={styles.EmployeeListTable}>
-          <thead>
-            <tr>
-              <th>
-                ID
-              </th>
-              <th>
-                First Name
-              </th>
-              <th>
-                Last Name
-              </th>
-              <th>
-                Email
-              </th>
-              <th>
-                Phone Number
-              </th>
-              <th>
-                Actions
-              </th>
-              <th>
-                Job Titles
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredEmployeesList &&
-              filteredEmployeesList.map((employee) => (
-                <React.Fragment key={employee.id}>
-                  <tr
-                    className={styles.information}
-                    key={employee.id}
-                    onClick={() => {
-                      sessionStorage.setItem("selectedEmployeeId", employee.id);
-                      navigate("employeeProfile");
-                    }}
-                  >
-                    <td>{employee.id}</td>
-                    <td>{employee.firstName}</td>
-                    <td>{employee.lastName}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.phoneNumber}</td>
-                    <td>
-                      <button
-                        className={styles.Edit}
-                        onClick={(event) => editEmployee(employee, event)}
+        {filteredEmployeesList.length > 0 && (
+          <React.Fragment>
+            <h3>Search Result</h3>
+            <table className={styles.EmployeeListTable}>
+              <thead>
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    First Name
+                  </th>
+                  <th>
+                    Last Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Phone Number
+                  </th>
+                  <th>
+                    Actions
+                  </th>
+                  <th>
+                    Job Titles
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  filteredEmployeesList.map((employee) => (
+                    <React.Fragment key={employee.id}>
+                      <tr
+                        className={styles.information}
+                        key={employee.id}
+                        onClick={() => {
+                          sessionStorage.setItem("selectedEmployeeId", employee.id);
+                          navigate("employeeProfile");
+                        }}
                       >
-                        Edit
-                      </button>
-                      |
-                      <button
-                        className={styles.Delete}
-                        onClick={(event) => deleteEmployee(employee.id, event)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                    <td>{employee.jobTitles}</td>
-                  </tr>
-                </React.Fragment>
-              ))}
-          </tbody>
-        </table>
+                        <td>{employee.id}</td>
+                        <td>{employee.firstName}</td>
+                        <td>{employee.lastName}</td>
+                        <td>{employee.email}</td>
+                        <td>{employee.phoneNumber}</td>
+                        <td>
+                          <button
+                            className={styles.Edit}
+                            onClick={(event) => editEmployee(employee, event)}
+                          >
+                            Edit
+                          </button>
+                          |
+                          <button
+                            className={styles.Delete}
+                            onClick={(event) => deleteEmployee(employee.id, event)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                        <td>{employee.jobTitles}</td>
+                      </tr>
+                    </React.Fragment>
+                  ))}
+              </tbody>
+            </table>
+          </React.Fragment>
+        )}
       </div>
       <Footer />
     </main>

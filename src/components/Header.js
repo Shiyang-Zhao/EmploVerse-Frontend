@@ -1,12 +1,13 @@
 import "./components.css";
 import styles from "./css/Header.module.css";
 import user from "../icons/user.svg";
-import toggler from '../icons/toggler.svg';
+import togglerIcon from '../icons/toggler.svg';
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header({ state }) {
   const { isSignedIn, cookies } = state;
+  const isAdmin = cookies.selectedRole?.[0] === 'ROLE_ADMIN';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleToggleMenu = () => {
@@ -32,8 +33,13 @@ export default function Header({ state }) {
       </Link>
 
       <nav>
-        <button className={styles.toggleButton} >
-          <img src={toggler} className={styles.togglerIcon} onClick={handleToggleMenu} />
+        <button className={styles.toggleButton}>
+          <img
+            src={togglerIcon}
+            className={styles.togglerIcon}
+            onClick={handleToggleMenu}
+            alt="Toggle Menu"
+          />
         </button>
         <ul className={isMenuOpen ? styles.show : styles.hide}>
           <li>
@@ -42,27 +48,40 @@ export default function Header({ state }) {
           <li>
             <Link to="user">Dashboard</Link>
           </li>
-          <li>
-            <Link to="employees">Employee List</Link>
-          </li>
-          <li className={styles.dropdown}>
-            <Link to={isSignedIn ? "#" : "signin"}>
-              {isSignedIn ? <img src={user} alt="User" /> : "Sign in"}
-            </Link>
-            {isSignedIn && (
-              <ul className={styles["dropdown-menu"]}>
+          {isSignedIn && (
+            <>
+              {isAdmin && (
                 <li>
-                  <Link to="user">Profile</Link>
+                  <Link to="users">User List</Link>
                 </li>
-                <li>
-                  <Link to="/switch">Switch</Link>
-                </li>
-                <li>
-                  <Link to="/logout">Log out</Link>
-                </li>
-              </ul>
-            )}
-          </li>
+              )}
+              
+              <li>
+                <Link to="employees">Employee List</Link>
+              </li>
+              <li className={styles.dropdown}>
+                <Link to="user">
+                  <img src={user} alt="User" />
+                </Link>
+                <ul className={styles["dropdown-menu"]}>
+                  <li>
+                    <Link to="user">Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/switch">Switch</Link>
+                  </li>
+                  <li>
+                    <Link to="/logout">Log out</Link>
+                  </li>
+                </ul>
+              </li>
+            </>
+          )}
+          {!isSignedIn && (
+            <li>
+              <Link to="signin">Sign in</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

@@ -12,8 +12,6 @@ export default function Home() {
   useEffect(() => {
     function handleScroll() {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
       // Check if scrolled to the top
       setIsAtTop(scrollTop === 0);
     }

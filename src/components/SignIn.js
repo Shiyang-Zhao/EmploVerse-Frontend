@@ -8,22 +8,16 @@ import { API_URL } from '../config';
 export default function SignIn({ setCookie }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
     selectedRole: ['ROLE_USER']
   });
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value
-    });
-  };
-
-  const handleRoleChange = (event) => {
-    setFormData({
-      ...formData,
-      selectedRole: [event.target.value]
+      [name]: value,
     });
   };
 
@@ -31,15 +25,17 @@ export default function SignIn({ setCookie }) {
     event.preventDefault();
     try {
       const response = await axios.post(`${API_URL}/user/authenticate`, {
-        email: formData.email,
+        username: formData.username,
         password: formData.password,
-        roles: formData.selectedRole
+        roles: formData.selectedRole,
       });
 
-      setCookie("email", formData.email);
+      setCookie("id", response.data.id);
+      setCookie("username", response.data.username);
+      setCookie("email", response.data.email);
       setCookie("jwt", `Bearer ${response.data.token}`);
-      setCookie("selectedRole", formData.selectedRole);
-      navigate("/");
+      setCookie("selectedRole", response.data.roles);
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -54,13 +50,13 @@ export default function SignIn({ setCookie }) {
         </div>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputContainer}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="username">Username</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleInputChange}
+              type="username"
+              id="username"
+              name="username"
+              placeholder="Username"
+              onChange={handleChange}
               required
             />
           </div>
@@ -71,7 +67,7 @@ export default function SignIn({ setCookie }) {
               id="password"
               name="password"
               placeholder="Password"
-              onChange={handleInputChange}
+              onChange={handleChange}
               required
             />
           </div>
@@ -83,7 +79,7 @@ export default function SignIn({ setCookie }) {
                   id="ROLE_ADMIN"
                   name="selectedRole"
                   value={["ROLE_ADMIN"]}
-                  onChange={handleRoleChange}
+                  onChange={handleChange}
                 />
                 <span>Administrator</span>
               </label>
@@ -93,7 +89,7 @@ export default function SignIn({ setCookie }) {
                   id="ROLE_MANAGER"
                   name="selectedRole"
                   value={["ROLE_MANAGER"]}
-                  onChange={handleRoleChange}
+                  onChange={handleChange}
                 />
                 <span>Manager</span>
               </label>
@@ -103,12 +99,14 @@ export default function SignIn({ setCookie }) {
                   id="ROLE_USER"
                   name="selectedRole"
                   value={["ROLE_USER"]}
-                  onChange={handleRoleChange}
+                  onChange={handleChange}
                 />
                 <span>User</span>
               </label>
             </div>
-            <button type="submit">Sign In</button>
+            <div className={styles.buttonContainer}>
+              <button type="submit">Sign Up</button>
+            </div>
           </div>
           <div className={styles.linkContainer}>
             <p>

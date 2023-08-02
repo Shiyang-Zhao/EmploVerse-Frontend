@@ -31,7 +31,7 @@ export default function User({ state }) {
   return (
     <main>
       <div className={styles.container}>
-        <div className={styles['user-photo']}><img src={img} alt="User Photo" /></div>
+        <div className={styles['user-photo']}><img src={img} alt="User" /></div>
         <Link to="edituser" className={styles.button}>Edit Profile</Link>
         <div className={styles['user-info']}>
           <h1 className={styles['user-name']}>{user.firstName} {user.lastName}</h1>
@@ -39,20 +39,22 @@ export default function User({ state }) {
             <h2 className={styles['section-title']}>Personal Information</h2>
             <div className={styles['section-content']}>
               <div className={styles['grid-item']}>
-                <p>Email:</p>
+                <strong>Email</strong>
                 <p>{user.email}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Phone:</p>
+                <strong>Phone</strong>
                 <p>{user.phoneNumber}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Birthday:</p>
+                <strong>Birthday</strong>
                 <p>{user.birthday}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Address:</p>
-                <p>{user.address1} {user.address2 ?? ''}, {user.city}, {user.state} {user.zipCode}, {user.country}</p>
+                <strong>Address</strong>
+                <p>
+                  {user.address1} {user.address2 ?? ''}, {user.city}, {user.state} {user.zipCode}, {user.country}
+                </p>
               </div>
             </div>
           </section>
@@ -61,35 +63,35 @@ export default function User({ state }) {
             <h2 className={styles['section-title']}>Employment Information</h2>
             <div className={styles['section-content']}>
               <div className={styles['grid-item']}>
-                <p>Company:</p>
+                <strong>Company</strong>
                 <p>{user.company}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Start Date:</p>
+                <strong>Start Date</strong>
                 <p>{user.startDate}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>End Date:</p>
+                <strong>End Date</strong>
                 <p>{user.endDate}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Department:</p>
+                <strong>Department</strong>
                 <p>{user.department}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Supervisor:</p>
+                <strong>Supervisor</strong>
                 <p>{user.supervisor}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Job Titles:</p>
+                <strong>Job Titles</strong>
                 <p>{user.jobTitles}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Work Schedule:</p>
+                <strong>Work Schedule</strong>
                 <p>{user.workSchedule}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Status:</p>
+                <strong>Status</strong>
                 <p>{user.status}</p>
               </div>
             </div>
@@ -99,20 +101,21 @@ export default function User({ state }) {
             <h2 className={styles['section-title']}>Education Information</h2>
             <div className={styles['section-content']}>
               <div className={styles['grid-item']}>
-                <p>University:</p>
+                <strong>University</strong>
                 <p>{user.university}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Degree:</p>
+                <strong>Degree</strong>
                 <p>{user.degree}</p>
               </div>
               <div className={styles['grid-item']}>
-                <p>Major:</p>
+                <strong>Major</strong>
                 <p>{user.major}</p>
               </div>
             </div>
           </section>
-          
+
+
         </div>
       </div>
     </main>

@@ -59,7 +59,7 @@ export default function AddEmployee({ state }) {
         <form className={styles.addEmployeeForm} onSubmit={handleSubmit}>
           {Object.entries(formData).map(([name, value]) => (
             <div className={styles['input-container']} key={name}>
-              <label htmlFor={`employee-${name}`}>{formatLabel(name)}{name !== 'address2' && name !== 'endDate' ? <text className={styles.requiredText}>*</text> : ''}</label>
+              <label htmlFor={`employee-${name}`}>{formatLabel(name)}{name !== 'address2' && name !== 'endDate' ? <text className="requiredText">*</text> : ''}</label>
               <input
                 id={`employee-${name}`}
                 name={name}
