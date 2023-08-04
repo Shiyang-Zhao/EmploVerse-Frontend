@@ -1,4 +1,4 @@
-import searchIcon from "../icons/search.svg";
+import searchIcon from "../media/icons/search.svg";
 import "./components.css";
 import styles from "./css/UserList.module.css";
 import Footer from "./Footer";

@@ -1,7 +1,7 @@
 import "./components.css";
 import styles from "./css/Header.module.css";
-import user from "../icons/user.svg";
-import togglerIcon from '../icons/toggler.svg';
+import user from "../media/icons/user.svg";
+import togglerIcon from '../media/icons/toggler.svg';
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

@@ -3,9 +3,11 @@ import styles from './css/SignUp.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { imageCompression } from 'browser-image-compression';
 import { API_URL, inputTypes, formatLabel } from '../config';
 
 export default function SignUp({ setCookie }) {
+  const MAX_FILE_SIZE = 1048576;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -14,18 +16,45 @@ export default function SignUp({ setCookie }) {
     email: '',
     password: '',
     phoneNumber: '',
-    profileImage: ''
+    profileImage: null
   });
 
   const [roles, setRoles] = useState(["ROLE_USER"]);
   const [selectedRole, setSelectedRole] = useState(["ROLE_USER"]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleChange = async (event) => {
+    const { name, value, files } = event.target;
+
+    // If the input type is 'file', update the formData with the selected file if it's within the size limit
+    if (event.target.type === 'file' && files.length > 0) {
+      const file = files[0];
+      // Check if the file size exceeds the maximum allowed size
+      if (file.size > MAX_FILE_SIZE) {
+        try {
+          // Compress the image using browser-image-compression
+          const compressedFile = await imageCompression(file, {
+            maxSizeMB: 1, // Set the target file size in MB after compression
+          });
+
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: compressedFile,
+          }));
+        } catch (error) {
+          console.error('Error compressing image:', error);
+        }
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: file,
+        }));
+      }
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleRoleChange = (event) => {
@@ -38,7 +67,11 @@ export default function SignUp({ setCookie }) {
     try {
       const registerResponse = await axios.post(
         `${API_URL}/user/register`,
-        { ...formData, roles }
+        { ...formData, roles }, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Set the correct Content-Type for multipart form data
+        }
+      }
       );
 
       if (registerResponse.ok) {
@@ -78,7 +111,7 @@ export default function SignUp({ setCookie }) {
                 name={name}
                 type={inputTypes[name] || inputTypes.default}
                 placeholder={formatLabel(name)}
-                value={value}
+                {...(inputTypes[name] === 'file' ? null : { value: value })}
                 onChange={handleChange}
                 required
               />

@@ -1,9 +1,9 @@
 import './components.css';
 import styles from './css/Footer.module.css';
-import facebook from '../icons/facebook.svg';
-import instagram from '../icons/instagram.svg';
-import twitter from '../icons/twitter.svg';
-import youtube from '../icons/youtube.svg';
+import facebook from '../media/icons/facebook.svg';
+import instagram from '../media/icons/instagram.svg';
+import twitter from '../media/icons/twitter.svg';
+import youtube from '../media/icons/youtube.svg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

@@ -8,28 +8,6 @@ import { API_URL, formatLabel, inputTypes } from '../config';
 export default function AddEmployee({ state }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    birthday: '',
-    phoneNumber: '',
-    address1: '',
-    address2: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: '',
-    company: '',
-    startDate: '',
-    endDate: '',
-    department: '',
-    supervisor: '',
-    jobTitles: '',
-    workSchedule: '',
-    status: '',
-    university: '',
-    degree: '',
-    major: ''
   });
 
   const handleChange = (event) => {

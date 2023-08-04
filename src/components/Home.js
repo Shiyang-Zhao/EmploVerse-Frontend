@@ -2,7 +2,7 @@ import './components.css';
 import styles from './css/Home.module.css';
 import React, { useEffect, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
-import EarthVideo from '../videos/Earth.mp4'
+import EarthVideo from '../media/videos/Earth.mp4'
 import Footer from './Footer'
 
 

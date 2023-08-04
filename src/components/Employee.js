@@ -1,5 +1,5 @@
 import './components.css';
-import img from '../videos/photo.jpg';
+import img from '../media/profileImages/defaultProfileImage.jpg';
 import styles from './css/Employee.module.css';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';

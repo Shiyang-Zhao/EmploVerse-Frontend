@@ -1,6 +1,6 @@
-const API_URL = 'http://54.153.123.3:8080/EmploVerse';
+// const API_URL = 'http://54.153.123.3:8080/EmploVerse';
 
-//const API_URL = 'http://localhost:8080/EmploVerse';
+const API_URL = 'http://localhost:8080/EmploVerse';
 const inputTypes = {
     password: 'password',
     email: 'email',

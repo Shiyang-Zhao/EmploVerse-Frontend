@@ -15,10 +15,10 @@ export default function SignIn({ setCookie }) {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -105,7 +105,7 @@ export default function SignIn({ setCookie }) {
               </label>
             </div>
             <div className={styles.buttonContainer}>
-              <button type="submit">Sign Up</button>
+              <button type="submit">Sign In</button>
             </div>
           </div>
           <div className={styles.linkContainer}>

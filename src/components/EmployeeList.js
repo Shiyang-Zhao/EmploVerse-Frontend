@@ -1,4 +1,4 @@
-import searchIcon from "../icons/search.svg";
+import searchIcon from "../media/icons/search.svg";
 import "./components.css";
 import styles from "./css/EmployeeList.module.css";
 import Footer from "./Footer";
@@ -13,20 +13,40 @@ export default function EmployeeList({ state }) {
   const navigate = useNavigate();
   const [allEmployeesList, setAllEmployeesList] = useState([]);
 
-  const [employeesList, setEmployeesList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    totalItems: 0,
+    sortField: 'id',
+    sortDir: 'asc',
+    employeeList: []
+  })
 
-  const [filteredEmployeesList, setFilteredEmployeesList] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [sortField, setSortField] = useState("id");
-  const [sortDir, setSortDir] = useState("asc");
-  const [searchField, setSearchField] = useState("id");
-  const [searchDir, setSearchDir] = useState("asc");
+  const [search, setSearch] = useState({
+    keyword: '',
+    searchField: 'id',
+    searchResult: []
+  })
+
+  // Update the pagination state
+  const changePagination = (changes) => {
+    setPagination((prevPagination) => ({
+      ...prevPagination,
+      ...changes
+    }));
+  };
+
+  // Update the search state
+  const changeSearch = (changes) => {
+    setSearch((prevSearch) => ({
+      ...prevSearch,
+      ...changes
+    }));
+  };
 
   useEffect(() => {
-    getEmployeesList();
-  }, [currentPage, sortField, sortDir]);
+    getPaginatedEmployeesList();
+  }, [pagination.currentPage, pagination.totalItems, pagination.sortField, pagination.sortDir]);
 
   useEffect(() => {
     getAllEmployeesList();
@@ -34,7 +54,19 @@ export default function EmployeeList({ state }) {
 
   //Handle page change
   const handlePageChange = ({ selected: selectedPage }) => {
-    setCurrentPage(selectedPage + 1);
+    changePagination({ 'currentPage': selectedPage + 1 });
+  };
+
+  //Toggle sort direction
+  const handleSort = async (event) => {
+    try {
+      changePagination({
+        sortField: event.target.className,
+        sortDir: pagination.sortDir === 'asc' ? 'desc' : 'asc'
+      })
+    } catch (error) {
+      console.error("Error fetching pagination:", error);
+    }
   };
 
   //Get all employees
@@ -52,55 +84,44 @@ export default function EmployeeList({ state }) {
   };
 
   //Get paginated employees
-  const getEmployeesList = async () => {
+  const getPaginatedEmployeesList = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/employees/page/${currentPage}?sortField=${sortField}&sortDir=${sortDir}`,
+        `${API_URL}/employees/page/${pagination.currentPage}?sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`,
         {
           headers: {
             Authorization: state.cookies.jwt,
           },
         }
       );
-      setTotalPages(response.data.totalPages);
-      setEmployeesList(response.data.listEmployees);
-    } catch (error) {
-      console.error("Error fetching pagination:", error);
-    }
-  };
-
-  //Toggle sort direction
-  const handleSort = async (event) => {
-    try {
-      setSortField(event.target.className);
-      if (sortDir === "asc") {
-        setSortDir("desc");
-      } else {
-        setSortDir("asc");
-      }
+      changePagination({
+        'totalPages': response.data.totalPages,
+        'totalItems': response.data.totalItems,
+        'employeeList': response.data.employeeList
+      });
     } catch (error) {
       console.error("Error fetching pagination:", error);
     }
   };
 
   //Handle search function
-  const handleSearch = async () => {
+  const getSearchResult = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/employees/searchEmployees?keyword=${keyword}&sortField=${searchField}&sortDir=${searchDir}`,
+        `${API_URL}/employees/searchEmployees?keyword=${search.keyword}&searchField=${search.searchField}`,
         {
           headers: {
             Authorization: state.cookies.jwt,
           },
         }
       );
-      setFilteredEmployeesList(response.data);
+      changeSearch({ 'searchResult': response.data });
     } catch (error) {
       console.error("Error fetching all employee list:", error);
     }
   };
 
-  //Handle edit employees (Optimized)
+  //Handle edit employees
   const editEmployee = (employee, event) => {
     event.stopPropagation();
     try {
@@ -137,7 +158,7 @@ export default function EmployeeList({ state }) {
             },
           }
         );
-        getEmployeesList();
+        changePagination({ totalItems: pagination.totalItems - 1 })
       }
     } catch (error) {
       console.error("Error deleting employee:", error);
@@ -155,16 +176,16 @@ export default function EmployeeList({ state }) {
               placeholder="Search"
               defaultValue=""
               className={styles.searchInput}
-              onChange={async (event) => {
-                setKeyword(event.target.value);
+              onChange={(event) => {
+                changeSearch({ 'keyword': event.target.value });
               }}
             />
           </div>
           <select
             className={styles.searchField}
             defaultValue="id"
-            onChange={async (event) => {
-              setSearchField(event.target.value);
+            onChange={(event) => {
+              changeSearch({ 'searchField': event.target.value });
             }}
           >
             <option value="id">ID</option>
@@ -179,20 +200,10 @@ export default function EmployeeList({ state }) {
             <option value="degree">Degree</option>
             <option value="major">Major</option>
           </select>
-          <select
-            className={styles.searchDir}
-            defaultValue="asc"
-            onChange={async (event) => {
-              setSearchDir(event.target.value);
-            }}
-          >
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
           <img
             className={styles.searchIcon}
             src={searchIcon}
-            onClick={handleSearch}
+            onClick={getSearchResult}
           ></img>
         </div>
 
@@ -274,8 +285,8 @@ export default function EmployeeList({ state }) {
             </tr>
           </thead>
           <tbody>
-            {employeesList &&
-              employeesList.map((employee) => (
+            {pagination.employeeList &&
+              pagination.employeeList.map((employee) => (
                 <React.Fragment key={employee.id}>
                   <tr
                     className={styles.information}
@@ -317,82 +328,11 @@ export default function EmployeeList({ state }) {
           nextLabel=">"
           onPageChange={handlePageChange}
           pageRangeDisplayed={5}
-          pageCount={totalPages}
+          pageCount={pagination.totalPages}
           previousLabel="<"
           pageClassName={styles.page}
           renderOnZeroPageCount={null}
         />
-
-
-        {filteredEmployeesList.length > 0 && (
-          <React.Fragment>
-            <h3>Search Result</h3>
-            <table className={styles.EmployeeListTable}>
-              <thead>
-                <tr>
-                  <th>
-                    ID
-                  </th>
-                  <th>
-                    First Name
-                  </th>
-                  <th>
-                    Last Name
-                  </th>
-                  <th>
-                    Email
-                  </th>
-                  <th>
-                    Phone Number
-                  </th>
-                  <th>
-                    Actions
-                  </th>
-                  <th>
-                    Job Titles
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  filteredEmployeesList.map((employee) => (
-                    <React.Fragment key={employee.id}>
-                      <tr
-                        className={styles.information}
-                        key={employee.id}
-                        onClick={() => {
-                          sessionStorage.setItem("selectedEmployeeId", employee.id);
-                          navigate("employeeProfile");
-                        }}
-                      >
-                        <td>{employee.id}</td>
-                        <td>{employee.firstName}</td>
-                        <td>{employee.lastName}</td>
-                        <td>{employee.email}</td>
-                        <td>{employee.phoneNumber}</td>
-                        <td>
-                          <button
-                            className={styles.Edit}
-                            onClick={(event) => editEmployee(employee, event)}
-                          >
-                            Edit
-                          </button>
-                          |
-                          <button
-                            className={styles.Delete}
-                            onClick={(event) => deleteEmployee(employee.id, event)}
-                          >
-                            Delete
-                          </button>
-                        </td>
-                        <td>{employee.jobTitles}</td>
-                      </tr>
-                    </React.Fragment>
-                  ))}
-              </tbody>
-            </table>
-          </React.Fragment>
-        )}
       </div>
       <Footer />
     </main>

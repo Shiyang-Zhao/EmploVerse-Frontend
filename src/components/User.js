@@ -1,5 +1,5 @@
 import './components.css';
-import img from '../videos/photo.jpg';
+import img from '../media/profileImages/defaultProfileImage.jpg';
 import styles from './css/User.module.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
