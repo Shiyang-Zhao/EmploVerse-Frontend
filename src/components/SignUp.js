@@ -3,7 +3,7 @@ import styles from './css/SignUp.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { imageCompression } from 'browser-image-compression';
+import imageCompression from 'browser-image-compression';
 import { API_URL, inputTypes, formatLabel } from '../config';
 
 export default function SignUp({ setCookie }) {
@@ -58,8 +58,11 @@ export default function SignUp({ setCookie }) {
   };
 
   const handleRoleChange = (event) => {
-    setRoles(event.target.value);
-    setSelectedRole([event.target.value[0]]);
+    const parsedRoles = JSON.parse(event.target.value);
+    setRoles(parsedRoles);
+    setSelectedRole([parsedRoles[0]]); // Set the selectedRole to the first element of the parsedRoles array
+    console.log(parsedRoles);
+    console.log([parsedRoles[0]]);
   };
 
   const handleSubmit = async (event) => {
@@ -71,25 +74,22 @@ export default function SignUp({ setCookie }) {
         headers: {
           'Content-Type': 'multipart/form-data', // Set the correct Content-Type for multipart form data
         }
-      }
-      );
+      });
 
-      if (registerResponse.ok) {
-        const authenticateResponse = await axios.post(
-          `${API_URL}/user/authenticate`,
-          {
-            username: formData.username,
-            password: formData.password,
-            roles: selectedRole,
-          }
-        );
-        setCookie("id", authenticateResponse.data.id);
-        setCookie("username", authenticateResponse.data.username);
-        setCookie("email", authenticateResponse.data.email);
-        setCookie("jwt", `Bearer ${authenticateResponse.data.token}`);
-        setCookie("selectedRole", authenticateResponse.data.roles);
-        navigate('/');
-      }
+      const authenticateResponse = await axios.post(
+        `${API_URL}/user/authenticate`,
+        {
+          username: formData.username,
+          password: formData.password,
+          roles: selectedRole,
+        }
+      );
+      setCookie("id", authenticateResponse.data.id);
+      setCookie("username", authenticateResponse.data.username);
+      setCookie("email", authenticateResponse.data.email);
+      setCookie("jwt", `Bearer ${authenticateResponse.data.token}`);
+      setCookie("selectedRole", authenticateResponse.data.roles);
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -119,10 +119,10 @@ export default function SignUp({ setCookie }) {
           ))}
           <div className={styles.inputContainer} key="roles">
             <label htmlFor="user-roles">Role</label>
-            <select id="roles" name="roles" defaultValue={formData.roles} onChange={handleRoleChange}>
-              <option value={["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"]}>Administrator</option>
-              <option value={["ROLE_MANAGER", "ROLE_USER"]}>Manager</option>
-              <option value={["ROLE_USER"]}>User</option>
+            <select id="roles" name="roles" defaultValue={JSON.stringify(['ROLE_USER'])} onChange={handleRoleChange}>
+              <option value={JSON.stringify(['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'])}>Administrator</option>
+              <option value={JSON.stringify(['ROLE_MANAGER', 'ROLE_USER'])}>Manager</option>
+              <option value={JSON.stringify(['ROLE_USER'])}>User</option>
             </select>
           </div>
           <div className={styles.buttonContainer}>

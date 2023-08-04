@@ -15,10 +15,12 @@ export default function SignIn({ setCookie }) {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    const parsedValue = name === 'selectedRole' ? JSON.parse(value) : value;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: parsedValue,
     }));
+    console.log(formData);
   };
 
   const handleSubmit = async (event) => {
@@ -78,7 +80,7 @@ export default function SignIn({ setCookie }) {
                   type="radio"
                   id="ROLE_ADMIN"
                   name="selectedRole"
-                  value={["ROLE_ADMIN"]}
+                  value={JSON.stringify(['ROLE_ADMIN'])}
                   onChange={handleChange}
                 />
                 <span>Administrator</span>
@@ -88,7 +90,7 @@ export default function SignIn({ setCookie }) {
                   type="radio"
                   id="ROLE_MANAGER"
                   name="selectedRole"
-                  value={["ROLE_MANAGER"]}
+                  value={JSON.stringify(['ROLE_MANAGER'])}
                   onChange={handleChange}
                 />
                 <span>Manager</span>
@@ -98,7 +100,7 @@ export default function SignIn({ setCookie }) {
                   type="radio"
                   id="ROLE_USER"
                   name="selectedRole"
-                  value={["ROLE_USER"]}
+                  value={JSON.stringify(['ROLE_USER'])}
                   onChange={handleChange}
                 />
                 <span>User</span>
