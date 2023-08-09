@@ -157,7 +157,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: -2;
+}
+
+.Feature-cntainer {
+  position: relative;
+  height: 100vh;
+
 }
 
 .Features-section {
@@ -167,7 +173,7 @@
   flex-direction: column;
   align-items: center;
   border: none;
-  background-image: url(../../media/images/background3.jpg);
+  background-image: url(../../media/backgrounds/background3.jpg);
   background-size: cover;
 }
 
@@ -216,7 +222,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(../../media/images/background1.jpg);
+  background-image: url(../../media/backgrounds/background1.jpg);
   background-size: cover;
 }
 
@@ -270,7 +276,7 @@
   background-color: #222;
   text-align: center;
   color: #fff;
-  background-image: url(../../media/images/background2.jpg);
+  background-image: url(../../media/backgrounds/background2.jpg);
   background-size: cover;
 }
 
@@ -318,7 +324,7 @@
   color: #888;
 }
 
-@keyframes gradientFadeIn {
+/* @keyframes gradientFadeIn {
   0% {
     opacity: 0;
   }
@@ -366,4 +372,4 @@
   animation-name: gradientFadeOut;
   animation-duration: 0.4s;
   animation-timing-function: ease-in-out;
-}
+} */

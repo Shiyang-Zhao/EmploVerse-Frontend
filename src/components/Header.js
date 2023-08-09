@@ -1,7 +1,6 @@
-import "./components.css";
+import "../../src/App.css";
+import {userIcon, togglerIcon} from '../config'
 import styles from "./css/Header.module.css";
-import user from "../media/icons/user.svg";
-import togglerIcon from '../media/icons/toggler.svg';
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,6 +8,7 @@ export default function Header({ state }) {
   const { isSignedIn, cookies } = state;
   const isAdmin = cookies.selectedRole?.[0] === 'ROLE_ADMIN';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const notAtHome = window.location.pathname === "/" ? "" : "text-dark";
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -29,7 +29,7 @@ export default function Header({ state }) {
   return (
     <header className={styles.header}>
       <Link to="/">
-        <h1>EmploVerse</h1>
+        <h1 className={notAtHome}>EmploVerse</h1>
       </Link>
 
       <nav>
@@ -42,36 +42,36 @@ export default function Header({ state }) {
           />
         </button>
         <ul className={isMenuOpen ? styles.show : styles.hide}>
-          <li>
-            <Link to="/">Home</Link>
+          <li >
+            <Link to="/" className={notAtHome}>Home</Link>
           </li>
           <li>
-            <Link to="user">Dashboard</Link>
+            <Link to="user" className={notAtHome}>Dashboard</Link>
           </li>
           {isSignedIn && (
             <>
               {isAdmin && (
                 <li>
-                  <Link to="users">User List</Link>
+                  <Link to="users" className={notAtHome}>Users</Link>
                 </li>
               )}
-              
+
               <li>
-                <Link to="employees">Employee List</Link>
+                <Link to="employees" className={notAtHome}>Employees</Link>
               </li>
               <li className={styles.dropdown}>
                 <Link to="user">
-                  <img src={user} alt="User" />
+                  <img src={userIcon} alt="User" />
                 </Link>
                 <ul className={styles["dropdown-menu"]}>
                   <li>
-                    <Link to="user">Profile</Link>
+                    <Link to="user" className={notAtHome}>Profile</Link>
                   </li>
                   <li>
-                    <Link to="/switch">Switch</Link>
+                    <Link to="/switch" className={notAtHome}>Switch</Link>
                   </li>
                   <li>
-                    <Link to="/logout">Log out</Link>
+                    <Link to="/logout" className={notAtHome}>Log out</Link>
                   </li>
                 </ul>
               </li>
@@ -79,7 +79,7 @@ export default function Header({ state }) {
           )}
           {!isSignedIn && (
             <li>
-              <Link to="signin">Sign in</Link>
+              <Link to="signin" className={notAtHome}>Sign in</Link>
             </li>
           )}
         </ul>

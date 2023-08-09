@@ -1,31 +1,14 @@
-import './components.css';
+import "../../src/App.css";
 import styles from './css/Home.module.css';
 import React, { useEffect, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import EarthVideo from '../media/videos/Earth.mp4'
 import Footer from './Footer'
 
-
 export default function Home() {
-  const [isAtTop, setIsAtTop] = useState(true);
-
-  useEffect(() => {
-    function handleScroll() {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      // Check if scrolled to the top
-      setIsAtTop(scrollTop === 0);
-    }
-    // Attach the scroll event listener
-    window.addEventListener('scroll', handleScroll);
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <main>
-      <div className={`${styles['gradient-top']} ${isAtTop ? styles.fadeOut : styles.fadeIn}`}></div>
+      {/* <div className={`${styles['gradient-top']} ${isAtTop ? styles.fadeOut : styles.fadeIn}`}></div> */}
       <video className={styles['Earth']} src={EarthVideo} autoPlay loop muted />
       <Parallax speed={-40} scale={[0.8, 1.5, 'easeInOut']}>
         <div className={styles['Welcome-container']}>
@@ -39,7 +22,7 @@ export default function Home() {
           </div>
         </div>
       </Parallax>
-      <Parallax scale={[1, 1.3, 'easeInOut']}>
+      <Parallax>
         <section className={styles['Features-section']}>
           <h2>Key Features</h2>
           <ul className={styles['Features-list']}>

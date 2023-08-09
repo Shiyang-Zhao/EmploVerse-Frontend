@@ -1,5 +1,5 @@
-import searchIcon from "../media/icons/search.svg";
-import "./components.css";
+import { searchIcon } from "../config";
+import "../../src/App.css";
 import styles from "./css/UserList.module.css";
 import Footer from "./Footer";
 import React, { useState, useEffect, useCallback } from "react";
@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL } from "../config";
+import { API_URL, ScrollToTop } from "../config";
 
 export default function UserList({ state }) {
+    ScrollToTop();
     const navigate = useNavigate();
     const [allUsersList, setAllUsersList] = useState([]);
 

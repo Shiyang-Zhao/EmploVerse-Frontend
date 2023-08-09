@@ -1,4 +1,4 @@
-import "./components.css";
+import "../../src/App.css";
 import styles from "./css/EditUser.module.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

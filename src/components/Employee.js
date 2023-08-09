@@ -1,4 +1,4 @@
-import './components.css';
+import "../../src/App.css";
 import img from '../media/profileImages/defaultProfileImage.jpg';
 import styles from './css/Employee.module.css';
 import React, { useEffect, useState } from 'react';

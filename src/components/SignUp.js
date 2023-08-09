@@ -1,4 +1,4 @@
-import './components.css';
+import "../../src/App.css";
 import styles from './css/SignUp.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -16,7 +16,7 @@ export default function SignUp({ setCookie }) {
     email: '',
     password: '',
     phoneNumber: '',
-    profileImage: null
+    profileImage: {}
   });
 
   const [roles, setRoles] = useState(["ROLE_USER"]);
@@ -32,10 +32,10 @@ export default function SignUp({ setCookie }) {
       if (file.size > MAX_FILE_SIZE) {
         try {
           // Compress the image using browser-image-compression
-          const compressedFile = await imageCompression(file, {
+          const compressedBlob = await imageCompression(file, {
             maxSizeMB: 1, // Set the target file size in MB after compression
           });
-
+          const compressedFile = new File([compressedBlob], file.name, { type: file.type });
           setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: compressedFile,
@@ -61,8 +61,6 @@ export default function SignUp({ setCookie }) {
     const parsedRoles = JSON.parse(event.target.value);
     setRoles(parsedRoles);
     setSelectedRole([parsedRoles[0]]); // Set the selectedRole to the first element of the parsedRoles array
-    console.log(parsedRoles);
-    console.log([parsedRoles[0]]);
   };
 
   const handleSubmit = async (event) => {
@@ -111,9 +109,10 @@ export default function SignUp({ setCookie }) {
                 name={name}
                 type={inputTypes[name] || inputTypes.default}
                 placeholder={formatLabel(name)}
-                {...(inputTypes[name] === 'file' ? null : { value: value })}
+                {...(inputTypes[name] === 'file' ? { accept: "image/*" } : '')}
+                {...(inputTypes[name] === 'file' ? '' : { value: value })}
                 onChange={handleChange}
-                required
+                {...(inputTypes[name] === 'file' ? '' : { required: true })}
               />
             </div>
           ))}

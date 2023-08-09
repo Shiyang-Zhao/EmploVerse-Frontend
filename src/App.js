@@ -33,13 +33,16 @@ export default function App() {
   }, [cookies]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     console.log(state);
   }, [state]);
 
   return (
     <div>
       <Header state={state} />
-      {window.location.pathname === "/" ? "" : <div className="gradient-top"></div>}
       <TransitionGroup component={null}>
         <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
           <ParallaxProvider>
