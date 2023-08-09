@@ -4,6 +4,8 @@ import defaultProfileImage from './media/profileImages/defaultProfileImage.jpg';
 import userIcon from './media/icons/user.svg';
 import togglerIcon from './media/icons/toggler.svg';
 import searchIcon from './media/icons/search.svg';
+import editIcon from './media/icons/edit.svg';
+import deleteIcon from './media/icons/delete.svg';
 import facebookIcon from './media/icons/facebook.svg';
 import instagramIcon from './media/icons/instagram.svg';
 import twitterIcon from './media/icons/twitter.svg';
@@ -45,4 +47,4 @@ const formatPath = (path) => {
     return path.replace(rootToRemove, '');
 };
 
-export { API_URL, inputTypes, formatLabel, ScrollToTop, defaultProfileImage, formatPath, userIcon, togglerIcon, searchIcon, facebookIcon, instagramIcon, twitterIcon, youtubeIcon }
+export { API_URL, inputTypes, formatLabel, ScrollToTop, defaultProfileImage, formatPath, userIcon, togglerIcon, searchIcon, editIcon, deleteIcon, facebookIcon, instagramIcon, twitterIcon, youtubeIcon }

@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "browser-image-compression": "^2.0.2",
+    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-csv": "^2.2.2",

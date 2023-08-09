@@ -8,30 +8,15 @@ import { API_URL, ScrollToTop, formatPath } from '../config';
 export default function User({ state }) {
   ScrollToTop();
   const [user, setUser] = useState({});
-  const [profileImageFile, setProfileImageFile] = useState();
+  const [profileImageFile, setProfileImageFile] = useState({});
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/user/getCurrentUser`,
-          {
-            headers: {
-              'Authorization': state.cookies.jwt
-            }
-          });
-        setUser(response.data);
-        console.log(response.data);
-        const imagePath = response.data.profileImagePath;
-        import(`../${formatPath(imagePath)}`).then(imageModule => {
-          setProfileImageFile(imageModule.default)
-        })
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUser();
-
-
+    const userInfo = JSON.parse(sessionStorage.getItem('user'));
+    setUser(userInfo);
+    const imagePath = userInfo.profileImagePath;
+    import(`../${formatPath(imagePath)}`).then(imageModule => {
+      setProfileImageFile(imageModule.default);
+    });
   }, [state.cookies.username]);
 
 

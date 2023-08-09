@@ -1,5 +1,5 @@
 import "../../src/App.css";
-import { searchIcon } from "../config";
+import { searchIcon, editIcon, deleteIcon } from "../config";
 import styles from "./css/EmployeeList.module.css";
 import Footer from "./Footer";
 import React, { useState, useEffect, useCallback } from "react";

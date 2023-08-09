@@ -1,11 +1,38 @@
 import "../../src/App.css";
 import styles from './css/Home.module.css';
+import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import EarthVideo from '../media/videos/Earth.mp4'
 import Footer from './Footer'
+import { API_URL, ScrollToTop, formatPath } from '../config';
 
-export default function Home() {
+
+export default function Home({ state }) {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/user/getCurrentUser`,
+          {
+            headers: {
+              'Authorization': state.cookies.jwt
+            }
+          });
+        setUser(response.data);
+        const {password, ...FormData} = response.data;
+        sessionStorage.setItem('user', JSON.stringify(FormData));
+        console.log(response.data);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUser();
+
+
+  }, [state.cookies.username]);
   return (
     <main>
       {/* <div className={`${styles['gradient-top']} ${isAtTop ? styles.fadeOut : styles.fadeIn}`}></div> */}

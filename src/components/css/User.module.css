@@ -28,6 +28,13 @@
     font-size: 1rem;
     text-align: center;
     line-height: 160px;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+.user-photo img:hover {
+    cursor: pointer;
+    transform: scale(1);
 }
 
 .user-info {

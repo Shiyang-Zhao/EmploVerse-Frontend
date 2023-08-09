@@ -13,14 +13,14 @@ export default function EditUser({ state }) {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}/user/getUserByEmail/${state.cookies.email}`,
+          `${API_URL}/user/getUserByUsername/${state.cookies.username}`,
           {
             headers: {
               Authorization: state.cookies.jwt,
             },
           }
         );
-        const { id, roles, ...formData } = response.data;
+        const { id, roles, profileImagePath, ...formData } = response.data;
         setUser(response.data);
         setFormData(formData);
       } catch (error) {
@@ -29,7 +29,7 @@ export default function EditUser({ state }) {
     };
 
     getUser();
-  }, [state.cookies.email, state.cookies.jwt]);
+  }, [state.cookies.username]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,7 +44,7 @@ export default function EditUser({ state }) {
     try {
       const updatedUser = { ...user, ...formData };
       await axios.post(
-        `${API_URL}/user/updateUserByEmail/${user.email}`,
+        `${API_URL}/user/updateUserByUsername/${user.username}`,
         updatedUser,
         {
           headers: {

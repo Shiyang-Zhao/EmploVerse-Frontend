@@ -16,6 +16,7 @@ import AddEmployee from './components/AddEmployee';
 import Employee from './components/Employee';
 import EditEmployee from './components/EditEmployee';
 import EditUser from './components/EditUser';
+import jwtDecoder from 'jwt-decode';
 
 export default function App() {
   const ref = createRef();
@@ -47,7 +48,7 @@ export default function App() {
         <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
           <ParallaxProvider>
             <Routes location={location}>
-              <Route path="/" element={<div ref={ref}><Home /></div>} />
+              <Route path="/" element={<div ref={ref}><Home state={state}/></div>} />
               <Route path="users" element={state.isSignedIn ? <div ref={ref}><UserList state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="user" element={state.isSignedIn ? <div ref={ref}><User state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="user/edituser" element={state.isSignedIn ? <div ref={ref}><EditUser state={state} /></div> : <Navigate to="/signin" />} />
