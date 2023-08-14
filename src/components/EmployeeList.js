@@ -1,5 +1,4 @@
 import "../../src/App.css";
-import { searchIcon, editIcon, deleteIcon } from "../config";
 import styles from "./css/EmployeeList.module.css";
 import Footer from "./Footer";
 import React, { useState, useEffect, useCallback } from "react";
@@ -7,10 +6,9 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL, ScrollToTop } from "../config";
+import { API_URL } from "../config";
 
 export default function EmployeeList({ state }) {
-  ScrollToTop();
   const navigate = useNavigate();
   const [allEmployeesList, setAllEmployeesList] = useState([]);
 
@@ -29,6 +27,14 @@ export default function EmployeeList({ state }) {
     searchResult: []
   })
 
+  useEffect(() => {
+    getPaginatedEmployeesList();
+  }, [pagination.currentPage, pagination.totalItems, pagination.sortField, pagination.sortDir]);
+
+  useEffect(() => {
+    getAllEmployeesList();
+  }, []);
+
   // Update the pagination state
   const changePagination = (changes) => {
     setPagination((prevPagination) => ({
@@ -44,14 +50,6 @@ export default function EmployeeList({ state }) {
       ...changes
     }));
   };
-
-  useEffect(() => {
-    getPaginatedEmployeesList();
-  }, [pagination.currentPage, pagination.totalItems, pagination.sortField, pagination.sortDir]);
-
-  useEffect(() => {
-    getAllEmployeesList();
-  }, []);
 
   //Handle page change
   const handlePageChange = ({ selected: selectedPage }) => {
@@ -95,11 +93,13 @@ export default function EmployeeList({ state }) {
           },
         }
       );
+      console.log(JSON.parse(response.data));
       changePagination({
         'totalPages': response.data.totalPages,
         'totalItems': response.data.totalItems,
         'employeeList': response.data.employeeList
       });
+      
     } catch (error) {
       console.error("Error fetching pagination:", error);
     }
@@ -119,6 +119,21 @@ export default function EmployeeList({ state }) {
       changeSearch({ 'searchResult': response.data });
     } catch (error) {
       console.error("Error fetching all employee list:", error);
+    }
+  };
+
+  const addCurrentUserToEmployees = async () => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/user/addCurrentUserToEmployee`, null,
+        {
+          headers: {
+            Authorization: state.cookies.jwt,
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Failto add current user to employees:", error);
     }
   };
 
@@ -201,29 +216,11 @@ export default function EmployeeList({ state }) {
             <option value="degree">Degree</option>
             <option value="major">Major</option>
           </select>
-          <img
-            className={styles.searchIcon}
-            src={searchIcon}
-            onClick={getSearchResult}
-          ></img>
+          <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`} onClick={getSearchResult}></i>
         </div>
 
         <div className={styles.addExport}>
-          <button
-            className={styles.addButton}
-            onClick={() => {
-              if (
-                state.cookies.selectedRole[0] !== "ROLE_ADMIN" &&
-                state.cookies.selectedRole[0] !== "ROLE_MANAGER"
-              ) {
-                alert("You don't have the priviledges to add employees");
-              } else {
-                navigate("addemployee");
-              }
-            }}
-          >
-            Add
-          </button>
+          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => { navigate("addemployee"); console.log(state.cookies.selectedRole) }}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}

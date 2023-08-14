@@ -14,7 +14,8 @@ export default function SignUp({ setCookie }) {
     lastName: '',
     username: '',
     email: '',
-    password: '',
+    password1: '',
+    password2: '',
     phoneNumber: '',
     profileImage: {}
   });
@@ -24,7 +25,6 @@ export default function SignUp({ setCookie }) {
 
   const handleChange = async (event) => {
     const { name, value, files } = event.target;
-
     // If the input type is 'file', update the formData with the selected file if it's within the size limit
     if (event.target.type === 'file' && files.length > 0) {
       const file = files[0];
@@ -66,6 +66,13 @@ export default function SignUp({ setCookie }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      if (formData.password1 !== formData.password2) {
+        console.log(formData.password1);
+        console.log(formData.password2);
+
+        return console.error("Password does not match"); // Return an error message
+      }
+
       const registerResponse = await axios.post(
         `${API_URL}/user/register`,
         { ...formData, roles }, {
@@ -77,14 +84,11 @@ export default function SignUp({ setCookie }) {
       const authenticateResponse = await axios.post(
         `${API_URL}/user/authenticate`,
         {
-          username: formData.username,
-          password: formData.password,
+          usernameOrEmail: formData.username,
+          password: formData.password1,
           roles: selectedRole,
         }
       );
-      setCookie("id", authenticateResponse.data.id);
-      setCookie("username", authenticateResponse.data.username);
-      setCookie("email", authenticateResponse.data.email);
       setCookie("jwt", `Bearer ${authenticateResponse.data.token}`);
       setCookie("selectedRole", authenticateResponse.data.roles);
       navigate('/');

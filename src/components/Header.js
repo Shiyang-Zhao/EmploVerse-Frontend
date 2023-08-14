@@ -1,5 +1,4 @@
 import "../../src/App.css";
-import {userIcon, togglerIcon} from '../config'
 import styles from "./css/Header.module.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -34,12 +33,7 @@ export default function Header({ state }) {
 
       <nav>
         <button className={styles.toggleButton}>
-          <img
-            src={togglerIcon}
-            className={styles.togglerIcon}
-            onClick={handleToggleMenu}
-            alt="Toggle Menu"
-          />
+          <i className={`fa-solid fa-bars fa-2xl ${notAtHome}`} onClick={handleToggleMenu}></i>
         </button>
         <ul className={isMenuOpen ? styles.show : styles.hide}>
           <li >
@@ -61,9 +55,9 @@ export default function Header({ state }) {
               </li>
               <li className={styles.dropdown}>
                 <Link to="user">
-                  <img src={userIcon} alt="User" />
+                  <i className={`fa-solid fa-user-tie fa-2xl ${notAtHome}`} ></i>
                 </Link>
-                <ul className={styles["dropdown-menu"]}>
+                <ul className={styles.dropdownMenu}>
                   <li>
                     <Link to="user" className={notAtHome}>Profile</Link>
                   </li>

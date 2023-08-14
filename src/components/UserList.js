@@ -1,4 +1,3 @@
-import { searchIcon } from "../config";
 import "../../src/App.css";
 import styles from "./css/UserList.module.css";
 import Footer from "./Footer";
@@ -7,10 +6,9 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL, ScrollToTop } from "../config";
+import { API_URL } from "../config";
 
 export default function UserList({ state }) {
-    ScrollToTop();
     const navigate = useNavigate();
     const [allUsersList, setAllUsersList] = useState([]);
 
@@ -40,7 +38,7 @@ export default function UserList({ state }) {
             <h1>User List</h1>
             {/* Add a search bar if necessary */}
             <div className={styles.searchBar}>
-                <img src={searchIcon} alt="Search Icon" />
+                <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>
                 <input type="text" placeholder="Search users..." />
             </div>
 

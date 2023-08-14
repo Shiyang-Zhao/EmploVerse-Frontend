@@ -1,35 +1,18 @@
 import "../../src/App.css";
 import styles from "./css/EditUser.module.css";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL, inputTypes, formatLabel } from "../config";
 
 export default function EditUser({ state }) {
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
   const [formData, setFormData] = useState({});
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axios.get(
-          `${API_URL}/user/getUserByUsername/${state.cookies.username}`,
-          {
-            headers: {
-              Authorization: state.cookies.jwt,
-            },
-          }
-        );
-        const { id, roles, profileImagePath, ...formData } = response.data;
-        setUser(response.data);
-        setFormData(formData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getUser();
-  }, [state.cookies.username]);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { id, roles, profileImage, ...FormData } = user;
+    setFormData(FormData);
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,10 +25,9 @@ export default function EditUser({ state }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const updatedUser = { ...user, ...formData };
       await axios.post(
-        `${API_URL}/user/updateUserByUsername/${user.username}`,
-        updatedUser,
+        `${API_URL}/user/updateCurrentUser`,
+        formData,
         {
           headers: {
             Authorization: state.cookies.jwt,
@@ -62,22 +44,25 @@ export default function EditUser({ state }) {
     <main>
       <div className={styles.container}>
         <h2>User Details</h2>
-        <form className={styles.editUserForm} onSubmit={handleSubmit}>
+        <form className={styles.inputContainer} onSubmit={handleSubmit}>
           {Object.entries(formData).map(([name, value]) => (
             <div className={styles["input-container"]} key={name}>
-              <label htmlFor={`user-${name}`}>{formatLabel(name)}{name !== 'address2' && name !== 'endDate' ? <text className="requiredText">*</text> : ''}</label>
+              <label htmlFor={`user-${name}`}>{formatLabel(name)}</label>
               <input
                 id={`user-${name}`}
                 name={name}
                 type={inputTypes[name] || inputTypes.default}
                 placeholder={formatLabel(name)}
-                value={value}
+                {...(inputTypes[name] === 'file' ? { accept: "image/*" } : '')}
+                {...(inputTypes[name] === 'file' ? '' : { value: value })}
                 onChange={handleChange}
-                required={name !== "address2" && name !== "endDate"}
+                {...(inputTypes[name] === 'file' ? '' : { required: true })}
               />
             </div>
           ))}
-          <button type="submit">Save</button>
+          <div className={styles.buttonContainer}>
+            <button type="submit">Save</button>
+          </div>
         </form>
       </div>
     </main>

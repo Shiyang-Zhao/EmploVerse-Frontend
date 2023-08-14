@@ -32,7 +32,7 @@
 }
 
 .inputContainer {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -44,11 +44,7 @@
   color: #333;
 }
 
-.inputContainer input[type='text'],
-.inputContainer input[type='password'],
-.inputContainer input[type='email'],
-.inputContainer input[type='date'],
-.inputContainer input[type='tel'],
+.inputContainer input,
 .inputContainer select {
   width: 100%;
   padding: 8px 12px;
@@ -58,24 +54,20 @@
   transition: all 0.3s;
 }
 
-.inputContainer input[type='text']:focus,
-.inputContainer input[type='password']:focus,
-.inputContainer input[type='email']:focus,
-.inputContainer input[type='date']:focus,
-.inputContainer input[type='tel']:focus,
+.inputContainer input:focus,
 .inputContainer select:focus {
   border-color: #007bff;
   outline: none;
 }
 
 .buttonContainer {
-  margin-top: 25px;
+  margin-top: 20px;
   text-align: center;
+  grid-column: span 2;
 }
 
 .buttonContainer button {
   width: 200px;
-  margin-left: 60%;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -83,7 +75,6 @@
   background-color: #007bff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   transition: all 0.3s;
 }
 

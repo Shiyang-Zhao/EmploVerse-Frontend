@@ -20,21 +20,20 @@ export default function SignIn({ setCookie }) {
       ...prevFormData,
       [name]: parsedValue,
     }));
-    console.log(formData);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(`${API_URL}/user/authenticate`, {
-        username: formData.username,
+        usernameOrEmail: formData.username,
         password: formData.password,
         roles: formData.selectedRole,
       });
 
-      setCookie("id", response.data.id);
-      setCookie("username", response.data.username);
-      setCookie("email", response.data.email);
+      // setCookie("id", response.data.id);
+      // setCookie("username", response.data.username);
+      // setCookie("email", response.data.email);
       setCookie("jwt", `Bearer ${response.data.token}`);
       setCookie("selectedRole", response.data.roles);
       navigate('/');
@@ -52,7 +51,7 @@ export default function SignIn({ setCookie }) {
         </div>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputContainer}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Username/Email</label>
             <input
               type="username"
               id="username"

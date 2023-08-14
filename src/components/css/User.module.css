@@ -1,5 +1,5 @@
 .container {
-    min-width: 650px;
+    min-width: 700px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px;
@@ -12,29 +12,68 @@
 }
 
 .user-photo {
-    flex: 1;
-    display: flex;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.loaded {
+    opacity: 1;
+    transition: opacity 1s ease, transform 0.3s ease;
+}
+
+.user-photo:hover {
+    cursor: pointer;
+    transform: scale(1);
 }
 
 .user-photo img {
-    display: flex;
     width: 30vw;
     height: 30vw;
     min-width: 200px;
     min-height: 200px;
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    /* background-color: #fff; */
     font-size: 1rem;
     text-align: center;
     line-height: 160px;
-    transform: scale(0.9);
-    transition: all 0.3s ease;
 }
 
-.user-photo img:hover {
-    cursor: pointer;
-    transform: scale(1);
+.profileImageForm {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.image-input {
+    display: none;
+}
+
+.update-profile-image-btn {
+    height: 50px;
+    padding: 10px 20px;
+    background-color: darkcyan;
+    color: #fff;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: slideFromLeft 0.4s ease forwards;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+        /* Start from outside the viewport */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        /* End at the original position */
+    }
 }
 
 .user-info {
@@ -81,30 +120,32 @@
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    word-wrap: break-word;
 }
 
 .grid-item:hover {
     transform: translateY(-5px);
 }
 
-.button {
-    display: inline-block;
+.edit-user-btn {
+    height: 50px;
     padding: 10px 20px;
-    margin-top: 20px;
     background-color: #3498db;
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.25em;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
+    border: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     grid-column: 1;
     grid-row: 2;
 }
 
-.button:hover {
+.update-profile-image-btn:hover,
+.edit-user-btn:hover {
     background-color: #2980b9;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);

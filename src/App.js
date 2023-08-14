@@ -17,15 +17,22 @@ import Employee from './components/Employee';
 import EditEmployee from './components/EditEmployee';
 import EditUser from './components/EditUser';
 import jwtDecoder from 'jwt-decode';
+import axios from 'axios';
+import { API_URL, inputTypes, formatLabel } from './config';
 
 export default function App() {
   const ref = createRef();
   const location = useLocation();
-  const [cookies, setCookie, removeCookie] = useCookies(['id', 'username', 'email', 'jwt', 'selectedRole']);
+  const [user, setUser] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies(['jwt', 'selectedRole']);
   const [state, setState] = useState({
     cookies: cookies,
     isSignedIn: cookies.jwt ? true : false,
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   useEffect(() => {
     setState({
       cookies: cookies,
@@ -34,12 +41,32 @@ export default function App() {
   }, [cookies]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    console.log(state);
+    if (state.cookies.jwt) {
+      console.log(jwtDecoder(state.cookies.jwt));
+    }
+  }, [state]);
 
   useEffect(() => {
-    console.log(state);
-  }, [state]);
+    if (state.isSignedIn) {
+      const getUser = async () => {
+        try {
+          const response = await axios.get(`${API_URL}/user/getCurrentUser`,
+            {
+              headers: {
+                'Authorization': state.cookies.jwt
+              }
+            });
+          const { password, ...FormData } = response.data;
+          setUser(FormData);
+          localStorage.setItem('user', JSON.stringify(FormData));
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getUser();
+    }
+  }, [location]);
 
   return (
     <div>
@@ -48,7 +75,7 @@ export default function App() {
         <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
           <ParallaxProvider>
             <Routes location={location}>
-              <Route path="/" element={<div ref={ref}><Home state={state}/></div>} />
+              <Route path="/" element={<div ref={ref}><Home state={state} /></div>} />
               <Route path="users" element={state.isSignedIn ? <div ref={ref}><UserList state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="user" element={state.isSignedIn ? <div ref={ref}><User state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="user/edituser" element={state.isSignedIn ? <div ref={ref}><EditUser state={state} /></div> : <Navigate to="/signin" />} />

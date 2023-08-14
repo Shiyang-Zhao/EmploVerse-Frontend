@@ -16,6 +16,49 @@
     margin-bottom: 30px;
 }
 
+.link-account-btn {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.link-account-btn:hover {
+    background-color: #2980b9;
+}
+
+.link-account-btn:focus {
+    outline: none;
+}
+
+.link-account-btn:active {
+    transform: scale(0.95);
+}
+
+
+.nav-bar {
+    background-color: #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover,
+.nav-btn:focus {
+    background-color: #a0a0a0;
+}
+
 .addEmployeeForm {
     width: 100%;
     margin: 0 auto;

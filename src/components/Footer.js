@@ -1,6 +1,5 @@
 import "../../src/App.css";
 import styles from './css/Footer.module.css';
-import { facebookIcon, instagramIcon, twitterIcon, youtubeIcon } from '../config';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -27,10 +26,10 @@ export default function Footer() {
           <aside className={styles.footerSection}>
             <h3>Follow Us</h3>
             <ul className={styles.socialIcons}>
-              <Link to="https://www.facebook.com/"><img src={facebookIcon}></img></Link>
-              <Link to="https://www.instagram.com/"><img src={instagramIcon}></img></Link>
-              <Link to="https://twitter.com/"><img src={twitterIcon}></img></Link>
-              <Link to="https://www.youtube.com/"><img src={youtubeIcon}></img></Link>
+              <Link to="https://www.facebook.com/"><i className="fa-brands fa-facebook-f"></i></Link>
+              <Link to="https://www.instagram.com/"><i className="fa-brands fa-instagram"></i></Link>
+              <Link to="https://twitter.com/"><i className="fa-brands fa-twitter"></i></Link>
+              <Link to="https://www.youtube.com/"><i className="fa-brands fa-youtube"></i></Link>
             </ul>
           </aside>
         </div>
