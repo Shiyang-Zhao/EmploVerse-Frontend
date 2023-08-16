@@ -3,6 +3,7 @@
     padding: 20px;
     margin-top: 100px;
     max-width: 80vw;
+    min-width: 700px;
     background-color: #f5f5f5;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -30,14 +31,89 @@
     background-color: #2980b9;
 }
 
-.link-account-btn:focus {
-    outline: none;
-}
-
 .link-account-btn:active {
     transform: scale(0.95);
 }
 
+.searchContainer {
+    min-width: 650px;
+    display: inline-block;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+}
+
+.searchInput {
+    width: 67%;
+    border: none;
+    outline: none;
+    padding: 5px 20px;
+    border-radius: 30px 0 0 30px;
+}
+
+.searchField {
+    width: 25%;
+    margin: 0px 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.searchIcon {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.searchIcon:hover {
+    transform: scale(1.1);
+}
+
+.searchIcon:active {
+    transform: scale(0.6);
+}
+
+/* Add this CSS to your stylesheet */
+.searchResultsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns with equal width */
+    gap: 20px;
+    /* Add some spacing between items */
+}
+
+.searchResult {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+.searchResult:focus,
+.searchResult:hover {
+    background-color: #a0a0a0;
+    cursor: pointer;
+}
+
+.searchResult:active {
+    transform: scale(0.9);
+}
+
+.searchResult img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    text-align: center;
+    line-height: 160px;
+}
+
+.userInfo {
+    margin-left: 10px;
+    text-align: left;
+}
 
 .nav-bar {
     background-color: #ccc;

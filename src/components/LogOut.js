@@ -10,9 +10,6 @@ export function LogOut({ state, removeCookie }) {
       await axios.post(`${API_URL}/user/logout`, null, {
         headers: { Authorization: state.cookies.jwt },
       });
-      removeCookie("id");
-      removeCookie("username");
-      removeCookie("email");
       removeCookie("jwt");
       removeCookie("selectedRole");
       navigate("/");
@@ -28,9 +25,6 @@ export function Switch({ state, removeCookie }) {
       await axios.post(`${API_URL}/user/logout`, null, {
         headers: { Authorization: state.cookies.jwt },
       });
-      removeCookie("id");
-      removeCookie("username");
-      removeCookie("email");
       removeCookie("jwt");
       removeCookie("selectedRole");
       navigate("/signin");

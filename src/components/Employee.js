@@ -1,15 +1,16 @@
 import "../../src/App.css";
-import img from '../media/profileImages/defaultProfileImage.jpg';
 import styles from './css/Employee.module.css';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL } from '../config';
+import { API_URL, formatPath } from '../config';
 
 export default function Employee({ state }) {
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState({});
+  const [employee, setEmployee] = useState(null);
   const selectedEmployeeId = sessionStorage.getItem('selectedEmployeeId');
+  const [profileImageFile, setProfileImageFile] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     const getEmployee = async () => {
       try {
@@ -28,21 +29,35 @@ export default function Employee({ state }) {
     getEmployee();
   }, [selectedEmployeeId]);
 
+  useEffect(() => {
+    if (employee) {
+      import(`../${formatPath(employee.user.profileImage)}`)
+        .then(imageModule => {
+          setProfileImageFile(imageModule.default);
+        })
+        .catch(error => {
+          console.error("Error loading profile image:", error);
+        });
+    }
+  }, [employee]);
+
   return (
     <main>
       <div className={styles.container}>
-        <div className={styles['employee-photo']}>
-          <img src={img} alt='Employee' />
+      <div className={`${styles['employee-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
+          <img src={profileImageFile} alt='Employee Profile' loading="lazy" />
         </div>
-        <button className={styles.button} onClick={() => {
-          if (state.cookies.selectedRole[0] !== 'ROLE_ADMIN' && state.cookies.selectedRole[0] !== 'ROLE_MANAGER') {
-            alert("You don't have the privileges to edit employees");
-          } else {
-            navigate('/employees/editemployee');
-          }
-        }}>Edit Employee</button>
-        <div className={styles['employee-info']}>
-          <h1 className={styles['employee-name']}>{employee.firstName} {employee.lastName}</h1>
+        <Link to="/employees/editemployee" className={styles['edit-employee-btn']}><i class="fa-regular fa-pen-to-square"></i> Edit Employee</Link>
+
+        <div className={styles['nav-bar']}>
+          <button className={`${styles['nav-btn']} ${styles.personalInfo}`} >Personal Infomation</button>
+          <button className={`${styles['nav-btn']} ${styles.employeeInfo}`} >Employee Infomation</button>
+          <button className={`${styles['nav-btn']} ${styles.educationInfo}`} >Education Infomation</button>
+        </div>
+
+
+        {employee && (<div className={styles['employee-info']}>
+          <h1 className={styles['employee-name']}>{employee.user.firstName} {employee.user.lastName}</h1>
 
           <div className={`${styles['info-section']} ${styles['personal-info']}`}>
             <h2>Personal Information</h2>
@@ -53,19 +68,19 @@ export default function Employee({ state }) {
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Email</strong></p>
-                <p>{employee.email}</p>
+                <p>{employee.user.email}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Phone</strong></p>
-                <p>{employee.phoneNumber}</p>
+                <p>{employee.user.phoneNumber}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Birthday</strong></p>
-                <p>{employee.birthday}</p>
+                <p>{employee.personalInfo.birthday}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Address</strong></p>
-                <p>{employee.address1} {employee.address2 ?? ''}, {employee.city}, {employee.state} {employee.zipCode}, {employee.country}</p>
+                <p>{employee.personalInfo.address1} {employee.personalInfo.address2 ?? ''}, {employee.personalInfo.city}, {employee.personalInfo.state} {employee.personalInfo.zipCode}, {employee.personalInfo.country}</p>
               </div>
             </div>
           </div>
@@ -74,36 +89,32 @@ export default function Employee({ state }) {
             <h2>Company Information</h2>
             <div className={styles['info-grid']}>
               <div className={styles['info-item']}>
-                <p><strong>Company</strong></p>
-                <p>{employee.company}</p>
-              </div>
-              <div className={styles['info-item']}>
                 <p><strong>Start Date</strong></p>
-                <p>{employee.startDate}</p>
+                <p>{employee.employeeInfo.startDate}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>End Date</strong></p>
-                <p>{employee.endDate}</p>
+                <p>{employee.employeeInfo.endDate}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Department</strong></p>
-                <p>{employee.department}</p>
+                <p>{employee.employeeInfo.department}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Supervisor</strong></p>
-                <p>{employee.supervisor}</p>
+                <p>{employee.employeeInfo.manager}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Job Titles</strong></p>
-                <p>{employee.jobTitles}</p>
+                <p>{employee.employeeInfo.jobTitles}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Work Schedule</strong></p>
-                <p>{employee.workSchedule}</p>
+                <p>{employee.employeeInfo.workSchedule}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Status</strong></p>
-                <p>{employee.status}</p>
+                <p>{employee.employeeInfo.status}</p>
               </div>
             </div>
           </div>
@@ -113,19 +124,19 @@ export default function Employee({ state }) {
             <div className={styles['info-grid']}>
               <div className={styles['info-item']}>
                 <p><strong>University</strong></p>
-                <p>{employee.university}</p>
+                <p>{employee.educationInfo.university}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Degree</strong></p>
-                <p>{employee.degree}</p>
+                <p>{employee.educationInfo.degree}</p>
               </div>
               <div className={styles['info-item']}>
                 <p><strong>Major</strong></p>
-                <p>{employee.major}</p>
+                <p>{employee.educationInfo.major}</p>
               </div>
             </div>
           </div>
-        </div>
+        </div>)}
       </div>
     </main>
   );

@@ -16,13 +16,19 @@
 
 .Edit,
 .Delete {
-  width: 75px;
-  height: 40px;
+  width: 50px;
+  height: 35px;
+  margin: 2px;
   border-radius: 3px;
   color: #fff;
   font-weight: bold;
   transition: all 0.3s ease;
   border: none;
+}
+
+.vertical-line {
+  border-left: 1px solid #000;
+  margin: 0 5px;
 }
 
 .Edit {

@@ -66,7 +66,7 @@ export default function App() {
       };
       getUser();
     }
-  }, [location]);
+  }, [location, state]);
 
   return (
     <div>

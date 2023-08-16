@@ -29,6 +29,7 @@ export default function EmployeeList({ state }) {
 
   useEffect(() => {
     getPaginatedEmployeesList();
+    console.log(pagination.employeeList)
   }, [pagination.currentPage, pagination.totalItems, pagination.sortField, pagination.sortDir]);
 
   useEffect(() => {
@@ -93,13 +94,13 @@ export default function EmployeeList({ state }) {
           },
         }
       );
-      console.log(JSON.parse(response.data));
+      console.log(response.data);
       changePagination({
         'totalPages': response.data.totalPages,
         'totalItems': response.data.totalItems,
         'employeeList': response.data.employeeList
       });
-      
+
     } catch (error) {
       console.error("Error fetching pagination:", error);
     }
@@ -159,23 +160,15 @@ export default function EmployeeList({ state }) {
   const deleteEmployee = useCallback(async (employee, event) => {
     event.stopPropagation();
     try {
-      if (
-        state.cookies.selectedRole[0] !== "ROLE_ADMIN" &&
-        state.cookies.selectedRole[0] !== "ROLE_MANAGER"
-      ) {
-        alert("You don't have the priviledges to delete employees");
-      } else {
-        await axios.post(
-          `${API_URL}/employees/deleteEmployeeById/${employee.id}`,
-          null,
-          {
-            headers: {
-              Authorization: state.cookies.jwt,
-            },
-          }
-        );
-        changePagination({ totalItems: pagination.totalItems - 1 })
-      }
+      const response = await axios.post(
+        `${API_URL}/employees/deleteEmployeeById/${employee.id}`,
+        null,
+        {
+          headers: {
+            Authorization: state.cookies.jwt,
+          },
+        }
+      );
     } catch (error) {
       console.error("Error deleting employee:", error);
     }
@@ -243,19 +236,18 @@ export default function EmployeeList({ state }) {
                 </span>
               </th>
               <th>
-                <span
-                  className="firstName"
-                  onClick={(event) => handleSort(event)}
-                >
+                <span className="firstName" onClick={(event) => handleSort(event)}>
                   First Name
                 </span>
               </th>
               <th>
-                <span
-                  className="lastName"
-                  onClick={(event) => handleSort(event)}
-                >
+                <span className="lastName" onClick={(event) => handleSort(event)}>
                   Last Name
+                </span>
+              </th>
+              <th>
+                <span className="username" onClick={(event) => handleSort(event)}>
+                  Username
                 </span>
               </th>
               <th>
@@ -264,19 +256,18 @@ export default function EmployeeList({ state }) {
                 </span>
               </th>
               <th>
-                <span
-                  className="phoneNumber"
-                  onClick={(event) => handleSort(event)}
-                >
+                <span className="phoneNumber" onClick={(event) => handleSort(event)}>
                   Phone Number
                 </span>
               </th>
               <th>Actions</th>
               <th>
-                <span
-                  className="jobTitles"
-                  onClick={(event) => handleSort(event)}
-                >
+                <span className="department" onClick={(event) => handleSort(event)}>
+                  Department
+                </span>
+              </th>
+              <th>
+                <span className="jobTitles" onClick={(event) => handleSort(event)}>
                   Job Titles
                 </span>
               </th>
@@ -295,26 +286,22 @@ export default function EmployeeList({ state }) {
                     }}
                   >
                     <td>{employee.id}</td>
-                    <td>{employee.firstName}</td>
-                    <td>{employee.lastName}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.phoneNumber}</td>
+                    <td>{employee.user.firstName}</td>
+                    <td>{employee.user.lastName}</td>
+                    <td>{employee.user.username}</td>
+                    <td>{employee.user.email}</td>
+                    <td>{employee.user.phoneNumber}</td>
                     <td>
-                      <button
-                        className={styles.Edit}
-                        onClick={(event) => editEmployee(employee, event)}
-                      >
-                        Edit
+                      <button className={styles.Edit} onClick={(event) => editEmployee(employee, event)}>
+                        <i class="fas fa-edit fa-xl"></i>
                       </button>
-                      |
-                      <button
-                        className={styles.Delete}
-                        onClick={(event) => deleteEmployee(employee, event)}
-                      >
-                        Delete
+                      {/* <span className={styles["vertical-line"]}></span> */}
+                      <button className={styles.Delete} onClick={(event) => deleteEmployee(employee, event)}>
+                        <i class="fa-solid fa-trash fa-xl"></i>
                       </button>
                     </td>
-                    <td>{employee.jobTitles}</td>
+                    <td>{employee.employeeInfo.department}</td>
+                    <td>{employee.employeeInfo.jobTitles}</td>
                   </tr>
                 </React.Fragment>
               ))}
