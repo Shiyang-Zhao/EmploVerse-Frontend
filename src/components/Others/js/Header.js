@@ -1,5 +1,5 @@
-import "../../src/App.css";
-import styles from "./css/Header.module.css";
+import "App.css";
+import styles from "components/Others/css/Header.module.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -40,7 +40,7 @@ export default function Header({ state }) {
             <Link to="/" className={notAtHome}>Home</Link>
           </li>
           <li>
-            <Link to="user" className={notAtHome}>Dashboard</Link>
+            <Link to="employees/currentEmployeeProfile" className={notAtHome}>Dashboard</Link>
           </li>
           {isSignedIn && (
             <>

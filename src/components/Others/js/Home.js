@@ -1,11 +1,10 @@
-import "../../src/App.css";
-import styles from './css/Home.module.css';
-import axios from "axios";
+import "App.css";
+import styles from 'components/Others/css/Home.module.css';
 import React, { useEffect, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
-import EarthVideo from '../media/videos/Earth.mp4'
-import Footer from './Footer'
-import { API_URL, ScrollToTop, formatPath } from '../config';
+import EarthVideo from 'media/videos/Earth.mp4'
+import Footer from 'components/Others/js/Footer'
+import { API_URL, ScrollToTop, formatPath } from 'config';
 
 
 export default function Home({ state }) {

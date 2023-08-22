@@ -4,19 +4,19 @@ import { Navigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { ParallaxProvider } from 'react-scroll-parallax';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
-import { LogOut, Switch } from './components/LogOut'
-import Header from './components/Header';
-import Home from './components/Home';
-import User from './components/User';
-import UserList from './components/UserList';
-import EmployeeList from './components/EmployeeList';
-import AddEmployee from './components/AddEmployee';
-import Employee from './components/Employee';
-import EditEmployee from './components/EditEmployee';
-import EditUser from './components/EditUser';
-import jwtDecoder from 'jwt-decode';
+import SignUp from 'components/Authentication/js/SignUp';
+import SignIn from 'components/Authentication/js/SignIn';
+import { LogOut, Switch } from 'components/Authentication/js/LogOut'
+import Header from 'components/Others/js/Header';
+import Home from 'components/Others/js/Home';
+import CurrentUser from 'components/User/js/CurrentUser';
+import CurrentEmployee from 'components/Employee/js/CurrentEmployee';
+import UserList from 'components/User/js/UserList';
+import EmployeeList from 'components/Employee/js/EmployeeList';
+import AddEmployee from 'components/Employee/js/AddEmployee';
+import Employee from 'components/Employee/js/Employee';
+import EditEmployee from 'components/Employee/js/EditEmployee';
+import EditUser from 'components/User/js/EditUser';
 import axios from 'axios';
 import { API_URL, inputTypes, formatLabel } from './config';
 
@@ -42,9 +42,6 @@ export default function App() {
 
   useEffect(() => {
     console.log(state);
-    if (state.cookies.jwt) {
-      console.log(jwtDecoder(state.cookies.jwt));
-    }
   }, [state]);
 
   useEffect(() => {
@@ -77,11 +74,12 @@ export default function App() {
             <Routes location={location}>
               <Route path="/" element={<div ref={ref}><Home state={state} /></div>} />
               <Route path="users" element={state.isSignedIn ? <div ref={ref}><UserList state={state} /></div> : <Navigate to="/signin" />} />
-              <Route path="user" element={state.isSignedIn ? <div ref={ref}><User state={state} /></div> : <Navigate to="/signin" />} />
+              <Route path="user" element={state.isSignedIn ? <div ref={ref}><CurrentUser state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="user/edituser" element={state.isSignedIn ? <div ref={ref}><EditUser state={state} /></div> : <Navigate to="/signin" />} />
 
               <Route path="employees" element={state.isSignedIn ? <div ref={ref}><EmployeeList state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="employees/employeeProfile" element={state.isSignedIn ? <div ref={ref}><Employee state={state} /></div> : <Navigate to="/signin" />} />
+              <Route path="employees/currentEmployeeProfile" element={state.isSignedIn ? <div ref={ref}><CurrentEmployee state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="employees/addemployee" element={state.isSignedIn ? <div ref={ref}><AddEmployee state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="employees/editemployee" element={state.isSignedIn ? <div ref={ref}><EditEmployee state={state} /></div> : <Navigate to="/signin" />} />
 

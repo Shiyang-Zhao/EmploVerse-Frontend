@@ -1,12 +1,12 @@
-import "../../src/App.css";
-import styles from "./css/EmployeeList.module.css";
-import Footer from "./Footer";
+import "App.css";
+import styles from "components/Employee/css/EmployeeList.module.css";
+import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL } from "../config";
+import { API_URL } from "config";
 
 export default function EmployeeList({ state }) {
   const navigate = useNavigate();
@@ -27,10 +27,14 @@ export default function EmployeeList({ state }) {
     searchResult: []
   })
 
+  useEffect(()=>{
+    console.log(search.searchResult)
+  })
+
   useEffect(() => {
     getPaginatedEmployeesList();
     console.log(pagination.employeeList)
-  }, [pagination.currentPage, pagination.totalItems, pagination.sortField, pagination.sortDir]);
+  }, [pagination.currentPage, pagination.sortField, pagination.sortDir]);
 
   useEffect(() => {
     getAllEmployeesList();
@@ -133,6 +137,7 @@ export default function EmployeeList({ state }) {
           },
         }
       );
+      getPaginatedEmployeesList();
     } catch (error) {
       console.error("Failto add current user to employees:", error);
     }
@@ -169,6 +174,7 @@ export default function EmployeeList({ state }) {
           },
         }
       );
+      getPaginatedEmployeesList();
     } catch (error) {
       console.error("Error deleting employee:", error);
     }
@@ -293,11 +299,11 @@ export default function EmployeeList({ state }) {
                     <td>{employee.user.phoneNumber}</td>
                     <td>
                       <button className={styles.Edit} onClick={(event) => editEmployee(employee, event)}>
-                        <i class="fas fa-edit fa-xl"></i>
+                        <i className="fas fa-edit fa-xl"></i>
                       </button>
                       {/* <span className={styles["vertical-line"]}></span> */}
                       <button className={styles.Delete} onClick={(event) => deleteEmployee(employee, event)}>
-                        <i class="fa-solid fa-trash fa-xl"></i>
+                        <i className="fa-solid fa-trash fa-xl"></i>
                       </button>
                     </td>
                     <td>{employee.employeeInfo.department}</td>

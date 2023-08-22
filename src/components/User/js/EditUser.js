@@ -1,9 +1,9 @@
-import "../../src/App.css";
-import styles from "./css/EditUser.module.css";
+import "App.css";
+import styles from "components/User/css/EditUser.module.css";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL, inputTypes, formatLabel } from "../config";
+import { API_URL, inputTypes, formatLabel } from "config";
 
 export default function EditUser({ state }) {
   const navigate = useNavigate();

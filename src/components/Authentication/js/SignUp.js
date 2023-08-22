@@ -1,10 +1,10 @@
-import "../../src/App.css";
-import styles from './css/SignUp.module.css';
+import "App.css";
+import styles from 'components/Authentication/css/SignUp.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import imageCompression from 'browser-image-compression';
-import { API_URL, inputTypes, formatLabel } from '../config';
+import { API_URL, inputTypes, formatLabel } from 'config';
 
 export default function SignUp({ setCookie }) {
   const MAX_FILE_SIZE = 1048576;

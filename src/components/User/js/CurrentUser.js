@@ -1,9 +1,9 @@
-import "../../src/App.css";
-import styles from './css/User.module.css';
+import "App.css";
+import styles from 'components/User/css/User.module.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import imageCompression from 'browser-image-compression';
-import { API_URL, ScrollToTop, formatPath } from '../config';
+import { API_URL, ScrollToTop, formatPath, compressedImage } from 'config';
 import axios from "axios";
 
 export default function User({ state }) {
@@ -15,7 +15,7 @@ export default function User({ state }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    import(`../${formatPath(user.profileImage)}`)
+    import(`../../../${formatPath(user.profileImage)}`)
       .then(imageModule => {
         setProfileImageFile(imageModule.default);
       })
@@ -25,21 +25,25 @@ export default function User({ state }) {
   }, [user]);
 
   const handleProfileImageChange = async (event) => {
-    // setNewProfileImageFile(newProfileImage);
-    const file = event.target.files[0];
-    if (file.size > MAX_FILE_SIZE) {
+    // const file = event.target.files[0];
+    // if (file.size > MAX_FILE_SIZE) {
 
-      // Compress the image using browser-image-compression
-      const compressedBlob = await imageCompression(file, {
-        maxSizeMB: 1, // Set the target file size in MB after compression
-      });
-      const compressedFile = new File([compressedBlob], file.name, { type: file.type });
-      setNewProfileImageFile(compressedFile);
-      setProfileImageFile(URL.createObjectURL(compressedFile));
-    } else {
-      setNewProfileImageFile(file);
-      setProfileImageFile(URL.createObjectURL(file));
-    }
+    //   // Compress the image using browser-image-compression
+    //   const compressedBlob = await imageCompression(file, {
+    //     maxSizeMB: 1, // Set the target file size in MB after compression
+    //   });
+    //   const compressedFile = new File([compressedBlob], file.name, { type: file.type });
+    //   setNewProfileImageFile(compressedFile);
+    //   setProfileImageFile(URL.createObjectURL(compressedFile));
+    // } else {
+    //   setNewProfileImageFile(file);
+    //   setProfileImageFile(URL.createObjectURL(file));
+    // }
+
+    const compressedFile = await compressedImage(event, 1);
+    setNewProfileImageFile(compressedFile);
+    setProfileImageFile(URL.createObjectURL(compressedFile));
+
   }
 
   const handleSubmit = async (event) => {
@@ -53,7 +57,7 @@ export default function User({ state }) {
           formData,
           {
             headers: {
-              Authorization: state.cookies.jwt,
+              'Authorization': state.cookies.jwt,
               'Content-Type': 'multipart/form-data',
             }
           }

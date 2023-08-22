@@ -1,12 +1,12 @@
-import "../../src/App.css";
-import styles from "./css/UserList.module.css";
-import Footer from "./Footer";
+import "App.css";
+import styles from "components/User/css/UserList.module.css";
+import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL } from "../config";
+import { API_URL } from "config";
 
 export default function UserList({ state }) {
     const navigate = useNavigate();

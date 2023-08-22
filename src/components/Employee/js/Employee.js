@@ -1,9 +1,9 @@
-import "../../src/App.css";
-import styles from './css/Employee.module.css';
+import "App.css";
+import styles from 'components/Employee/css/Employee.module.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL, formatPath } from '../config';
+import { API_URL, formatPath } from 'config';
 
 export default function Employee({ state }) {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function Employee({ state }) {
 
   useEffect(() => {
     if (employee) {
-      import(`../${formatPath(employee.user.profileImage)}`)
+      import(`../../../${formatPath(employee.user.profileImage)}`)
         .then(imageModule => {
           setProfileImageFile(imageModule.default);
         })
@@ -47,7 +47,7 @@ export default function Employee({ state }) {
       <div className={`${styles['employee-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
           <img src={profileImageFile} alt='Employee Profile' loading="lazy" />
         </div>
-        <Link to="/employees/editemployee" className={styles['edit-employee-btn']}><i class="fa-regular fa-pen-to-square"></i> Edit Employee</Link>
+        <Link to="/employees/editemployee" className={styles['edit-employee-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Employee</Link>
 
         <div className={styles['nav-bar']}>
           <button className={`${styles['nav-btn']} ${styles.personalInfo}`} >Personal Infomation</button>
@@ -62,6 +62,10 @@ export default function Employee({ state }) {
           <div className={`${styles['info-section']} ${styles['personal-info']}`}>
             <h2>Personal Information</h2>
             <div className={styles['info-grid']}>
+            <div className={styles['info-item']}>
+                <p><strong>User ID</strong></p>
+                <p>{employee.user.id}</p>
+              </div>
               <div className={styles['info-item']}>
                 <p><strong>Employee ID</strong></p>
                 <p>{employee.id}</p>

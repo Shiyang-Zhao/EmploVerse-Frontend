@@ -1,9 +1,9 @@
-import "../../src/App.css";
-import styles from './css/AddEmployee.module.css';
+import "App.css";
+import styles from 'components/Employee/css/AddEmployee.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL, formatLabel, inputTypes, formatPath } from '../config';
+import { API_URL, formatLabel, inputTypes, formatPath } from 'config';
 import { useEffect } from "react";
 
 export default function AddEmployee({ state }) {

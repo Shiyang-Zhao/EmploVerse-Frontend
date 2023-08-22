@@ -1,9 +1,9 @@
-import "../../src/App.css";
-import styles from './css/EditEmployee.module.css';
+import "App.css";
+import styles from 'components/Employee/css/EditEmployee.module.css';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL, inputTypes, formatLabel } from '../config';
+import { API_URL, inputTypes, formatLabel } from 'config';
 
 export default function EditEmployee({ state }) {
   const navigate = useNavigate();
@@ -19,8 +19,7 @@ export default function EditEmployee({ state }) {
             'Authorization': state.cookies.jwt
           }
         });
-        const { id, ...employee } = response.data;
-        setFormData(employee);
+        setFormData(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -56,19 +55,22 @@ export default function EditEmployee({ state }) {
       <div className={styles.container}>
         <h2>Employee Details</h2>
         <form className={styles.editEmployeeForm} onSubmit={handleSubmit}>
-          {Object.entries(formData).map(([name, value]) => (
-            <div className={styles['input-container']} key={name}>
-              <label htmlFor={`employee-${name}`}>{formatLabel(name)}{name !== 'address2' && name !== 'endDate' ? <text className="requiredText">*</text> : ''}</label>
-              <input
-                id={`employee-${name}`}
-                name={name}
-                type={inputTypes[name] || inputTypes.default}
-                placeholder={formatLabel(name)}
-                value={value}
-                onChange={handleChange}
-                required={name !== "address2" && name !== "endDate"}
-              />
-            </div>
+          {Object.entries(formData).map(([sectionName, sectionData]) => (
+            Object.entries(sectionData).map(([name, value]) => (
+              name !== 'id' && name !== 'roles' && name !== 'profileImage' && (
+                <div className={styles['input-container']} key={name}>
+                  <label htmlFor={`employee-${name}`}>{formatLabel(name)}</label>
+                  <input
+                    id={`employee-${name}`}
+                    name={name}
+                    type={inputTypes[name] || inputTypes.default}
+                    placeholder={formatLabel(name)}
+                    value={value}
+                    onChange={handleChange}
+                  />
+                </div>
+              )
+            ))
           ))}
           <button type="submit">Save</button>
         </form>

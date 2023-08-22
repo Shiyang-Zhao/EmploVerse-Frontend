@@ -114,12 +114,12 @@
     transform: translateY(-2px);
 }
 
-/* .nav-bar {
+.nav-bar {
     background-color: #ccc;
     display: flex;
     justify-content: space-between;
-    grid-column: 2;
-    grid-row: 1;
+    /* grid-column: 2;
+    grid-row: 1; */
 }
 
 .nav-btn {
@@ -134,4 +134,4 @@
 .nav-btn:hover,
 .nav-btn:focus {
     background-color: #a0a0a0;
-} */
+}
