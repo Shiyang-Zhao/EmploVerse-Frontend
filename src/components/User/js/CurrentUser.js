@@ -1,49 +1,36 @@
-import "App.css";
+//import "App.css";
 import styles from 'components/User/css/User.module.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import imageCompression from 'browser-image-compression';
-import { API_URL, ScrollToTop, formatPath, compressedImage } from 'config';
+import { API_URL, ScrollToTop, formatPath, compressImage } from 'config';
 import axios from "axios";
 
 export default function User({ state }) {
   const MAX_FILE_SIZE = 1048576;
   const imageInputRef = useRef();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-  const [profileImageFile, setProfileImageFile] = useState('');
+  const [profileImageFile, setProfileImageFile] = useState(formatPath(user.profileImage));
   const [newProfileImageFile, setNewProfileImageFile] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    import(`../../../${formatPath(user.profileImage)}`)
-      .then(imageModule => {
-        setProfileImageFile(imageModule.default);
-      })
-      .catch(error => {
-        console.error("Error loading profile image:", error);
-      });
-  }, [user]);
+  // useEffect(() => {
+  //   import(`../../../${formatPath(user.profileImage)}`)
+  //     .then(imageModule => {
+  //       setProfileImageFile(imageModule.default);
+  //     })
+  //     .catch(error => {
+  //       console.error("Error loading profile image:", error);
+  //     });
+  // }, [user]);
 
   const handleProfileImageChange = async (event) => {
-    // const file = event.target.files[0];
-    // if (file.size > MAX_FILE_SIZE) {
-
-    //   // Compress the image using browser-image-compression
-    //   const compressedBlob = await imageCompression(file, {
-    //     maxSizeMB: 1, // Set the target file size in MB after compression
-    //   });
-    //   const compressedFile = new File([compressedBlob], file.name, { type: file.type });
-    //   setNewProfileImageFile(compressedFile);
-    //   setProfileImageFile(URL.createObjectURL(compressedFile));
-    // } else {
-    //   setNewProfileImageFile(file);
-    //   setProfileImageFile(URL.createObjectURL(file));
-    // }
-
-    const compressedFile = await compressedImage(event, 1);
-    setNewProfileImageFile(compressedFile);
-    setProfileImageFile(URL.createObjectURL(compressedFile));
-
+    const { files } = event.target;
+    if (event.target.type === 'file' && files.length > 0) {
+      const file = await compressImage(files[0], 1);
+      setNewProfileImageFile(file);
+      setProfileImageFile(URL.createObjectURL(file));
+    }
   }
 
   const handleSubmit = async (event) => {

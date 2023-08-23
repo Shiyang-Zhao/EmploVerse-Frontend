@@ -173,7 +173,7 @@
   flex-direction: column;
   align-items: center;
   border: none;
-  background-image: url(../../../media/backgrounds/background3.jpg);
+  background-image: url(/public/media/backgrounds/background3.jpg);
   background-size: cover;
 }
 
@@ -222,7 +222,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(../../../media/backgrounds/background1.jpg);
+  background-image: url(/public/media/backgrounds/background1.jpg);
   background-size: cover;
 }
 
@@ -276,7 +276,7 @@
   background-color: #222;
   text-align: center;
   color: #fff;
-  background-image: url(../../../media/backgrounds/background2.jpg);
+  background-image: url(/public/media/backgrounds/background2.jpg);
   background-size: cover;
 }
 

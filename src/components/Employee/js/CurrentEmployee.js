@@ -1,4 +1,4 @@
-import "App.css";
+////import "App.css";
 import styles from 'components/Employee/css/Employee.module.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ export default function Employee({ state }) {
     const navigate = useNavigate();
     const [employee, setEmployee] = useState(null);
     const [currentEmployee, setCurrentEmployee] = useState(null);
-    const [profileImageFile, setProfileImageFile] = useState('');
+    const [profileImageFile, setProfileImageFile] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -41,6 +41,7 @@ export default function Employee({ state }) {
                     });
 
                     setCurrentEmployee(response.data)
+                    setProfileImageFile(formatPath(response.data.user.profileImage))
                     console.log(response.data);
                 }
             } catch (error) {
@@ -48,18 +49,6 @@ export default function Employee({ state }) {
             }
         }
         getCurrentEmployee();
-    }, [employee]);
-
-    useEffect(() => {
-        if (employee) {
-            import(`../../../${formatPath(employee.user.profileImage)}`)
-                .then(imageModule => {
-                    setProfileImageFile(imageModule.default);
-                })
-                .catch(error => {
-                    console.error("Error loading profile image:", error);
-                });
-        }
     }, [employee]);
 
     return (

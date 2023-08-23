@@ -1,4 +1,4 @@
-import "App.css";
+////import "App.css";
 import styles from 'components/Employee/css/AddEmployee.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

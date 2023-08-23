@@ -1,4 +1,4 @@
-import "App.css";
+//import "App.css";
 import styles from "components/Employee/css/EmployeeList.module.css";
 import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import imageCompression from 'browser-image-compression';
-import defaultProfileImage from './media/profileImages/defaultProfileImage.jpg';
 
 // const API_URL = 'http://54.153.123.3:8080/EmploVerse';
 const API_URL = 'http://localhost:8080/EmploVerse';
@@ -32,26 +31,24 @@ const formatLabel = (name) => {
 };
 
 const formatPath = (path) => {
-    const rootToRemove = 'C:/Users/shiya/Downloads/Projects/EmploVerse/EmploVerse-Frontend/src/';
+    const rootToRemove = 'C:/Users/shiya/Downloads/Projects/EmploVerse/EmploVerse-Frontend/public';
     return path.replace(rootToRemove, '');
 };
 
-const compressedImage = async (event, maxMB) => {
+const compressImage = async (file, maxMB) => {
     try {
-        const { name, value, files } = event.target;
-        const file = files[0];
-        if (event.target.type === 'file' && files.length > 0) {
-            if (file.size > maxMB * 1024 * 1024) {
+        // if (event.target.type === 'file' && files.length > 0) {
+        if (file.size > maxMB * 1024 * 1024) {
 
-                const compressedBlob = await imageCompression(file, {
-                    maxSizeMB: maxMB,
-                });
-                const compressedFile = new File([compressedBlob], file.name, { type: file.type });
-                return compressedFile;
-            } else {
-                return file;
-            }
+            const compressedBlob = await imageCompression(file, {
+                maxSizeMB: maxMB,
+            });
+            const compressedFile = new File([compressedBlob], file.name, { type: file.type });
+            return compressedFile;
+        } else {
+            return file;
         }
+        // }
     } catch (error) {
         console.error('Error compressing image:', error);
     }
@@ -69,4 +66,4 @@ const compressedImage = async (event, maxMB) => {
 //     });
 // };
 
-export { defaultProfileImage, API_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressedImage }
+export { API_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage }

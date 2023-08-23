@@ -18,7 +18,7 @@
 
 .loaded {
     opacity: 1;
-    transition: opacity 1s ease, transform 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.3s ease;
 }
 
 .user-photo:hover {

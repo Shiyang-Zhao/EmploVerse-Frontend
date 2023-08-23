@@ -1,4 +1,4 @@
-import "App.css";
+//import "App.css";
 import styles from "components/Others/css/Header.module.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,7 +7,8 @@ export default function Header({ state }) {
   const { isSignedIn, cookies } = state;
   const isAdmin = cookies.selectedRole?.[0] === 'ROLE_ADMIN';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const notAtHome = window.location.pathname === "/" ? "" : "text-dark";
+  const isAtHome = window.location.pathname === "/" ? `${styles.atHome}` : '';
+  const notAtHome = window.location.pathname === "/" ? '' : 'text-dark';
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,7 +27,7 @@ export default function Header({ state }) {
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isAtHome}`}>
       <Link to="/">
         <h1 className={notAtHome}>EmploVerse</h1>
       </Link>

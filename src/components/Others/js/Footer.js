@@ -1,4 +1,4 @@
-import "App.css";
+//import "App.css";
 import styles from 'components/Others/css/Footer.module.css';
 import React from 'react';
 import { Link } from 'react-router-dom';

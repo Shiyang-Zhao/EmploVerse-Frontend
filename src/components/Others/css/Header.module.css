@@ -6,6 +6,12 @@
     padding: 6px 0;
     position: fixed;
     z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.atHome:hover {
+    background-color: rgba(var(--bs-black-rgb));
+    cursor: pointer;
 }
 
 .header h1 {
@@ -17,8 +23,7 @@
     font-style: italic;
     float: left;
     font-family: "Cambria";
-    transition: all 0.4s;
-    transform-origin: 50% 50%;
+    transition: all 0.3s ease;
 }
 
 .header h1:hover {

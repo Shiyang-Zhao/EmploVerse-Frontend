@@ -1,4 +1,4 @@
-import "App.css";
+//import "App.css";
 import styles from 'components/Authentication/css/SignIn.module.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -31,9 +31,6 @@ export default function SignIn({ setCookie }) {
         roles: formData.selectedRole,
       });
 
-      // setCookie("id", response.data.id);
-      // setCookie("username", response.data.username);
-      // setCookie("email", response.data.email);
       setCookie("jwt", `Bearer ${response.data.token}`);
       setCookie("selectedRole", response.data.roles);
       navigate('/');
