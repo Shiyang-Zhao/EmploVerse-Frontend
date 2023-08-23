@@ -31,13 +31,7 @@ export default function Employee({ state }) {
 
   useEffect(() => {
     if (employee) {
-      import(`../../../${formatPath(employee.user.profileImage)}`)
-        .then(imageModule => {
-          setProfileImageFile(imageModule.default);
-        })
-        .catch(error => {
-          console.error("Error loading profile image:", error);
-        });
+      setProfileImageFile(formatPath(employee.user.profileImage));
     }
   }, [employee]);
 

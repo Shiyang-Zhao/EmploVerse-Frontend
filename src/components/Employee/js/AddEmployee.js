@@ -53,13 +53,7 @@ export default function AddEmployee({ state }) {
   useEffect(() => {
     // Load profile images for search results
     search.searchResult.forEach((user) => {
-      import(`../${formatPath(user.profileImage)}`)
-        .then(imageModule => {
-          setProfileImageFile(imageModule.default);
-        })
-        .catch(error => {
-          console.error("Error loading profile image:", error);
-        });
+      setProfileImageFile(formatPath(user.profileImage));
     });
   }, [search.searchResult]);
 

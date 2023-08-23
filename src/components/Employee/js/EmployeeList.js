@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL } from "config";
+import { API_URL, formatPath } from "config";
 
 export default function EmployeeList({ state }) {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function EmployeeList({ state }) {
     searchResult: []
   })
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(search.searchResult)
   })
 
@@ -183,7 +183,6 @@ export default function EmployeeList({ state }) {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h2>Employee List</h2>
         <div className={styles.filter}>
           <div className={styles.searchBar}>
             <input
@@ -242,6 +241,11 @@ export default function EmployeeList({ state }) {
                 </span>
               </th>
               <th>
+                <span className="profileImage">
+                  Employee
+                </span>
+              </th>
+              <th>
                 <span className="firstName" onClick={(event) => handleSort(event)}>
                   First Name
                 </span>
@@ -292,6 +296,7 @@ export default function EmployeeList({ state }) {
                     }}
                   >
                     <td>{employee.id}</td>
+                    <td><img src={formatPath(employee.user.profileImage)} className="rounded img-fluid" /></td>
                     <td>{employee.user.firstName}</td>
                     <td>{employee.user.lastName}</td>
                     <td>{employee.user.username}</td>

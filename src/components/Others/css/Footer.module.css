@@ -60,6 +60,7 @@
 }
 
 .socialIcons a {
+  color: #a3a3a3;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -69,6 +70,7 @@
   border-radius: 50%;
   background-color: #333;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .socialIcons a:hover {

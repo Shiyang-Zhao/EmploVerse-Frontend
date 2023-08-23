@@ -14,16 +14,6 @@ export default function User({ state }) {
   const [newProfileImageFile, setNewProfileImageFile] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   import(`../../../${formatPath(user.profileImage)}`)
-  //     .then(imageModule => {
-  //       setProfileImageFile(imageModule.default);
-  //     })
-  //     .catch(error => {
-  //       console.error("Error loading profile image:", error);
-  //     });
-  // }, [user]);
-
   const handleProfileImageChange = async (event) => {
     const { files } = event.target;
     if (event.target.type === 'file' && files.length > 0) {

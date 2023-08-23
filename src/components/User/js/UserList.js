@@ -35,7 +35,6 @@ export default function UserList({ state }) {
 
     return (
         <div className={styles.userListContainer}>
-            <h1>User List</h1>
             {/* Add a search bar if necessary */}
             <div className={styles.searchBar}>
                 <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>

@@ -1,29 +1,54 @@
 .header {
     top: 0;
+    left: 0;
     width: 100vw;
+    display: flex;
+    justify-content: space-between;
     background: transparent;
-    color: #fff;
-    padding: 6px 0;
     position: fixed;
     z-index: 3;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+.atHome,
+.notAtHome {
     transition: all 0.3s ease;
 }
 
+.atHome li a,
+.atHome a h1,
+.atHome i {
+    color: #fff;
+}
+
+.notAtHome li a,
+.notAtHome a h1,
+.notAtHome i {
+    color: #000;
+}
+
 .atHome:hover {
-    background-color: rgba(var(--bs-black-rgb));
+    opacity: 0.9;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.notAtHome:hover {
+    opacity: 0.8;
+    background-color: darkgray;
     cursor: pointer;
 }
 
 .header h1 {
-    margin: 0px 0px 0px 3%;
-    font-size: 40px;
-    color: #fff;
+    margin-left: 3rem;
+    font-size: 2.5rem;
     opacity: 0.7;
     font-weight: bolder;
     font-style: italic;
-    float: left;
     font-family: "Cambria";
-    transition: all 0.3s ease;
 }
 
 .header h1:hover {
@@ -31,77 +56,59 @@
     transform: scale(1.1);
 }
 
-.header nav {
-    margin: 10px 3% 0px 0px;
-    font-size: 17px;
-    float: right;
-}
-
 .header ul {
-    list-style: none;
     margin: 0;
-    padding: 0;
-}
-
-.header ul li {
-    float: left;
-    margin-left: 35px;
-}
-
-.header ul li a {
-    display: block;
-    color: #fff;
-    opacity: 0.7;
-    text-decoration: none;
-    transition: all 0.4s ease;
-    transform-origin: 50% 50%;
-}
-
-.header ul li a:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-/* .dropdown i {
-    width: 35px;
-    height: 35px;
-    margin-top: -5px;
-    transition: all 0.4s ease;
-    transform-origin: 50% 50%;
-} */
-
-.dropdownMenu {
-    width: 150px;
-    height: 200px;
-    font-size: 0.9rem;
-    position: absolute;
-    background-color: transparent;
-    border: none;
-    transform: translateX(-40px);
-    visibility: hidden;
-    opacity: 0;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
     transition: all 0.3s ease;
 }
 
-.dropdownMenu li {
-    margin: 10px auto;
+.header ul li {
+    opacity: 0.7;
+    margin-right: 3.5rem;
+    transition: all 0.3s ease;
 }
 
-.dropdown:hover .dropdownMenu {
+.header ul li:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.dropdown ul {
+    opacity: 0;
+    visibility: hidden;
+    text-indent: -0.5rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.dropdown:hover ul {
     visibility: visible;
     opacity: 1;
 }
 
+.dropdown ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.5rem;
+}
+
+.dropdown ul li:hover {
+    transform: scale(1.1);
+}
+
 /* Button Styles */
 .toggleButton {
-    color: #fff;
     background-color: transparent;
-    padding: 2px 6px;
-    margin-right: 35px;
+    margin: 1.8rem 3.5rem 0.5rem 3.5rem;
     border: none;
-    border-radius: 2px;
     display: none;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: all 0.3s ease;
 }
 
@@ -112,26 +119,37 @@
 
 @media only screen and (max-width: 700px) {
     .toggleButton {
-        display: inline;
+        display: flex;
+    }
+
+    .header nav {
+        width: fit-content;
+    }
+
+    .header ul {
+        flex-direction: column;
+        align-items: flex-end;
+        animation: slideFromTopAnimation 0.4s ease forwards;
+    }
+
+    .dropdown ul {
+        text-indent: 0;
+        align-items: flex-start;
     }
 
     .header ul li {
-        margin: 10px 0 0 0;
-        transform: translateX(-25px);
+        margin-bottom: 1rem;
+    }
+}
+
+@keyframes slideFromTopAnimation {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
     }
 
-    .dropdownMenu li a {
-        margin-left: 90px;
-    }
-
-    .show {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        text-align: center;
-    }
-
-    .hide {
-        display: none;
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
