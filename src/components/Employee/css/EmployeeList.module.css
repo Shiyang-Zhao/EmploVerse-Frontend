@@ -9,6 +9,11 @@
   margin-bottom: 100px;
 }
 
+.employeeImage {
+  max-width: 60px;
+  aspect-ratio: 1/1;
+}
+
 .Edit,
 .Delete {
   width: 50px;
@@ -19,11 +24,6 @@
   font-weight: bold;
   transition: all 0.3s ease;
   border: none;
-}
-
-.vertical-line {
-  border-left: 1px solid #000;
-  margin: 0 5px;
 }
 
 .Edit {

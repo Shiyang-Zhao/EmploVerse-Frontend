@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Header({ state }) {
   const { isSignedIn, cookies } = state;
   const isAdmin = cookies.selectedRole?.[0] === 'ROLE_ADMIN';
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 700);
   const isAtHome = window.location.pathname === "/" ? `${styles.atHome}` : `${styles.notAtHome}`;
 
   const handleToggleMenu = () => {

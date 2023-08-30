@@ -27,9 +27,9 @@ export default function EmployeeList({ state }) {
     searchResult: []
   })
 
-  useEffect(() => {
-    console.log(search.searchResult)
-  })
+  // useEffect(() => {
+  //   console.log(search.searchResult)
+  // });
 
   useEffect(() => {
     getPaginatedEmployeesList();
@@ -296,7 +296,7 @@ export default function EmployeeList({ state }) {
                     }}
                   >
                     <td>{employee.id}</td>
-                    <td><img src={formatPath(employee.user.profileImage)} className="rounded img-fluid" /></td>
+                    <td><img src={formatPath(employee.user.profileImage)} className={`rounded img-fluid img-thumbnail ${styles.employeeImage}`} /></td>
                     <td>{employee.user.firstName}</td>
                     <td>{employee.user.lastName}</td>
                     <td>{employee.user.username}</td>
@@ -306,7 +306,6 @@ export default function EmployeeList({ state }) {
                       <button className={styles.Edit} onClick={(event) => editEmployee(employee, event)}>
                         <i className="fas fa-edit fa-xl"></i>
                       </button>
-                      {/* <span className={styles["vertical-line"]}></span> */}
                       <button className={styles.Delete} onClick={(event) => deleteEmployee(employee, event)}>
                         <i className="fa-solid fa-trash fa-xl"></i>
                       </button>
