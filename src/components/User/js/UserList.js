@@ -13,21 +13,31 @@ export default function UserList({ state }) {
 
     var sock = new SockJS("http://localhost:8080/EmploVerse/ws");
     let stompClient = Stomp.over(sock);
+
     sock.onopen = function () {
         console.log('open');
     }
+
+    // Function to handle incoming message
+    const handleMessage = (message) => {
+        // You can process and utilize the incoming message as needed
+        console.log('Handling message:', message);
+        // Add your custom handling logic here
+    }
+
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            //you can execute any function here
-            console.log(greeting.body);
+        stompClient.subscribe('/toClient/greetings', function (greeting) {
+            handleMessage(greeting.body);
         });
     });
 
     const sendMessageToServer = () => {
-        stompClient.send('/app/hello', {}, "Hello, server!");
+        stompClient.send('/toServer/hello', {}, "Hello, server!");
     }
 
+
+    //
 
     const navigate = useNavigate();
     const [allUsersList, setAllUsersList] = useState([]);

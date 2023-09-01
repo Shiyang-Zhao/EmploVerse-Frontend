@@ -154,7 +154,7 @@ export default function EmployeeList({ state }) {
       ) {
         alert("You don't have the privileges to edit employees");
       } else {
-        navigate("editemployee");
+        navigate("edit_employee");
       }
     } catch (error) {
       console.error("Error editing employee:", error);
@@ -292,7 +292,7 @@ export default function EmployeeList({ state }) {
                     key={employee.id}
                     onClick={() => {
                       sessionStorage.setItem("selectedEmployeeId", employee.id);
-                      navigate("employeeProfile");
+                      navigate("employee_profile");
                     }}
                   >
                     <td>{employee.id}</td>

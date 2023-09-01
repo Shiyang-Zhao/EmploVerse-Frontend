@@ -79,10 +79,10 @@ export default function App() {
               <Route path="user/edituser" element={state.isSignedIn ? <div ref={ref}><EditUser state={state} /></div> : <Navigate to="/signin" />} />
 
               <Route path="employees" element={state.isSignedIn ? <div ref={ref}><EmployeeList state={state} /></div> : <Navigate to="/signin" />} />
-              <Route path="employees/employeeProfile" element={state.isSignedIn ? <div ref={ref}><Employee state={state} /></div> : <Navigate to="/signin" />} />
+              <Route path="employees/employee_profile" element={state.isSignedIn ? <div ref={ref}><Employee state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="employees/currentEmployeeProfile" element={state.isSignedIn ? <div ref={ref}><CurrentEmployee state={state} /></div> : <Navigate to="/signin" />} />
               <Route path="employees/addemployee" element={state.isSignedIn ? <div ref={ref}><AddEmployee state={state} /></div> : <Navigate to="/signin" />} />
-              <Route path="employees/editemployee" element={state.isSignedIn ? <div ref={ref}><EditEmployee state={state} /></div> : <Navigate to="/signin" />} />
+              <Route path="employees/edit_employee" element={state.isSignedIn ? <div ref={ref}><EditEmployee state={state} /></div> : <Navigate to="/signin" />} />
 
               <Route path="signin" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignIn setCookie={setCookie} /></div>} />
               <Route path="signin/signup" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignUp setCookie={setCookie} /></div>} />

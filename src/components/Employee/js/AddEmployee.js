@@ -140,7 +140,7 @@ export default function AddEmployee({ state }) {
         </div>
         <div className={styles.searchResultsContainer}>
           {search.searchResult && search.searchResult.map((user) => (
-            <button className={styles.searchResult} key={user.id} onClick={() => { setTargetUser(user); console.log(targetUser) }}>
+            <button className={styles.searchResult} key={user.id} onClick={() => setTargetUser(user)}>
               <img src={profileImageFile} alt="Profile" />
               <div className={styles.userInfo}>
                 <p>ID: {user.id}</p>
