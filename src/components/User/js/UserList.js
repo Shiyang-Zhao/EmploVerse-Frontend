@@ -26,14 +26,14 @@ export default function UserList({ state }) {
     }
 
     stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
+        // stompClient.send('/toServer/hello', {}, state.cookies.jwt);
         stompClient.subscribe('/toClient/greetings', function (greeting) {
             handleMessage(greeting.body);
         });
     });
 
     const sendMessageToServer = () => {
-        stompClient.send('/toServer/hello', {}, "Hello, server!");
+        stompClient.send('/toServer/hello', {}, state.cookies.jwt);
     }
 
 
