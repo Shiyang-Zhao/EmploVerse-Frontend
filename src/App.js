@@ -49,7 +49,7 @@ export default function App() {
     if (state.isSignedIn) {
       const getUser = async () => {
         try {
-          const response = await axios.get(`${API_URL}/user/getCurrentUser`,
+          const response = await axios.get(`${API_URL}/users/getCurrentUser`,
             {
               headers: {
                 'Authorization': state.cookies.jwt

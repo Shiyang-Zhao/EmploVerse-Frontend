@@ -25,7 +25,7 @@ export default function SignIn({ setCookie }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/user/authenticate`, {
+      const response = await axios.post(`${API_URL}/users/authenticate`, {
         usernameOrEmail: formData.username,
         password: formData.password,
         roles: formData.selectedRole,

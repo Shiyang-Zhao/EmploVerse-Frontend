@@ -30,7 +30,7 @@ export default function User({ state }) {
         const formData = new FormData();
         formData.append('newProfileImage', newProfileImageFile);
         const response = await axios.post(
-          `${API_URL}/user/updateCurrentUserProfileIamge`,
+          `${API_URL}/users/updateCurrentUserProfileIamge`,
           formData,
           {
             headers: {
@@ -39,7 +39,7 @@ export default function User({ state }) {
             }
           }
         ).then(async () => {
-          const response = await axios.get(`${API_URL}/user/getCurrentUser`, {
+          const response = await axios.get(`${API_URL}/users/getCurrentUser`, {
             headers: {
               'Authorization': state.cookies.jwt
             }

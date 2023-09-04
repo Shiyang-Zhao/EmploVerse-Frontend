@@ -5,6 +5,8 @@ import imageCompression from 'browser-image-compression';
 // const API_URL = 'http://54.153.123.3:8080/EmploVerse';
 const API_URL = 'http://localhost:8080/EmploVerse';
 
+const SOCK_URL = 'http://localhost:8080/EmploVerse/ws';
+
 const inputTypes = {
     password1: 'password',
     password2: 'password',
@@ -66,4 +68,4 @@ const compressImage = async (file, maxMB) => {
 //     });
 // };
 
-export { API_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage }
+export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage }

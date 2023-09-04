@@ -57,7 +57,7 @@ export default function SignUp({ setCookie }) {
       }
 
       const registerResponse = await axios.post(
-        `${API_URL}/user/register`,
+        `${API_URL}/users/register`,
         { ...formData, roles }, {
         headers: {
           'Content-Type': 'multipart/form-data', // Set the correct Content-Type for multipart form data
@@ -65,7 +65,7 @@ export default function SignUp({ setCookie }) {
       });
 
       const authenticateResponse = await axios.post(
-        `${API_URL}/user/authenticate`,
+        `${API_URL}/users/authenticate`,
         {
           usernameOrEmail: formData.username,
           password: formData.password1,

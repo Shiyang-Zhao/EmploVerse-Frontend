@@ -3,7 +3,7 @@ import styles from "components/User/css/EditUser.module.css";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL, inputTypes, formatLabel } from "config";
+import { API_URL, inputTypes, formatLabel, formatPath } from "config";
 
 export default function EditUser({ state }) {
   const navigate = useNavigate();
@@ -26,11 +26,11 @@ export default function EditUser({ state }) {
     event.preventDefault();
     try {
       await axios.post(
-        `${API_URL}/user/updateCurrentUser`,
+        `${API_URL}/users/updateCurrentUser`,
         formData,
         {
           headers: {
-            Authorization: state.cookies.jwt,
+            'Authorization': state.cookies.jwt,
           },
         }
       );
