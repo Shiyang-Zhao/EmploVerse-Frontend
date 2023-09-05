@@ -7,7 +7,7 @@ export function LogOut({ state, removeCookie }) {
   const navigate = useNavigate();
   useEffect(() => {
     const logout = async () => {
-      await axios.post(`${API_URL}/user/logout`, null, {
+      await axios.post(`${API_URL}/users/logout`, null, {
         headers: { 'Authorization': state.cookies.jwt },
       });
       removeCookie("jwt");
@@ -22,7 +22,7 @@ export function Switch({ state, removeCookie }) {
   const navigate = useNavigate();
   useEffect(() => {
     const logout = async () => {
-      await axios.post(`${API_URL}/user/logout`, null, {
+      await axios.post(`${API_URL}/users/logout`, null, {
         headers: { 'Authorization': state.cookies.jwt },
       });
       removeCookie("jwt");

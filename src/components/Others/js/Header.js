@@ -41,7 +41,7 @@ export default function Header({ state }) {
               <Link to="/" >Home</Link>
             </li>
             <li>
-              <Link to="employees/currentEmployeeProfile" >Dashboard</Link>
+              <Link to="employees/current_employee_profile" >Dashboard</Link>
             </li>
             {isSignedIn ? (
               <React.Fragment>

@@ -15,7 +15,7 @@ export default function Employee({ state }) {
     useEffect(() => {
         const getEmployee = async () => {
             try {
-                const response = await axios.get(`${API_URL}/user/getCurrentEmployee`, {
+                const response = await axios.get(`${API_URL}/users/getCurrentEmployee`, {
                     headers: {
                         'Authorization': state.cookies.jwt
                     }

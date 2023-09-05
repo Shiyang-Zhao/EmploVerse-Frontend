@@ -3,13 +3,14 @@ import styles from "components/User/css/EditUser.module.css";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL, inputTypes, formatLabel, formatPath } from "config";
+import { API_URL, inputTypes, formatLabel } from "config";
 
 export default function EditUser({ state }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+  const user = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
     const { id, roles, profileImage, ...FormData } = user;
     setFormData(FormData);
   }, []);
@@ -25,7 +26,7 @@ export default function EditUser({ state }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(
+      const response = await axios.post(
         `${API_URL}/users/updateCurrentUser`,
         formData,
         {
@@ -53,10 +54,10 @@ export default function EditUser({ state }) {
                 name={name}
                 type={inputTypes[name] || inputTypes.default}
                 placeholder={formatLabel(name)}
-                {...(inputTypes[name] === 'file' ? { accept: "image/*" } : '')}
-                {...(inputTypes[name] === 'file' ? '' : { value: value })}
+                {...(inputTypes[name] === 'file' ? { accept: "image/*" } : {})}
+                {...(inputTypes[name] === 'file' ? {} : { value: value })}
                 onChange={handleChange}
-                {...(inputTypes[name] === 'file' ? '' : { required: true })}
+                {...(inputTypes[name] === 'file' ? {} : { required: true })}
               />
             </div>
           ))}

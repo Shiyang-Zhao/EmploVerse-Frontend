@@ -218,7 +218,7 @@ export default function EmployeeList({ state }) {
         </div>
 
         <div className={styles.addExport}>
-          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => { navigate("addemployee"); console.log(state.cookies.selectedRole) }}>Add</button>)}
+          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => { navigate("add_employee"); console.log(state.cookies.selectedRole) }}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}
@@ -296,7 +296,7 @@ export default function EmployeeList({ state }) {
                     }}
                   >
                     <td>{employee.id}</td>
-                    <td><img src={formatPath(employee.user.profileImage)} className={`rounded img-fluid img-thumbnail ${styles.employeeImage}`} /></td>
+                    <td><img src={formatPath(employee.user.profileImage)} className={`rounded-circle img-fluid img-thumbnail ${styles.employeeImage}`} /></td>
                     <td>{employee.user.firstName}</td>
                     <td>{employee.user.lastName}</td>
                     <td>{employee.user.username}</td>

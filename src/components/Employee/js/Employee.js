@@ -41,7 +41,7 @@ export default function Employee({ state }) {
       <div className={`${styles['employee-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
           <img src={profileImageFile} alt='Employee Profile' loading="lazy" />
         </div>
-        <Link to="/employees/editemployee" className={styles['edit-employee-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Employee</Link>
+        <Link to="/employees/edit_employee" className={styles['edit-employee-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Employee</Link>
 
         <div className={styles['nav-bar']}>
           <button className={`${styles['nav-btn']} ${styles.personalInfo}`} >Personal Infomation</button>

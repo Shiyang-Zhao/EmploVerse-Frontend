@@ -82,7 +82,7 @@ export default function AddEmployee({ state }) {
   const getSearchResult = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/user/searchUsers?keyword=${search.keyword}&searchField=${search.searchField}`,
+        `${API_URL}/users/searchUsers?keyword=${search.keyword}&searchField=${search.searchField}`,
         {
           headers: {
             'Authorization': state.cookies.jwt,
