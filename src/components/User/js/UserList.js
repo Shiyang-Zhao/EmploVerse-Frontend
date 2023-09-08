@@ -3,11 +3,11 @@ import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import axios from "axios";
 import { CSVLink } from "react-csv";
 import { API_URL, SOCK_URL, formatPath } from "config";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs'
+import { API } from "api/API";
 
 export default function UserList({ state }) {
 
@@ -44,11 +44,7 @@ export default function UserList({ state }) {
 
     const getAllUsersList = async () => {
         try {
-            const response = await axios.get(`${API_URL}/users/`, {
-                headers: {
-                    Authorization: state.cookies.jwt,
-                },
-            });
+            const response = await API.getAllUsers();
             setAllUsersList(response.data);
         } catch (error) {
             console.log(error);

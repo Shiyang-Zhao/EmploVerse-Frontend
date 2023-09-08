@@ -27,10 +27,6 @@ export default function EmployeeList({ state }) {
     searchResult: []
   })
 
-  // useEffect(() => {
-  //   console.log(search.searchResult)
-  // });
-
   useEffect(() => {
     getPaginatedEmployeesList();
     console.log(pagination.employeeList)

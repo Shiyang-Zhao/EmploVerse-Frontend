@@ -2,17 +2,25 @@
 import styles from 'components/User/css/User.module.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import imageCompression from 'browser-image-compression';
-import { API_URL, ScrollToTop, formatPath, compressImage } from 'config';
-import axios from "axios";
+import { API_URL, formatPath, compressImage } from 'config';
+import { API } from 'api/API'
+
 
 export default function User({ state }) {
-  // const MAX_FILE_SIZE = 1048576;
   const imageInputRef = useRef();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-  const [profileImageFile, setProfileImageFile] = useState(formatPath(user.profileImage));
+  const [user, setUser] = useState(null);
+  const [profileImageFile, setProfileImageFile] = useState(null);
   const [newProfileImageFile, setNewProfileImageFile] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const response = await API.getCurrentUser();
+      setUser(response.data);
+      setProfileImageFile(formatPath(response.data.profileImage));
+    }
+    getCurrentUser();
+  }, [])
 
   const handleProfileImageChange = async (event) => {
     const { files } = event.target;
@@ -27,29 +35,9 @@ export default function User({ state }) {
     event.preventDefault();
     try {
       if (newProfileImageFile) {
-        const formData = new FormData();
-        formData.append('newProfileImage', newProfileImageFile);
-        const response = await axios.post(
-          `${API_URL}/users/updateCurrentUserProfileIamge`,
-          formData,
-          {
-            headers: {
-              'Authorization': state.cookies.jwt,
-              'Content-Type': 'multipart/form-data',
-            }
-          }
-        ).then(async () => {
-          const response = await axios.get(`${API_URL}/users/getCurrentUser`, {
-            headers: {
-              'Authorization': state.cookies.jwt
-            }
-          })
-          setUser(response.data);
-          const { password, ...FormData } = response.data;
-          localStorage.setItem('user', JSON.stringify(FormData));
-        })
+        const Response = await API.updateCurrentUserProfileIamge({ 'newProfileImage': newProfileImageFile });
+        window.location.reload();
       }
-      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +45,7 @@ export default function User({ state }) {
 
   return (
     <main>
-      <div className={styles.container}>
+      {user && <div className={styles.container}>
         <div className={`${styles['user-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
           <img src={profileImageFile} alt='User Profile' loading="lazy" onClick={() => imageInputRef.current.click()} />
         </div>
@@ -91,7 +79,7 @@ export default function User({ state }) {
             </div>
           </section>
         </div>
-      </div>
+      </div>}
     </main>
   );
 }

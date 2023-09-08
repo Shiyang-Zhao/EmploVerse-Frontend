@@ -5,9 +5,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import imageCompression from 'browser-image-compression';
 import { API_URL, inputTypes, formatLabel, compressImage } from 'config';
+import { API } from 'api/API';
+
 
 export default function SignUp({ setCookie }) {
-  const MAX_FILE_SIZE = 1048576;
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -50,28 +52,14 @@ export default function SignUp({ setCookie }) {
     event.preventDefault();
     try {
       if (formData.password1 !== formData.password2) {
-        console.log(formData.password1);
-        console.log(formData.password2);
-
         return console.error("Password does not match"); // Return an error message
       }
-
-      const registerResponse = await axios.post(
-        `${API_URL}/users/register`,
-        { ...formData, roles }, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Set the correct Content-Type for multipart form data
-        }
+      const registerResponse = await API.signUp({ ...formData, roles });
+      const authenticateResponse = await API.signIn({
+        usernameOrEmail: formData.username,
+        password: formData.password1,
+        roles: selectedRole,
       });
-
-      const authenticateResponse = await axios.post(
-        `${API_URL}/users/authenticate`,
-        {
-          usernameOrEmail: formData.username,
-          password: formData.password1,
-          roles: selectedRole,
-        }
-      );
       setCookie("jwt", `Bearer ${authenticateResponse.data.token}`);
       setCookie("selectedRole", authenticateResponse.data.roles);
       navigate('/');

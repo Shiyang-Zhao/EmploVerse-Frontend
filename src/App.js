@@ -7,7 +7,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import SignUp from 'components/Authentication/js/SignUp';
 import SignIn from 'components/Authentication/js/SignIn';
-import { LogOut, Switch } from 'components/Authentication/js/LogOut'
+import { LogOut } from 'components/Authentication/js/LogOut'
 import Header from 'components/Others/js/Header';
 import Home from 'components/Others/js/Home';
 import CurrentUser from 'components/User/js/CurrentUser';
@@ -20,11 +20,11 @@ import EditEmployee from 'components/Employee/js/EditEmployee';
 import EditUser from 'components/User/js/EditUser';
 import axios from 'axios';
 import { API_URL, inputTypes, formatLabel } from './config';
+import { API } from 'api/API'
 
 export default function App() {
   const ref = createRef();
   const location = useLocation();
-  const [user, setUser] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies(['jwt', 'selectedRole']);
   const [state, setState] = useState({
     cookies: cookies,
@@ -44,27 +44,6 @@ export default function App() {
   useEffect(() => {
     console.log(state);
   }, [state]);
-
-  useEffect(() => {
-    if (state.isSignedIn) {
-      const getUser = async () => {
-        try {
-          const response = await axios.get(`${API_URL}/users/getCurrentUser`,
-            {
-              headers: {
-                'Authorization': state.cookies.jwt
-              }
-            });
-          const { password, ...FormData } = response.data;
-          setUser(FormData);
-          localStorage.setItem('user', JSON.stringify(FormData));
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      getUser();
-    }
-  }, [location, state]);
 
   return (
     <div>
@@ -87,7 +66,7 @@ export default function App() {
               <Route path="signin" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignIn setCookie={setCookie} /></div>} />
               <Route path="signin/signup" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignUp setCookie={setCookie} /></div>} />
               <Route path="/logout" element={state.isSignedIn ? <div ref={ref}><LogOut state={state} removeCookie={removeCookie} /></div> : <Navigate to="/signin" />} />
-              <Route path="/switch" element={state.isSignedIn ? <div ref={ref}><Switch state={state} removeCookie={removeCookie} /></div> : <Navigate to="/signin" />} />
+              {/* <Route path="/switch" element={state.isSignedIn ? <div ref={ref}><Switch state={state} removeCookie={removeCookie} /></div> : <Navigate to="/signin" />} /> */}
 
             </Routes>
           </ParallaxProvider>

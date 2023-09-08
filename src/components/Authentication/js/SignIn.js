@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from 'config';
+import { API } from 'api/API';
 
 export default function SignIn({ setCookie }) {
   const navigate = useNavigate();
@@ -25,11 +26,12 @@ export default function SignIn({ setCookie }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/users/authenticate`, {
+      const response = await API.signIn({
         usernameOrEmail: formData.username,
         password: formData.password,
         roles: formData.selectedRole,
       });
+      console.log(response)
 
       setCookie("jwt", `Bearer ${response.data.token}`);
       setCookie("selectedRole", response.data.roles);

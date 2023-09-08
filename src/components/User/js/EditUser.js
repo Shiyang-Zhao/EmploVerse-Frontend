@@ -2,18 +2,21 @@
 import styles from "components/User/css/EditUser.module.css";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { API_URL, inputTypes, formatLabel } from "config";
+import { API } from 'api/API'
 
 export default function EditUser({ state }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    const { id, roles, profileImage, ...FormData } = user;
-    setFormData(FormData);
-  }, []);
+    const getFormData = async () => {
+      const response = await API.getCurrentUser();
+      const { id, roles, profileImage, ...FormData } = response.data;
+      setFormData(FormData);
+    }
+    getFormData();
+  }, [])
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,15 +29,7 @@ export default function EditUser({ state }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `${API_URL}/users/updateCurrentUser`,
-        formData,
-        {
-          headers: {
-            'Authorization': state.cookies.jwt,
-          },
-        }
-      );
+      const response = await API.updateCurrentUser(formData);
       navigate("/user");
     } catch (error) {
       console.error("Error updating user:", error);
@@ -54,10 +49,9 @@ export default function EditUser({ state }) {
                 name={name}
                 type={inputTypes[name] || inputTypes.default}
                 placeholder={formatLabel(name)}
-                {...(inputTypes[name] === 'file' ? { accept: "image/*" } : {})}
-                {...(inputTypes[name] === 'file' ? {} : { value: value })}
+                value={value}
                 onChange={handleChange}
-                {...(inputTypes[name] === 'file' ? {} : { required: true })}
+                required
               />
             </div>
           ))}
