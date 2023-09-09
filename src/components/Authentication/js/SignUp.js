@@ -1,5 +1,5 @@
-//import "App.css";
-import styles from 'components/Authentication/css/SignUp.module.css';
+//import "App.scss";
+import styles from 'components/Authentication/css/SignUp.module.scss';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

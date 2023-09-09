@@ -10,56 +10,72 @@ const Axios = axios.create({
 })
 
 export const API = {
-    signUp: async function (data) {
-        return await Axios.post('/users/register', data);
+    signUp: function (data) {
+        return Axios.post('/users/register', data);
     },
 
-    signIn: async function (data) {
-        return await Axios.post('/users/authenticate', data);
+    signIn: function (data) {
+        return Axios.post('/users/authenticate', data);
     },
 
-    logOut: async function () {
-        return await Axios.post('/users/logout', null, {
+    logOut: function () {
+        return Axios.post('/users/logout', null, {
             headers: {
                 'Authorization': cookies.get('jwt')
             }
         });
     },
 
-    getAllUsers: async function () {
-        return await Axios.get('/users/', {
+    getAllUsers: function () {
+        return Axios.get('/users/', {
             headers: {
                 'Authorization': cookies.get('jwt')
             }
         });
     },
 
-    getCurrentUser: async function () {
-        return await Axios.get('/users/getCurrentUser', {
+    getPaginatedUsers: function (pagination) {
+        return Axios.get(`/users/page/${pagination.currentPage}?sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`, {
             headers: {
                 'Authorization': cookies.get('jwt')
             }
         });
     },
 
-    updateCurrentUser: async function (data) {
-        return await Axios.post('/users/updateCurrentUser', data, {
+    searchUsers: function (search) {
+        return Axios.get(`/users/searchUsers?keyword=${search.keyword}&searchField=${search.searchField}`, {
             headers: {
                 'Authorization': cookies.get('jwt')
             }
         });
     },
 
-    addCurrentUserToEmployee: async function () {
-        return await Axios.post('/users/addCurrentUserToEmployee', null, {
+    getCurrentUser: function () {
+        return Axios.get('/users/getCurrentUser', {
             headers: {
                 'Authorization': cookies.get('jwt')
             }
         });
     },
 
-    updateCurrentUserProfileIamge: async function (data) {
-        return await Axios.post('/users/updateCurrentUserProfileIamge', data, {
+    updateCurrentUser: function (data) {
+        return Axios.post('/users/updateCurrentUser', data, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    addCurrentUserToEmployee: function () {
+        return Axios.post('/users/addCurrentUserToEmployee', null, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    updateCurrentUserProfileIamge: function (data) {
+        return Axios.post('/users/updateCurrentUserProfileIamge', data, {
             headers: {
                 'Authorization': cookies.get('jwt'),
                 'Content-Type': 'multipart/form-data'
@@ -67,13 +83,67 @@ export const API = {
         });
     },
 
-    getCurrentEmployee: async function () {
-        return await Axios.get('/users/getCurrentEmployee', {
+    getCurrentEmployee: function () {
+        return Axios.get('/users/getCurrentEmployee', {
             headers: {
                 'Authorization': cookies.get('jwt')
             }
         });
     },
 
+    getAllEmployees: function () {
+        return Axios.get('/employees/', {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
 
+    createEmployee: function (data) {
+        return Axios.post('/employees/createEmployee', data, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    getEmployeeById: function (id) {
+        return Axios.get(`/employees/getEmployeeById/${id}`, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    updateEmployeeById: function (id, data) {
+        return Axios.post(`/employees/updateEmployeeById/${id}`, data, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    deleteEmployeeById: function (id, data) {
+        return Axios.post(`/employees/deleteEmployeeById/${id}`, null, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    getPaginatedEmployees: function (pagination) {
+        return Axios.get(`/employees/page/${pagination.currentPage}?sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
+    searchEmployees: function (search) {
+        return Axios.get(`/employees/searchEmployees?keyword=${search.keyword}&searchField=${search.searchField}`, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
 }

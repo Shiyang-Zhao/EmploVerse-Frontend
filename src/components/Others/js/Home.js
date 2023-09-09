@@ -1,9 +1,7 @@
-import styles from 'components/Others/css/Home.module.css';
+import styles from 'components/Others/css/Home.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import Footer from 'components/Others/js/Footer'
-import { API_URL, ScrollToTop, formatPath } from 'config';
-
 
 export default function Home({ state }) {
   

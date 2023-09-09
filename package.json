@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-scroll-parallax": "^3.4.2",
     "react-transition-group": "^4.4.5",
+    "sass": "^1.66.1",
     "sockjs": "^0.3.24",
     "web-vitals": "^2.1.4",
     "webpack": "^5.82.1",

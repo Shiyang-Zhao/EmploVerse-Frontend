@@ -1,9 +1,9 @@
-////import "App.css";
-import styles from 'components/Employee/css/Employee.module.css';
+////import "App.scss";
+import styles from 'components/Employee/css/Employee.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL, formatPath } from 'config';
+import { formatPath } from 'config';
+import { API } from 'api/API';
 
 export default function Employee({ state }) {
     const navigate = useNavigate();
@@ -15,11 +15,7 @@ export default function Employee({ state }) {
     useEffect(() => {
         const getEmployee = async () => {
             try {
-                const response = await axios.get(`${API_URL}/users/getCurrentEmployee`, {
-                    headers: {
-                        'Authorization': state.cookies.jwt
-                    }
-                });
+                const response = await API.getCurrentEmployee();
                 setEmployee(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -34,12 +30,7 @@ export default function Employee({ state }) {
             try {
                 if (employee) {
                     console.log(employee.id)
-                    const response = await axios.get(`${API_URL}/employees/getEmployeeById/${employee.id}`, {
-                        headers: {
-                            'Authorization': state.cookies.jwt
-                        }
-                    });
-
+                    const response = await API.getEmployeeById(employee.id);
                     setCurrentEmployee(response.data)
                     setProfileImageFile(formatPath(response.data.user.profileImage))
                     console.log(response.data);

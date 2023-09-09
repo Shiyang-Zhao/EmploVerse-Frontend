@@ -1,5 +1,4 @@
-//import "App.css";
-import styles from "components/Others/css/Header.module.css";
+import styles from "components/Others/css/Header.module.scss";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

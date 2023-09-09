@@ -1,9 +1,8 @@
-//import "App.css";
-import styles from 'components/Employee/css/Employee.module.css';
+import styles from 'components/Employee/css/Employee.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL, formatPath } from 'config';
+import { formatPath } from 'config';
+import { API } from 'api/API';
 
 export default function Employee({ state }) {
   const navigate = useNavigate();
@@ -15,13 +14,8 @@ export default function Employee({ state }) {
     const getEmployee = async () => {
       try {
         console.log("Selected Employee ID:", selectedEmployeeId);
-        const response = await axios.get(`${API_URL}/employees/getEmployeeById/${selectedEmployeeId}`, {
-          headers: {
-            'Authorization': state.cookies.jwt
-          }
-        });
+        const response = await API.getEmployeeById(selectedEmployeeId);
         setEmployee(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -38,7 +32,7 @@ export default function Employee({ state }) {
   return (
     <main>
       <div className={styles.container}>
-      <div className={`${styles['employee-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
+        <div className={`${styles['employee-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
           <img src={profileImageFile} alt='Employee Profile' loading="lazy" />
         </div>
         <Link to="/employees/edit_employee" className={styles['edit-employee-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Employee</Link>
@@ -49,14 +43,13 @@ export default function Employee({ state }) {
           <button className={`${styles['nav-btn']} ${styles.educationInfo}`} >Education Infomation</button>
         </div>
 
-
         {employee && (<div className={styles['employee-info']}>
           <h1 className={styles['employee-name']}>{employee.user.firstName} {employee.user.lastName}</h1>
 
           <div className={`${styles['info-section']} ${styles['personal-info']}`}>
             <h2>Personal Information</h2>
             <div className={styles['info-grid']}>
-            <div className={styles['info-item']}>
+              <div className={styles['info-item']}>
                 <p><strong>User ID</strong></p>
                 <p>{employee.user.id}</p>
               </div>

@@ -1,10 +1,9 @@
-//import "App.css";
-import styles from 'components/User/css/User.module.css';
+//import "App.scss";
+import styles from 'components/User/css/User.module.scss';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_URL, formatPath, compressImage } from 'config';
-import { API } from 'api/API'
-
+import { API } from 'api/API';
 
 export default function User({ state }) {
   const imageInputRef = useRef();

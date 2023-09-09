@@ -18,33 +18,25 @@
 .Delete {
   width: 50px;
   height: 35px;
-  margin: 2px;
+  background-color: transparent;
   border-radius: 3px;
-  color: #fff;
   font-weight: bold;
   transition: all 0.3s ease;
   border: none;
-}
-
-.Edit {
-  background-color: #3498db;
-}
-
-.Delete {
-  background-color: #c0392b;
+  color: #222;
 }
 
 .Edit:hover {
-  background-color: #00aeff;
+  color: #00aeff;
 }
 
 .Delete:hover {
-  background-color: #e31313;
+  color: #e31313;
 }
 
 .filter {
   display: inline-block;
-  background-color: #ffffff;
+  background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   border-radius: 30px;
 }

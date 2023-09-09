@@ -1,12 +1,11 @@
-//import "App.css";
-import styles from "components/Employee/css/EmployeeList.module.css";
+import styles from "components/Employee/css/EmployeeList.module.scss";
 import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import axios from "axios";
 import { CSVLink } from "react-csv";
-import { API_URL, formatPath } from "config";
+import { formatPath } from "config";
+import { API } from 'api/API';
 
 export default function EmployeeList({ state }) {
   const navigate = useNavigate();
@@ -72,11 +71,7 @@ export default function EmployeeList({ state }) {
   //Get all employees
   const getAllEmployeesList = async () => {
     try {
-      const response = await axios.get(`${API_URL}/employees/`, {
-        headers: {
-          Authorization: state.cookies.jwt,
-        },
-      });
+      const response = await API.getAllEmployees();
       setAllEmployeesList(response.data);
     } catch (error) {
       console.log(error);
@@ -86,14 +81,7 @@ export default function EmployeeList({ state }) {
   //Get paginated employees
   const getPaginatedEmployeesList = async () => {
     try {
-      const response = await axios.get(
-        `${API_URL}/employees/page/${pagination.currentPage}?sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`,
-        {
-          headers: {
-            Authorization: state.cookies.jwt,
-          },
-        }
-      );
+      const response = await API.getPaginatedEmployees(pagination);
       console.log(response.data);
       changePagination({
         'totalPages': response.data.totalPages,
@@ -109,14 +97,7 @@ export default function EmployeeList({ state }) {
   //Handle search function
   const getSearchResult = async () => {
     try {
-      const response = await axios.get(
-        `${API_URL}/employees/searchEmployees?keyword=${search.keyword}&searchField=${search.searchField}`,
-        {
-          headers: {
-            Authorization: state.cookies.jwt,
-          },
-        }
-      );
+      const response = await API.getSearchResult(search);
       changeSearch({ 'searchResult': response.data });
     } catch (error) {
       console.error("Error fetching all employee list:", error);
@@ -125,14 +106,7 @@ export default function EmployeeList({ state }) {
 
   const addCurrentUserToEmployees = async () => {
     try {
-      const response = await axios.post(
-        `${API_URL}/user/addCurrentUserToEmployee`, null,
-        {
-          headers: {
-            Authorization: state.cookies.jwt,
-          },
-        }
-      );
+      const response = await API.addCurrentUserToEmployee();
       getPaginatedEmployeesList();
     } catch (error) {
       console.error("Failto add current user to employees:", error);
@@ -161,15 +135,7 @@ export default function EmployeeList({ state }) {
   const deleteEmployee = useCallback(async (employee, event) => {
     event.stopPropagation();
     try {
-      const response = await axios.post(
-        `${API_URL}/employees/deleteEmployeeById/${employee.id}`,
-        null,
-        {
-          headers: {
-            Authorization: state.cookies.jwt,
-          },
-        }
-      );
+      const response = await API.deleteEmployeeById(employee.id);
       getPaginatedEmployeesList();
     } catch (error) {
       console.error("Error deleting employee:", error);
@@ -214,7 +180,7 @@ export default function EmployeeList({ state }) {
         </div>
 
         <div className={styles.addExport}>
-          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => { navigate("add_employee"); console.log(state.cookies.selectedRole) }}>Add</button>)}
+          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add_employee")}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}

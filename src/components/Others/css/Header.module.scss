@@ -34,14 +34,16 @@
     opacity: 0.9;
     background-color: #000;
     cursor: pointer;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4); /* Adjust shadow color */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    /* Adjust shadow color */
 }
 
 .notAtHome:hover {
     opacity: 0.8;
     background-color: darkgray;
     cursor: pointer;
-    box-shadow: 0px 4px 4px rgba(128, 128, 128, 0.4); /* Adjust shadow color */
+    box-shadow: 0px 4px 4px rgba(128, 128, 128, 0.4);
+    /* Adjust shadow color */
 }
 
 .header h1 {

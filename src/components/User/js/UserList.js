@@ -1,10 +1,10 @@
-import styles from "components/User/css/UserList.module.css";
+import styles from "components/User/css/UserList.module.scss";
 import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { CSVLink } from "react-csv";
-import { API_URL, SOCK_URL, formatPath } from "config";
+import { SOCK_URL, formatPath } from "config";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs'
 import { API } from "api/API";

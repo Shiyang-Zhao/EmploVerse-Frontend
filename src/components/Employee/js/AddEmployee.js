@@ -1,10 +1,10 @@
-////import "App.css";
-import styles from 'components/Employee/css/AddEmployee.module.css';
+////import "App.scss";
+import styles from 'components/Employee/css/AddEmployee.module.scss';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL, formatLabel, inputTypes, formatPath } from 'config';
+import { formatLabel, inputTypes, formatPath } from 'config';
 import { useEffect } from "react";
+import { API } from 'api/API';
 
 export default function AddEmployee({ state }) {
   const navigate = useNavigate();
@@ -50,16 +50,8 @@ export default function AddEmployee({ state }) {
 
   const [activeSection, setActiveSection] = useState(personalInfo);
 
-  useEffect(() => {
-    // Load profile images for search results
-    search.searchResult.forEach((user) => {
-      setProfileImageFile(formatPath(user.profileImage));
-    });
-  }, [search.searchResult]);
-
   const switchSection = (section) => {
     setActiveSection(section);
-    console.log(activeSection)
   };
 
   const handleChange = (event) => {
@@ -70,7 +62,6 @@ export default function AddEmployee({ state }) {
     }));
   };
 
-  // Update the search state
   const changeSearch = (changes) => {
     setSearch((prevSearch) => ({
       ...prevSearch,
@@ -78,34 +69,20 @@ export default function AddEmployee({ state }) {
     }));
   };
 
-  //Handle search function
   const getSearchResult = async () => {
     try {
-      const response = await axios.get(
-        `${API_URL}/users/searchUsers?keyword=${search.keyword}&searchField=${search.searchField}`,
-        {
-          headers: {
-            'Authorization': state.cookies.jwt,
-          },
-        }
-      );
+      const response = await API.searchUsers(search);
       changeSearch({ 'searchResult': response.data });
     } catch (error) {
       console.error("Error fetching all user list:", error);
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo })
-    const response = axios.post(`${API_URL}/employees/createEmployee`, { 'user': targetUser }, {
-      headers: {
-        'Authorization': state.cookies.jwt
-      }
-    })
-      .then(() => {
-        navigate('/employees');
-      });
+    const response = await API.createEmployee({ 'user': targetUser });
+    navigate('/employees');
   };
 
   return (
@@ -141,7 +118,7 @@ export default function AddEmployee({ state }) {
         <div className={styles.searchResultsContainer}>
           {search.searchResult && search.searchResult.map((user) => (
             <button className={styles.searchResult} key={user.id} onClick={() => setTargetUser(user)}>
-              <img src={profileImageFile} alt="Profile" />
+              <img src={formatPath(user.profileImage)} alt="Profile" />
               <div className={styles.userInfo}>
                 <p>ID: {user.id}</p>
                 <p>Username: {user.username}</p>
@@ -151,14 +128,11 @@ export default function AddEmployee({ state }) {
           ))}
         </div>
 
-
         <div className={styles['nav-bar']}>
           <button className={`${styles['nav-btn']} ${styles.personalInfo}`} onClick={() => switchSection(personalInfo)}>Personal Infomation</button>
           <button className={`${styles['nav-btn']} ${styles.employeeInfo}`} onClick={() => switchSection(employeeInfo)}>Employee Infomation</button>
           <button className={`${styles['nav-btn']} ${styles.educationInfo}`} onClick={() => switchSection(educationInfo)}>Education Infomation</button>
         </div>
-
-
 
         <form className={styles.addEmployeeForm} onSubmit={handleSubmit}>
           {Object.entries(activeSection).map(([name, value]) => (

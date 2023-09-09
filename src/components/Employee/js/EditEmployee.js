@@ -1,9 +1,8 @@
-////import "App.css";
-import styles from 'components/Employee/css/EditEmployee.module.css';
+import styles from 'components/Employee/css/EditEmployee.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_URL, inputTypes, formatLabel } from 'config';
+import { inputTypes, formatLabel } from 'config';
+import { API } from 'api/API';
 
 export default function EditEmployee({ state }) {
   const navigate = useNavigate();
@@ -14,12 +13,9 @@ export default function EditEmployee({ state }) {
     const getEmployee = async () => {
       try {
         console.log("Selected Employee ID:", selectedEmployeeId);
-        const response = await axios.get(`${API_URL}/employees/getEmployeeById/${selectedEmployeeId}`, {
-          headers: {
-            'Authorization': state.cookies.jwt
-          }
-        });
-        setFormData(response.data);
+        const response = await API.getEmployeeById(selectedEmployeeId);
+        const {user, ...FormData} = response.data;
+        setFormData(FormData);
       } catch (error) {
         console.log(error);
       }
@@ -39,11 +35,7 @@ export default function EditEmployee({ state }) {
     event.preventDefault();
     try {
       const updatedEmployee = formData;
-      await axios.post(`${API_URL}/employees/updateEmployeeById/${selectedEmployeeId}`, updatedEmployee, {
-        headers: {
-          'Authorization': state.cookies.jwt
-        }
-      });
+      const response = await API.updateEmployeeById(selectedEmployeeId, updatedEmployee);
       navigate('/employees');
     } catch (error) {
       console.error('Error updating employee:', error);
