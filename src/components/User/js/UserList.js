@@ -10,7 +10,7 @@ import { Stomp } from '@stomp/stompjs'
 import { API } from "api/API";
 
 export default function UserList({ state }) {
-
+    const [messages, setMessages] = useState([]);
     var sock = new SockJS(SOCK_URL);
     let stompClient = Stomp.over(sock);
 
@@ -21,17 +21,29 @@ export default function UserList({ state }) {
     // Function to handle incoming message
     const handleMessage = (message) => {
         console.log('Handling message:', message);
+        setMessages(prevMessages => [...prevMessages, message]);
     }
 
     stompClient.connect({ 'Authorization': state.cookies.jwt }, function (frame) {
-        stompClient.subscribe('/toClient/greetings', function (greeting) {
+        stompClient.subscribe("/toClient/greetings", function (greeting) {
             handleMessage(greeting.body);
-        });
+        }, { 'Authorization': state.cookies.jwt });
     });
 
     const sendMessageToServer = () => {
         stompClient.send('/toServer/hello', { 'Authorization': state.cookies.jwt }, "state.cookies.jwt");
     }
+
+    // Cleanup WebSocket connection on component unmount
+    useEffect(() => {
+        return () => {
+            stompClient.disconnect();
+        }
+    }, [stompClient]);
+
+
+
+
 
 
 
@@ -58,16 +70,23 @@ export default function UserList({ state }) {
     return (
 
         <div className={styles.userListContainer}>
+
             <div>
                 <button onClick={sendMessageToServer} className={styles.ws}>Send Message to Server</button>
+                <div>
+                    <h2>Received Messages</h2>
+                    <ul>
+                        {messages.map((message, index) => (
+                            <li key={index}>{message}</li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-            {/* Add a search bar if necessary */}
-            <div className={styles.searchBar}>
+            {/* <div className={styles.searchBar}>
                 <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>
                 <input type="text" placeholder="Search users..." />
             </div>
 
-            {/* Render the user list */}
             <div className={styles.userList}>
                 {allUsersList.map((user) => (
                     <div
@@ -86,7 +105,6 @@ export default function UserList({ state }) {
                 ))}
             </div>
 
-            {/* Add pagination if necessary */}
             <ReactPaginate
                 previousLabel={"Previous"}
                 nextLabel={"Next"}
@@ -95,13 +113,11 @@ export default function UserList({ state }) {
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 onPageChange={(selectedPage) => {
-                    // Handle pagination change here
                 }}
                 containerClassName={styles.paginationContainer}
                 activeClassName={styles.paginationActive}
             />
 
-            {/* Add a CSV export button if necessary */}
             <CSVLink
                 data={allUsersList}
                 filename={"user_list.csv"}
@@ -110,8 +126,7 @@ export default function UserList({ state }) {
                 Export User List to CSV
             </CSVLink>
 
-            {/* Add the footer component */}
-            <Footer />
+            <Footer /> */}
         </div>
     );
 }
