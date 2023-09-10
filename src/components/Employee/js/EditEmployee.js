@@ -14,7 +14,8 @@ export default function EditEmployee({ state }) {
       try {
         console.log("Selected Employee ID:", selectedEmployeeId);
         const response = await API.getEmployeeById(selectedEmployeeId);
-        const {user, ...FormData} = response.data;
+        const { id, user, ...FormData } = response.data;
+        console.log(FormData)
         setFormData(FormData);
       } catch (error) {
         console.log(error);

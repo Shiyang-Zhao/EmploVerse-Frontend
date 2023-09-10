@@ -8,6 +8,7 @@ const API_URL = 'http://localhost:8080/EmploVerse';
 const SOCK_URL = 'http://localhost:8080/EmploVerse/ws';
 
 const inputTypes = {
+    ssn: 'password',
     password: 'password',
     password1: 'password',
     password2: 'password',
