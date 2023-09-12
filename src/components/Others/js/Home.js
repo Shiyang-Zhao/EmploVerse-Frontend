@@ -8,14 +8,14 @@ export default function Home({ state }) {
   return (
     <main className={styles['main']}>
       <video className={styles['earth']} src="/media/videos/Earth.mp4" autoPlay loop muted />
-      <Parallax speed={-40}>
+      <Parallax speed={-30}>
         <div className={styles['welcome-container']}>
           <div className={styles['welcome']}>
             <h2>
               EmploVerse
               <span>EmploVerse</span>
               <span>EmploVerse</span>
-              <span>Created by Shiayng Zhao</span>
+              <span>Welcome</span>
             </h2>
           </div>
         </div>
@@ -33,7 +33,7 @@ export default function Home({ state }) {
           </ul>
         </section>
       </Parallax>
-      <Parallax>
+      <Parallax speed={-10}>
         <section className={styles['why-choose-container']}>
           <h2>Why Choose EmploVerse</h2>
           <div className={styles['why-choose']}>
@@ -56,7 +56,7 @@ export default function Home({ state }) {
           </div>
         </section>
       </Parallax>
-      <Parallax>
+      <Parallax speed={-10}>
         <section className={styles['testimonial-container']}>
           <h2>Client Testimonials</h2>
           <div className={styles['testimonial']}>

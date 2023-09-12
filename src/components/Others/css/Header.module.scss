@@ -7,144 +7,128 @@
     background: transparent;
     position: fixed;
     z-index: 3;
+
+    a {
+        text-decoration: none;
+    }
+
+    h1 {
+        margin-left: 2rem;
+        font-size: 2.5rem;
+        opacity: 0.7;
+        font-weight: bolder;
+        font-style: italic;
+        font-family: "Cambria";
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 1rem 0;
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        transition: all 0.3s ease;
+
+        li {
+            opacity: 0.7;
+            margin-right: 3rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    button {
+        background-color: transparent;
+        margin: 1.8rem 3.5rem 0.5rem 3.5rem;
+        border: none;
+        display: none;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
 }
 
-.header a {
-    text-decoration: none;
+.atHome {
+    transition: all 0.3s ease;
+
+    &:hover {
+        opacity: 0.9;
+        background-color: #000;
+        cursor: pointer;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    li a,
+    a h1,
+    i {
+        color: #fff;
+    }
 }
 
-.atHome,
 .notAtHome {
     transition: all 0.3s ease;
+
+    &:hover {
+        opacity: 0.8;
+        background-color: darkgray;
+        cursor: pointer;
+        box-shadow: 0px 4px 4px rgba(128, 128, 128, 0.4);
+    }
+
+    li a,
+    a h1,
+    i {
+        color: #000;
+    }
 }
 
-.atHome li a,
-.atHome a h1,
-.atHome i {
-    color: #fff;
-}
-
-.notAtHome li a,
-.notAtHome a h1,
-.notAtHome i {
-    color: #000;
-}
-
-.atHome:hover {
-    opacity: 0.9;
-    background-color: #000;
-    cursor: pointer;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-    /* Adjust shadow color */
-}
-
-.notAtHome:hover {
-    opacity: 0.8;
-    background-color: darkgray;
-    cursor: pointer;
-    box-shadow: 0px 4px 4px rgba(128, 128, 128, 0.4);
-    /* Adjust shadow color */
-}
-
-.header h1 {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    opacity: 0.7;
-    font-weight: bolder;
-    font-style: italic;
-    font-family: "Cambria";
-}
-
-.header h1:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.header ul {
-    margin: 0;
-    padding: 1rem 0;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    transition: all 0.3s ease;
-}
-
-.header ul li {
-    opacity: 0.7;
-    margin-right: 3rem;
-    transition: all 0.3s ease;
-}
-
-.header ul li:hover {
-    opacity: 1;
-    transform: scale(1.2);
-}
-
-.dropdown ul {
-    opacity: 0;
-    visibility: hidden;
-    text-indent: -0.5rem;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    align-items: center;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.dropdown:hover ul {
-    visibility: visible;
-    opacity: 1;
-}
-
-.dropdown ul li {
-    margin-bottom: 0.5rem;
-    font-size: 0.5rem;
-}
-
-.dropdown ul li:hover {
-    transform: scale(1.1);
-}
-
-/* Button Styles */
-.toggleButton {
-    background-color: transparent;
-    margin: 1.8rem 3.5rem 0.5rem 3.5rem;
-    border: none;
-    display: none;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.toggleButton:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-@media only screen and (max-width: 700px) {
-    .toggleButton {
+.dropdown {
+    ul {
+        opacity: 0;
+        visibility: hidden;
+        text-indent: -0.5rem;
         display: flex;
-    }
-
-    .header nav {
-        width: fit-content;
-    }
-
-    .header ul {
         flex-direction: column;
-        align-items: flex-end;
-        animation: slideFromTopAnimation 0.4s ease forwards;
+        position: absolute;
+        align-items: center;
+        transition: all 0.3s ease;
+        white-space: nowrap;
     }
 
-    .dropdown ul {
-        text-indent: 0;
-        align-items: flex-start;
+    &:hover {
+        ul {
+            visibility: visible;
+            opacity: 1;
+        }
     }
 
-    .header ul li {
-        margin-bottom: 1rem;
+    ul {
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 0.5rem;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
     }
 }
+
+
 
 @keyframes slideFromTopAnimation {
     0% {
@@ -157,3 +141,38 @@
         opacity: 1;
     }
 }
+
+
+@media only screen and (max-width: 1100px) {}
+
+@media only screen and (max-width: 900px) {}
+
+@media only screen and (max-width: 700px) {
+    .header {
+        button {
+            display: flex;
+        }
+
+        nav {
+            width: fit-content;
+        }
+
+        ul {
+            flex-direction: column;
+            align-items: flex-end;
+            animation: slideFromTopAnimation 0.4s ease forwards;
+
+            li {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .dropdown ul {
+        text-indent: 0;
+        align-items: flex-start;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {}

@@ -6,7 +6,7 @@ export default function Header({ state }) {
   const { isSignedIn, cookies } = state;
   const isAdmin = cookies.selectedRole?.[0] === 'ROLE_ADMIN';
   const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 700);
-  const isAtHome = window.location.pathname === "/" ? `${styles.atHome}` : `${styles.notAtHome}`;
+  const isAtHome = window.location.pathname === "/" ? `${styles['atHome']}` : `${styles['notAtHome']}`;
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -16,22 +16,20 @@ export default function Header({ state }) {
     const handleResize = () => {
       setIsMenuOpen(window.innerWidth > 700);
     };
-    // Add event listener for resize events
     window.addEventListener("resize", handleResize);
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
-    <header className={`${styles.header} ${isAtHome}`} onMouseLeave={window.innerWidth < 700 ? () => setIsMenuOpen(false) : null}>
+    <header className={`${styles['header']} ${isAtHome}`} onMouseLeave={window.innerWidth < 700 ? () => setIsMenuOpen(false) : null}>
       <Link to="/">
         <h1 >EmploVerse</h1>
       </Link>
 
       <nav>
-        <button className={styles.toggleButton}>
+        <button>
           <i className={`fa-solid fa-bars fa-2xl`} onClick={handleToggleMenu}></i>
         </button>
         {isMenuOpen &&
@@ -53,7 +51,7 @@ export default function Header({ state }) {
                 <li>
                   <Link to="employees" >Employees</Link>
                 </li>
-                <li className={styles.dropdown}>
+                <li className={styles['dropdown']}>
                   <Link to="user">
                     <i className={`fa-solid fa-user-tie fa-2xl`} ></i>
                   </Link>
