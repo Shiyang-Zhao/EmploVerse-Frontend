@@ -1,17 +1,16 @@
 import styles from 'components/Others/css/Home.module.scss';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import Footer from 'components/Others/js/Footer'
 
 export default function Home({ state }) {
-  
+
   return (
-    <main>
-      {/* <div className={`${styles['gradient-top']} ${isAtTop ? styles.fadeOut : styles.fadeIn}`}></div> */}
-      <video className={styles.earthVideo} src={"/media/videos/Earth.mp4"} autoPlay loop muted />
-      <Parallax speed={-40} scale={[0.8, 1.5, 'easeInOut']}>
-        <div className={styles.welcomeContainer}>
-          <div className={styles.welcome}>
+    <main className={styles['main']}>
+      <video className={styles['earth']} src="/media/videos/Earth.mp4" autoPlay loop muted />
+      <Parallax speed={-40}>
+        <div className={styles['welcome-container']}>
+          <div className={styles['welcome']}>
             <h2>
               EmploVerse
               <span>EmploVerse</span>
@@ -22,9 +21,9 @@ export default function Home({ state }) {
         </div>
       </Parallax>
       <Parallax>
-        <section className={styles.featuresSection}>
+        <section className={styles['features-container']}>
           <h2>Key Features</h2>
-          <ul className={styles['features-list']}>
+          <ul className={styles['features']}>
             <li>Employee profiles with detailed information</li>
             <li>Employee list with search and pagination</li>
             <li>Add new employees to the system</li>
@@ -34,44 +33,44 @@ export default function Home({ state }) {
           </ul>
         </section>
       </Parallax>
-      <Parallax scale={[1, 1.3, 'easeInOut']}>
-        <section className={styles.whyChooseSection}>
+      <Parallax>
+        <section className={styles['why-choose-container']}>
           <h2>Why Choose EmploVerse</h2>
-          <div className={styles.whyChooseContainer}>
-            <div className={styles['why-choose-item']}>
+          <div className={styles['why-choose']}>
+            <div>
               <h3>Streamline HR Processes</h3>
               <p>Our EmploVerse automates and simplifies HR tasks, saving time and reducing errors.</p>
             </div>
-            <div className={styles['why-choose-item']}>
+            <div>
               <h3>Enhance Employee Productivity</h3>
               <p>Efficiently manage employee information, schedules, and performance to boost overall productivity.</p>
             </div>
-            <div className={styles['why-choose-item']}>
+            <div>
               <h3>Improve Data Accuracy</h3>
               <p>Ensure accurate and up-to-date employee data through centralized storage and automated data management.</p>
             </div>
-            <div className={styles['why-choose-item']}>
+            <div>
               <h3>Enable Self-Service</h3>
               <p>Empower employees to access and update their own information, reducing HR administrative burden.</p>
             </div>
           </div>
         </section>
       </Parallax>
-      <Parallax scale={[1, 1.3, 'easeInOut']}>
-        <section className={styles.testimonialSection}>
+      <Parallax>
+        <section className={styles['testimonial-container']}>
           <h2>Client Testimonials</h2>
-          <div className={styles.testimonialContainer}>
-            <div className={styles.testimonial}>
+          <div className={styles['testimonial']}>
+            <div>
               <p>"The EmploVerse has transformed our HR processes. It's user-friendly and highly efficient. We highly recommend it!"</p>
-              <p className={styles['testimonial-author']}>- John Smith, HR Manager</p>
+              <h3>- John Smith, HR Manager</h3>
             </div>
-            <div className={styles.testimonial}>
+            <div>
               <p>"We've been using the EmploVerse for years, and it has significantly streamlined our employee onboarding and performance tracking."</p>
-              <p className={styles['testimonial-author']}>- Jane Doe, CEO</p>
+              <h3>- Jane Doe, CEO</h3>
             </div>
-            <div className={styles.testimonial}>
+            <div>
               <p>"The EmploVerse is the best HR solution we have ever used. It has simplified our payroll management and enhanced our reporting capabilities."</p>
-              <p className={styles['testimonial-author']}>- Alex Johnson, CFO</p>
+              <h3>- Alex Johnson, CFO</h3>
             </div>
           </div>
         </section>

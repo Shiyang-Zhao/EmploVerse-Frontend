@@ -18,9 +18,6 @@ import AddEmployee from 'components/Employee/js/AddEmployee';
 import Employee from 'components/Employee/js/Employee';
 import EditEmployee from 'components/Employee/js/EditEmployee';
 import EditUser from 'components/User/js/EditUser';
-import axios from 'axios';
-import { API_URL, inputTypes, formatLabel } from './config';
-import { API } from 'api/API'
 
 export default function App() {
   const ref = createRef();
