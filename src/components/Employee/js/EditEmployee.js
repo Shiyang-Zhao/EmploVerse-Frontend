@@ -16,6 +16,7 @@ export default function EditEmployee({ state }) {
         const response = await API.getEmployeeById(selectedEmployeeId);
         const { id, ...FormData } = response.data;
         setFormData(FormData);
+        console.log(FormData)
       } catch (error) {
         console.log(error);
       }
@@ -23,19 +24,22 @@ export default function EditEmployee({ state }) {
     getEmployee();
   }, [selectedEmployeeId]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (event, sectionName, name) => {
+    const { value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [sectionName]: {
+        ...prevFormData[sectionName],
+        [name]: value,
+      },
     }));
+    console.log(value)
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const updatedEmployee = formData;
-      const response = await API.updateEmployeeById(selectedEmployeeId, updatedEmployee);
+      const response = await API.updateEmployeeById(selectedEmployeeId, formData);
       navigate('/employees');
     } catch (error) {
       console.error('Error updating employee:', error);
@@ -58,7 +62,7 @@ export default function EditEmployee({ state }) {
                     type={inputTypes[name] || inputTypes.default}
                     placeholder={formatLabel(name)}
                     value={inputTypes[name] === 'date' ? formatDateFromArray(value) : value}
-                    onChange={handleChange}
+                    onChange={(event) => handleChange(event, sectionName, name)}
                   />
                 </div>
               )

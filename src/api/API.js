@@ -3,6 +3,7 @@ import { Cookies } from 'react-cookie';
 import { API_URL } from "config";
 
 const cookies = new Cookies();
+const jwt = cookies.get('jwt');
 
 const Axios = axios.create({
     baseURL: API_URL,
@@ -21,7 +22,7 @@ export const API = {
     logOut: function () {
         return Axios.post('/users/logout', null, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -29,7 +30,7 @@ export const API = {
     getAllUsers: function () {
         return Axios.get('/users/', {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -37,7 +38,7 @@ export const API = {
     getPaginatedUsers: function (pagination) {
         return Axios.get(`/users/page/${pagination.currentPage}?sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -45,7 +46,7 @@ export const API = {
     searchUsers: function (search) {
         return Axios.get(`/users/searchUsers?keyword=${search.keyword}&searchField=${search.searchField}`, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -53,7 +54,7 @@ export const API = {
     getCurrentUser: function () {
         return Axios.get('/users/getCurrentUser', {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -61,7 +62,7 @@ export const API = {
     updateCurrentUser: function (data) {
         return Axios.post('/users/updateCurrentUser', data, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -69,7 +70,7 @@ export const API = {
     addCurrentUserToEmployee: function () {
         return Axios.post('/users/addCurrentUserToEmployee', null, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -77,7 +78,7 @@ export const API = {
     updateCurrentUserProfileIamge: function (data) {
         return Axios.post('/users/updateCurrentUserProfileIamge', data, {
             headers: {
-                'Authorization': cookies.get('jwt'),
+                'Authorization': jwt,
                 'Content-Type': 'multipart/form-data'
             }
         });
@@ -86,7 +87,7 @@ export const API = {
     getCurrentEmployee: function () {
         return Axios.get('/users/getCurrentEmployee', {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -94,7 +95,7 @@ export const API = {
     getAllEmployees: function () {
         return Axios.get('/employees/', {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -102,7 +103,7 @@ export const API = {
     createEmployee: function (data) {
         return Axios.post('/employees/createEmployee', data, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -110,7 +111,7 @@ export const API = {
     getEmployeeById: function (id) {
         return Axios.get(`/employees/getEmployeeById/${id}`, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -118,7 +119,7 @@ export const API = {
     updateEmployeeById: function (id, data) {
         return Axios.post(`/employees/updateEmployeeById/${id}`, data, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -126,7 +127,7 @@ export const API = {
     deleteEmployeeById: function (id, data) {
         return Axios.post(`/employees/deleteEmployeeById/${id}`, null, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -134,7 +135,7 @@ export const API = {
     getPaginatedEmployees: function (pagination) {
         return Axios.get(`/employees/page/${pagination.currentPage}?sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
@@ -142,7 +143,7 @@ export const API = {
     searchEmployees: function (search) {
         return Axios.get(`/employees/searchEmployees?keyword=${search.keyword}&searchField=${search.searchField}`, {
             headers: {
-                'Authorization': cookies.get('jwt')
+                'Authorization': jwt
             }
         });
     },
