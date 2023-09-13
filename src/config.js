@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import imageCompression from 'browser-image-compression';
 
+const Helper = {};
+
 // const API_URL = 'http://54.153.123.3:8080/EmploVerse';
 const API_URL = 'http://localhost:8080/EmploVerse';
 
@@ -58,16 +60,28 @@ const compressImage = async (file, maxMB) => {
     }
 }
 
-// const importImage = (path) => {
-//     return new Promise(async (resolve, reject) => {
-//         try {
-//             const imageModule = await import(`../../../${formatPath(path)}`);
-//             resolve(imageModule);
-//         } catch (error) {
-//             console.error("Error loading profile image:", error);
-//             reject(error);
-//         }
-//     });
-// };
+function formatDateFromArray(dateArray) {
+    const year = dateArray[0];
+    const month = dateArray[1] < 10 ? `0${dateArray[1]}` : dateArray[1];
+    const day = dateArray[2] < 10 ? `0${dateArray[2]}` : dateArray[2];
 
-export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage }
+    return `${year}-${month}-${day}`;
+}
+
+// const debounce = (func, delay) => {
+//     let timer;
+
+//     return function () {
+//         const context = this;
+//         const args = arguments;
+
+//         clearTimeout(timer);
+
+//         timer = setTimeout(() => {
+//             func.apply(context, args);
+//         }, delay);
+//     };
+// }
+
+
+export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage, formatDateFromArray }

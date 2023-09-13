@@ -1,7 +1,7 @@
 import styles from 'components/Employee/css/EditEmployee.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { inputTypes, formatLabel } from 'config';
+import { inputTypes, formatLabel, formatDateFromArray } from 'config';
 import { API } from 'api/API';
 
 export default function EditEmployee({ state }) {
@@ -14,8 +14,7 @@ export default function EditEmployee({ state }) {
       try {
         console.log("Selected Employee ID:", selectedEmployeeId);
         const response = await API.getEmployeeById(selectedEmployeeId);
-        const { id, user, ...FormData } = response.data;
-        console.log(FormData)
+        const { id, ...FormData } = response.data;
         setFormData(FormData);
       } catch (error) {
         console.log(error);
@@ -58,7 +57,7 @@ export default function EditEmployee({ state }) {
                     name={name}
                     type={inputTypes[name] || inputTypes.default}
                     placeholder={formatLabel(name)}
-                    value={value}
+                    value={inputTypes[name] === 'date' ? formatDateFromArray(value) : value}
                     onChange={handleChange}
                   />
                 </div>
