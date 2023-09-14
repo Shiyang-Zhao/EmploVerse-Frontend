@@ -23,7 +23,14 @@
   font-weight: bold;
   transition: all 0.3s ease;
   border: none;
-  color: #222;
+}
+
+.Edit {
+  color: #3498db;
+}
+
+.Delete {
+  color: #d81818;
 }
 
 .Edit:hover {
@@ -31,7 +38,7 @@
 }
 
 .Delete:hover {
-  color: #e31313;
+  color: #ff0000;
 }
 
 .filter {

@@ -205,45 +205,17 @@ export default function EmployeeList({ state }) {
               </th>
               <th>
                 <span className="profileImage">
-                  Employee
+                  {/* Employee */}
                 </span>
               </th>
-              <th>
-                <span className="firstName" onClick={(event) => handleSort(event)}>
-                  First Name
-                </span>
-              </th>
-              <th>
-                <span className="lastName" onClick={(event) => handleSort(event)}>
-                  Last Name
-                </span>
-              </th>
-              <th>
-                <span className="username" onClick={(event) => handleSort(event)}>
-                  Username
-                </span>
-              </th>
-              <th>
-                <span className="email" onClick={(event) => handleSort(event)}>
-                  Email
-                </span>
-              </th>
-              <th>
-                <span className="phoneNumber" onClick={(event) => handleSort(event)}>
-                  Phone Number
-                </span>
-              </th>
+              <th><span className="firstName" onClick={(event) => handleSort(event)}>First Name</span></th>
+              <th><span className="lastName" onClick={(event) => handleSort(event)}>Last Name</span></th>
+              <th><span className="username" onClick={(event) => handleSort(event)}>Username</span></th>
+              <th><span className="email" onClick={(event) => handleSort(event)}>Email</span></th>
+              <th><span className="phoneNumber" onClick={(event) => handleSort(event)}>Phone Number</span></th>
               <th>Actions</th>
-              <th>
-                <span className="department" onClick={(event) => handleSort(event)}>
-                  Department
-                </span>
-              </th>
-              <th>
-                <span className="jobTitles" onClick={(event) => handleSort(event)}>
-                  Job Titles
-                </span>
-              </th>
+              <th><span className="department" onClick={(event) => handleSort(event)}>Department</span></th>
+              <th><span className="jobTitles" onClick={(event) => handleSort(event)}>Job Titles</span></th>
             </tr>
           </thead>
           <tbody>
