@@ -16,8 +16,7 @@
 
 .Edit,
 .Delete {
-  width: 50px;
-  height: 35px;
+  margin: 3px;
   background-color: transparent;
   border-radius: 3px;
   font-weight: bold;
@@ -130,7 +129,7 @@
 .EmployeeListTable th,
 .EmployeeListTable td {
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.2rem;
   border-bottom: 1px solid #ddd;
 }
 

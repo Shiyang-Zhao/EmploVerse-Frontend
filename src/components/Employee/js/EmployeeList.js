@@ -98,8 +98,9 @@ export default function EmployeeList({ state }) {
   //Handle search function
   const getSearchResult = async () => {
     try {
-      const response = await API.getSearchResult(search);
+      const response = await API.searchEmployees(search);
       changeSearch({ 'searchResult': response.data });
+      console.log(response.data)
     } catch (error) {
       console.error("Error fetching all employee list:", error);
     }
@@ -238,12 +239,8 @@ export default function EmployeeList({ state }) {
                     <td>{employee.user.email}</td>
                     <td>{employee.user.phoneNumber}</td>
                     <td>
-                      <button className={styles.Edit} onClick={(event) => editEmployee(employee, event)}>
-                        <i className="fas fa-edit fa-xl"></i>
-                      </button>
-                      <button className={styles.Delete} onClick={(event) => deleteEmployee(employee, event)}>
-                        <i className="fa-solid fa-trash fa-xl"></i>
-                      </button>
+                      <i className={`${styles['Edit']} fas fa-edit fa-xl`} onClick={(event) => editEmployee(employee, event)}></i>
+                      <i className={`${styles['Delete']} fa-solid fa-trash fa-xl`} onClick={(event) => deleteEmployee(employee, event)}></i>
                     </td>
                     <td>{employee.employeeInfo.department}</td>
                     <td>{employee.employeeInfo.jobTitles}</td>
