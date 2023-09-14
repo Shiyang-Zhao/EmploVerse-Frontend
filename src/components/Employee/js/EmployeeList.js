@@ -15,6 +15,7 @@ export default function EmployeeList({ state }) {
     currentPage: 1,
     totalPages: 1,
     totalItems: 0,
+    pageSize: 5,
     sortField: 'id',
     sortDir: 'asc',
     employeeList: []
