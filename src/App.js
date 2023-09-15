@@ -57,11 +57,11 @@ export default function App() {
                   {state.cookies.selectedRole[0] !== 'ROLE_USER' && (
                     <React.Fragment>
                       <Route path="users" element={<div ref={ref}><UserList state={state} /></div>} />
-                      <Route path="users/user/:id" element={<div ref={ref}><User state={state} /></div>} />
-                      <Route path="users/user/:id/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
+                      <Route path="users/user/:userId" element={<div ref={ref}><User state={state} /></div>} />
+                      <Route path="users/user/:userId/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
 
-                      <Route path="employees/employee/:id" element={<div ref={ref}><Employee state={state} /></div>} />
-                      <Route path="employees/employee/:id/edit" element={<div ref={ref}><Employee state={state} /></div>} />
+                      <Route path="employees/employee/:employeeId" element={<div ref={ref}><Employee state={state} /></div>} />
+                      <Route path="employees/employee/:employeeId/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
                     </React.Fragment>
                   )}
 
@@ -69,9 +69,9 @@ export default function App() {
                   <Route path="current_user/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
 
                   <Route path="employees" element={<div ref={ref}><EmployeeList state={state} /></div>} />
-                  <Route path="current_employee" element={<div ref={ref}><Employee state={state} /></div>} />
                   <Route path="employees/add" element={<div ref={ref}><AddEmployee state={state} /></div>} />
-                  <Route path="employees/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
+                  <Route path="current_employee" element={<div ref={ref}><Employee state={state} /></div>} />
+                  <Route path="current_employee/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
 
                   <Route path="/logout" element={<div ref={ref}><LogOut state={state} removeCookie={removeCookie} /></div>} />
                   {/* <Route path="/switch" element={<div ref={ref}><Switch state={state} removeCookie={removeCookie} /></div>} /> */}

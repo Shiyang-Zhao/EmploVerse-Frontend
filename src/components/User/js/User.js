@@ -18,6 +18,8 @@ export default function User({ state }) {
       if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && userId) {
         response = await API.getUserById(userId);
       } else {
+        console.log(state.cookies.selectedRole[0] === 'ROLE_ADMIN')
+        console.log(userId)
         response = await API.getCurrentUser();
       }
       setUser(response.data);

@@ -10,36 +10,36 @@ import { Stomp } from '@stomp/stompjs'
 import { API } from "api/API";
 
 export default function UserList({ state }) {
-    const [messages, setMessages] = useState([]);
-    var sock = new SockJS(SOCK_URL);
-    let stompClient = Stomp.over(sock);
+    // const [messages, setMessages] = useState([]);
+    // var sock = new SockJS(SOCK_URL);
+    // let stompClient = Stomp.over(sock);
 
-    sock.onopen = function () {
-        console.log('open');
-    }
+    // sock.onopen = function () {
+    //     console.log('open');
+    // }
 
-    // Function to handle incoming message
-    const handleMessage = (message) => {
-        console.log('Handling message:', message);
-        setMessages(prevMessages => [...prevMessages, message]);
-    }
+    // // Function to handle incoming message
+    // const handleMessage = (message) => {
+    //     console.log('Handling message:', message);
+    //     setMessages(prevMessages => [...prevMessages, message]);
+    // }
 
-    stompClient.connect({ 'Authorization': state.cookies.jwt }, function (frame) {
-        stompClient.subscribe("/toClient/greetings", function (greeting) {
-            handleMessage(greeting.body);
-        }, { 'Authorization': state.cookies.jwt });
-    });
+    // stompClient.connect({ 'Authorization': state.cookies.jwt }, function (frame) {
+    //     stompClient.subscribe("/toClient/greetings", function (greeting) {
+    //         handleMessage(greeting.body);
+    //     }, { 'Authorization': state.cookies.jwt });
+    // });
 
-    const sendMessageToServer = () => {
-        stompClient.send('/toServer/hello', { 'Authorization': state.cookies.jwt }, "state.cookies.jwt");
-    }
+    // const sendMessageToServer = () => {
+    //     stompClient.send('/toServer/hello', { 'Authorization': state.cookies.jwt }, "state.cookies.jwt");
+    // }
 
-    // Cleanup WebSocket connection on component unmount
-    useEffect(() => {
-        return () => {
-            stompClient.disconnect();
-        }
-    }, [stompClient]);
+    // // Cleanup WebSocket connection on component unmount
+    // useEffect(() => {
+    //     return () => {
+    //         stompClient.disconnect();
+    //     }
+    // }, [stompClient]);
 
 
 
@@ -60,7 +60,6 @@ export default function UserList({ state }) {
         }
     };
     const handleUserClick = (userId) => {
-        // Handle navigation to user details page when a user is clicked
         navigate(`user/${userId}`);
     };
 
@@ -68,7 +67,7 @@ export default function UserList({ state }) {
 
         <div className={styles.userListContainer}>
 
-            <div>
+            {/* <div>
                 <button onClick={sendMessageToServer} className={styles.ws}>Send Message to Server</button>
                 <div>
                     <h2>Received Messages</h2>
@@ -78,7 +77,7 @@ export default function UserList({ state }) {
                         ))}
                     </ul>
                 </div>
-            </div>
+            </div> */}
             <div className={styles.searchBar}>
                 <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>
                 <input type="text" placeholder="Search users..." />

@@ -181,7 +181,7 @@ export default function EmployeeList({ state }) {
         </div>
 
         <div className={styles.addExport}>
-          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add_employee")}>Add</button>)}
+          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}
