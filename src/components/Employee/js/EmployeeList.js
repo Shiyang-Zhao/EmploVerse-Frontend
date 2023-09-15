@@ -228,7 +228,7 @@ export default function EmployeeList({ state }) {
                     key={employee.id}
                     onClick={() => {
                       sessionStorage.setItem("selectedEmployeeId", employee.id);
-                      navigate("employee_profile");
+                      navigate(`employee/${employee.id}`);
                     }}
                   >
                     <td>{employee.id}</td>

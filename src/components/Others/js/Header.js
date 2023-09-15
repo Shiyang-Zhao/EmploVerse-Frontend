@@ -37,11 +37,12 @@ export default function Header({ state }) {
             <li >
               <Link to="/" >Home</Link>
             </li>
-            <li>
-              <Link to="employees/current_employee_profile" >Dashboard</Link>
-            </li>
+
             {isSignedIn ? (
               <React.Fragment>
+                <li>
+                  <Link to="current_employee" >Dashboard</Link>
+                </li>
                 {isAdmin && (
                   <li>
                     <Link to="users" >Users</Link>
@@ -52,12 +53,12 @@ export default function Header({ state }) {
                   <Link to="employees" >Employees</Link>
                 </li>
                 <li className={styles['dropdown']}>
-                  <Link to="user">
+                  <Link to="current_user">
                     <i className={`fa-solid fa-user-tie fa-2xl`} ></i>
                   </Link>
                   <ul>
                     <li>
-                      <Link to="user" >Profile</Link>
+                      <Link to="current_user" >Profile</Link>
                     </li>
                     <li>
                       <Link to="/switch" >Switch</Link>

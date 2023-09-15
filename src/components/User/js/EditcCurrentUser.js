@@ -1,11 +1,10 @@
-//import "App.scss";
 import styles from "components/User/css/EditUser.module.scss";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { API_URL, inputTypes, formatLabel } from "config";
+import { useNavigate } from "react-router-dom";
+import { inputTypes, formatLabel } from "config";
 import { API } from 'api/API';
 
-export default function EditUser({ state }) {
+export default function EditUser() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 

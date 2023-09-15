@@ -107,7 +107,7 @@ export default function SignIn({ setCookie }) {
           </div>
           <div className={styles.linkContainer}>
             <p>
-              Don't have an account? <Link to="signup"><u>Sign Up</u></Link>
+              Don't have an account? <Link to="/signup"><u>Sign Up</u></Link>
             </p>
           </div>
         </form>

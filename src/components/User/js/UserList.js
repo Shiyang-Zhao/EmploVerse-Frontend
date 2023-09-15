@@ -1,7 +1,7 @@
 import styles from "components/User/css/UserList.module.scss";
 import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { CSVLink } from "react-csv";
 import { SOCK_URL, formatPath } from "config";
@@ -44,9 +44,6 @@ export default function UserList({ state }) {
 
 
 
-
-
-
     const navigate = useNavigate();
     const [allUsersList, setAllUsersList] = useState([]);
 
@@ -64,7 +61,7 @@ export default function UserList({ state }) {
     };
     const handleUserClick = (userId) => {
         // Handle navigation to user details page when a user is clicked
-        navigate('user');
+        navigate(`/user/${userId}`);
     };
 
     return (
@@ -82,7 +79,7 @@ export default function UserList({ state }) {
                     </ul>
                 </div>
             </div>
-            {/* <div className={styles.searchBar}>
+            <div className={styles.searchBar}>
                 <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>
                 <input type="text" placeholder="Search users..." />
             </div>
@@ -126,7 +123,7 @@ export default function UserList({ state }) {
                 Export User List to CSV
             </CSVLink>
 
-            <Footer /> */}
+            <Footer />
         </div>
     );
 }

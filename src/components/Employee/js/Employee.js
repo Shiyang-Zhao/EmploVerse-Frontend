@@ -1,27 +1,27 @@
 import styles from 'components/Employee/css/Employee.module.scss';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { formatPath } from 'config';
 import { API } from 'api/API';
 
 export default function Employee({ state }) {
-  const navigate = useNavigate();
+  const { id } = useParams();
   const [employee, setEmployee] = useState(null);
-  const selectedEmployeeId = sessionStorage.getItem('selectedEmployeeId');
+  // const selectedEmployeeId = sessionStorage.getItem('selectedEmployeeId');
   const [profileImageFile, setProfileImageFile] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     const getEmployee = async () => {
-      try {
-        console.log("Selected Employee ID:", selectedEmployeeId);
-        const response = await API.getEmployeeById(selectedEmployeeId);
-        setEmployee(response.data);
-      } catch (error) {
-        console.log(error);
+      let response;
+      if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && id) {
+        response = await API.getEmployeeById(id);
+      } else {
+        response = await API.getCurrentEmployee();
       }
+      setEmployee(response.data);
     }
     getEmployee();
-  }, [selectedEmployeeId]);
+  }, [id]);
 
   useEffect(() => {
     if (employee) {

@@ -1,11 +1,11 @@
-//import "App.scss";
 import styles from 'components/User/css/User.module.scss';
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { API_URL, formatPath, compressImage } from 'config';
+import { Link, useParams } from 'react-router-dom';
+import { formatPath, compressImage } from 'config';
 import { API } from 'api/API';
 
 export default function User({ state }) {
+  const { id } = useParams();
   const imageInputRef = useRef();
   const [user, setUser] = useState(null);
   const [profileImageFile, setProfileImageFile] = useState(null);
@@ -13,12 +13,17 @@ export default function User({ state }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const getCurrentUser = async () => {
-      const response = await API.getCurrentUser();
+    const getUser = async () => {
+      let response;
+      if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && id) {
+        response = await API.getUserById(id);
+      } else {
+        response = await API.getCurrentUser();
+      }
       setUser(response.data);
       setProfileImageFile(formatPath(response.data.profileImage));
     }
-    getCurrentUser();
+    getUser();
   }, [])
 
   const handleProfileImageChange = async (event) => {
@@ -42,6 +47,8 @@ export default function User({ state }) {
     }
   }
 
+
+
   return (
     <main>
       {user && <div className={styles.container}>
@@ -53,7 +60,7 @@ export default function User({ state }) {
           <input ref={imageInputRef} className={styles['image-input']} type="file" accept="image/*" onChange={handleProfileImageChange} />
           {newProfileImageFile ? <button type="submit" className={`${styles['update-profile-image-btn']} ${styles['slide-in']}`}><i className="fa-solid fa-upload"></i> Upload</button> : null}
         </form>
-        <Link to="edit_user" className={styles['edit-user-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Profile</Link>
+        <Link to="edit_current_user" className={styles['edit-user-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Profile</Link>
         <div className={styles['user-info']}>
           <h1 className={styles['user-name']}>{user.firstName} {user.lastName}</h1>
           <section className={`${styles['personal-info']} ${styles['grid-section']}`}>
