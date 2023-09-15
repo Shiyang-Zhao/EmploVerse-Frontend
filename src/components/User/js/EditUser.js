@@ -1,21 +1,28 @@
 import styles from "components/User/css/EditUser.module.scss";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { inputTypes, formatLabel } from "config";
 import { API } from 'api/API';
 
 export default function EditUser() {
+  const { id } = useParams();
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const getFormData = async () => {
-      const response = await API.getCurrentUser();
+      let response;
+      if (id) {
+        response = await API.getUserById(id);
+      } else {
+        response = await API.getCurrentUser();
+      }
       const { id, roles, profileImage, ...FormData } = response.data;
       setFormData(FormData);
     }
     getFormData();
-  }, [])
+  }, [id])
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,11 +34,13 @@ export default function EditUser() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await API.updateCurrentUser(formData);
-      navigate("/user");
-    } catch (error) {
-      console.error("Error updating user:", error);
+    let response;
+    if (id) {
+      response = await API.updateUserById(id, formData);
+      navigate(`users/user/${id}`);
+    } else {
+      response = await API.updateCurrentUser(formData);
+      navigate("current_user");
     }
   };
 

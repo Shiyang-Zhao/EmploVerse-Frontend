@@ -61,7 +61,7 @@ export default function UserList({ state }) {
     };
     const handleUserClick = (userId) => {
         // Handle navigation to user details page when a user is clicked
-        navigate(`/user/${userId}`);
+        navigate(`user/${userId}`);
     };
 
     return (
