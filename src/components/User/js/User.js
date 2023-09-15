@@ -5,7 +5,7 @@ import { formatPath, compressImage } from 'config';
 import { API } from 'api/API';
 
 export default function User({ state }) {
-  const { id } = useParams();
+  const { userId } = useParams();
   const imageInputRef = useRef();
   const [user, setUser] = useState(null);
   const [profileImageFile, setProfileImageFile] = useState(null);
@@ -15,8 +15,8 @@ export default function User({ state }) {
   useEffect(() => {
     const getUser = async () => {
       let response;
-      if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && id) {
-        response = await API.getUserById(id);
+      if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && userId) {
+        response = await API.getUserById(userId);
       } else {
         response = await API.getCurrentUser();
       }
@@ -24,7 +24,7 @@ export default function User({ state }) {
       setProfileImageFile(formatPath(response.data.profileImage));
     }
     getUser();
-  }, [])
+  }, [userId])
 
   const handleProfileImageChange = async (event) => {
     const { files } = event.target;

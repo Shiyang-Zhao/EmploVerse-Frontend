@@ -5,7 +5,7 @@ import { formatPath } from 'config';
 import { API } from 'api/API';
 
 export default function Employee({ state }) {
-  const { id } = useParams();
+  const { employeeId } = useParams();
   const [employee, setEmployee] = useState(null);
   // const selectedEmployeeId = sessionStorage.getItem('selectedEmployeeId');
   const [profileImageFile, setProfileImageFile] = useState('');
@@ -13,15 +13,15 @@ export default function Employee({ state }) {
   useEffect(() => {
     const getEmployee = async () => {
       let response;
-      if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && id) {
-        response = await API.getEmployeeById(id);
+      if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && employeeId) {
+        response = await API.getEmployeeById(employeeId);
       } else {
         response = await API.getCurrentEmployee();
       }
       setEmployee(response.data);
     }
     getEmployee();
-  }, [id]);
+  }, [employeeId]);
 
   useEffect(() => {
     if (employee) {

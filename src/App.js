@@ -58,7 +58,7 @@ export default function App() {
                     <React.Fragment>
                       <Route path="users" element={<div ref={ref}><UserList state={state} /></div>} />
                       <Route path="users/user/:id" element={<div ref={ref}><User state={state} /></div>} />
-                      <Route path="users/user/:id/edit" element={<div ref={ref}><User state={state} /></div>} />
+                      <Route path="users/user/:id/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
 
                       <Route path="employees/employee/:id" element={<div ref={ref}><Employee state={state} /></div>} />
                       <Route path="employees/employee/:id/edit" element={<div ref={ref}><Employee state={state} /></div>} />

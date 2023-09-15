@@ -5,15 +5,15 @@ import { inputTypes, formatLabel, formatDateFromArray } from 'config';
 import { API } from 'api/API';
 
 export default function EditEmployee({ state }) {
-  const { id } = useParams();
+  const { employeeId } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const getEmployee = async () => {
       let response;
-      if (id) {
-        response = await API.getEmployeeById(id);
+      if (employeeId) {
+        response = await API.getEmployeeById(employeeId);
       } else {
         response = await API.getCurrentEmployee();
       }
@@ -21,7 +21,7 @@ export default function EditEmployee({ state }) {
       setFormData(FormData);
     }
     getEmployee();
-  }, [id]);
+  }, [employeeId]);
 
   const handleChange = (event, sectionName, name) => {
     const { value } = event.target;
@@ -38,8 +38,8 @@ export default function EditEmployee({ state }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let response;
-    if (id) {
-      response = await API.updateEmployeeById(id, formData);
+    if (employeeId) {
+      response = await API.updateEmployeeById(employeeId, formData);
       navigate('/employees');
     } else {
       response = await API.updateCurrentUser(formData);

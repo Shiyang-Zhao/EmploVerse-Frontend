@@ -5,15 +5,15 @@ import { inputTypes, formatLabel } from "config";
 import { API } from 'api/API';
 
 export default function EditUser() {
-  const { id } = useParams();
+  const { userId } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const getFormData = async () => {
       let response;
-      if (id) {
-        response = await API.getUserById(id);
+      if (userId) {
+        response = await API.getUserById(userId);
       } else {
         response = await API.getCurrentUser();
       }
@@ -21,7 +21,7 @@ export default function EditUser() {
       setFormData(FormData);
     }
     getFormData();
-  }, [id])
+  }, [userId])
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,9 +34,9 @@ export default function EditUser() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let response;
-    if (id) {
-      response = await API.updateUserById(id, formData);
-      navigate(`users/user/${id}`);
+    if (userId) {
+      response = await API.updateUserById(userId, formData);
+      navigate(`users/user/${userId}`);
     } else {
       response = await API.updateCurrentUser(formData);
       navigate("current_user");
