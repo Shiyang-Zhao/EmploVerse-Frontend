@@ -1,28 +1,27 @@
 import styles from 'components/Employee/css/EditEmployee.module.scss';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { inputTypes, formatLabel, formatDateFromArray } from 'config';
 import { API } from 'api/API';
 
 export default function EditEmployee({ state }) {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const selectedEmployeeId = sessionStorage.getItem('selectedEmployeeId');
 
   useEffect(() => {
     const getEmployee = async () => {
-      try {
-        console.log("Selected Employee ID:", selectedEmployeeId);
-        const response = await API.getEmployeeById(selectedEmployeeId);
-        const { id, ...FormData } = response.data;
-        setFormData(FormData);
-        console.log(FormData)
-      } catch (error) {
-        console.log(error);
+      let response;
+      if (id) {
+        response = await API.getEmployeeById(id);
+      } else {
+        response = await API.getCurrentEmployee();
       }
+      const { id, ...FormData } = response.data;
+      setFormData(FormData);
     }
     getEmployee();
-  }, [selectedEmployeeId]);
+  }, [id]);
 
   const handleChange = (event, sectionName, name) => {
     const { value } = event.target;
@@ -38,11 +37,13 @@ export default function EditEmployee({ state }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await API.updateEmployeeById(selectedEmployeeId, formData);
+    let response;
+    if (id) {
+      response = await API.updateEmployeeById(id, formData);
       navigate('/employees');
-    } catch (error) {
-      console.error('Error updating employee:', error);
+    } else {
+      response = await API.updateCurrentUser(formData);
+      navigate('/employees');
     }
   };
 

@@ -47,8 +47,6 @@ export default function User({ state }) {
     }
   }
 
-
-
   return (
     <main>
       {user && <div className={styles.container}>

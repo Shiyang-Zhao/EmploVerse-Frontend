@@ -6,7 +6,6 @@ import { API } from 'api/API';
 
 export default function EditUser() {
   const { id } = useParams();
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
