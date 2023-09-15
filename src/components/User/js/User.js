@@ -60,7 +60,7 @@ export default function User({ state }) {
           <input ref={imageInputRef} className={styles['image-input']} type="file" accept="image/*" onChange={handleProfileImageChange} />
           {newProfileImageFile ? <button type="submit" className={`${styles['update-profile-image-btn']} ${styles['slide-in']}`}><i className="fa-solid fa-upload"></i> Upload</button> : null}
         </form>
-        <Link to="edit_current_user" className={styles['edit-user-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Profile</Link>
+        <Link to="edit" className={styles['edit-user-btn']}><i className="fa-regular fa-pen-to-square"></i> Edit Profile</Link>
         <div className={styles['user-info']}>
           <h1 className={styles['user-name']}>{user.firstName} {user.lastName}</h1>
           <section className={`${styles['personal-info']} ${styles['grid-section']}`}>

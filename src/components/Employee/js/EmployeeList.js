@@ -119,14 +119,13 @@ export default function EmployeeList({ state }) {
   const editEmployee = (employee, event) => {
     event.stopPropagation();
     try {
-      sessionStorage.setItem("selectedEmployeeId", employee.id);
       if (
         state.cookies.selectedRole[0] !== "ROLE_ADMIN" &&
         state.cookies.selectedRole[0] !== "ROLE_MANAGER"
       ) {
         alert("You don't have the privileges to edit employees");
       } else {
-        navigate("edit_employee");
+        navigate("edit");
       }
     } catch (error) {
       console.error("Error editing employee:", error);

@@ -16,7 +16,7 @@ import EmployeeList from 'components/Employee/js/EmployeeList';
 import AddEmployee from 'components/Employee/js/AddEmployee';
 import Employee from 'components/Employee/js/Employee';
 import EditEmployee from 'components/Employee/js/EditEmployee';
-import EditCurrentUser from 'components/User/js/EditcCurrentUser';
+import EditUser from 'components/User/js/EditUser';
 
 export default function App() {
   const ref = createRef();
@@ -58,18 +58,20 @@ export default function App() {
                     <React.Fragment>
                       <Route path="users" element={<div ref={ref}><UserList state={state} /></div>} />
                       <Route path="user/:id" element={<div ref={ref}><User state={state} /></div>} />
+                      <Route path="user/:id/edit" element={<div ref={ref}><User state={state} /></div>} />
+
                       <Route path="employees/employee/:id" element={<div ref={ref}><Employee state={state} /></div>} />
+                      <Route path="employees/employee/:id/edit" element={<div ref={ref}><Employee state={state} /></div>} />
                     </React.Fragment>
                   )}
 
                   <Route path="current_user" element={<div ref={ref}><User state={state} /></div>} />
-                  <Route path="current_user/edit_current_user" element={<div ref={ref}><EditCurrentUser state={state} /></div>} />
+                  <Route path="current_user/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
 
                   <Route path="employees" element={<div ref={ref}><EmployeeList state={state} /></div>} />
                   <Route path="current_employee" element={<div ref={ref}><Employee state={state} /></div>} />
-                  {/* <Route path="employees/current_employee_profile" element={<div ref={ref}><CurrentEmployee state={state} /></div>} /> */}
-                  <Route path="employees/add_employee" element={<div ref={ref}><AddEmployee state={state} /></div>} />
-                  <Route path="employees/edit_employee" element={<div ref={ref}><EditEmployee state={state} /></div>} />
+                  <Route path="employees/add" element={<div ref={ref}><AddEmployee state={state} /></div>} />
+                  <Route path="employees/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
 
                   <Route path="/logout" element={<div ref={ref}><LogOut state={state} removeCookie={removeCookie} /></div>} />
                   {/* <Route path="/switch" element={<div ref={ref}><Switch state={state} removeCookie={removeCookie} /></div>} /> */}
