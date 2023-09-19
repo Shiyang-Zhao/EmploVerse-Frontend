@@ -9,145 +9,149 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: #f7f7f7;
-}
 
-.user-photo {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-.loaded {
-    opacity: 1;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.user-photo:hover {
-    cursor: pointer;
-    transform: scale(1);
-}
-
-.user-photo img {
-    width: 30vw;
-    height: 30vw;
-    min-width: 200px;
-    min-height: 200px;
-    border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    font-size: 1rem;
-    text-align: center;
-    line-height: 160px;
-}
-
-.profileImageForm {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.image-input {
-    display: none;
-}
-
-.update-profile-image-btn {
-    height: 50px;
-    padding: 10px 20px;
-    background-color: darkcyan;
-    color: #fff;
-    font-size: 1.25em;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    animation: slideFromLeft 0.4s ease forwards;
-}
-
-@keyframes slideFromLeft {
-    0% {
+    .user-photo {
         opacity: 0;
-        transform: translateX(-100%);
-        /* Start from outside the viewport */
+        transform: scale(0.9);
+
+        &.loaded {
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1);
+        }
+
+        img {
+            width: 30vw;
+            height: 30vw;
+            min-width: 200px;
+            min-height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            text-align: center;
+            line-height: 160px;
+        }
     }
 
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-        /* End at the original position */
+    .profileImageForm {
+        grid-column: 2;
+        grid-row: 2;
+
+        .image-input {
+            display: none;
+        }
+
+        .update-profile-image-btn {
+            height: 50px;
+            padding: 10px 20px;
+            background-color: darkcyan;
+            color: #fff;
+            font-size: 1.25em;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+
+            @keyframes slideFromLeft {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-100%);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            animation: slideFromLeft 0.4s ease forwards;
+        }
     }
-}
 
-.user-info {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-}
+    .user-info {
+        grid-column: 2;
+        grid-row: 1 / span 3;
 
-.user-name {
-    margin-top: 0;
-    font-size: 2em;
-    font-weight: bold;
-    color: #545454;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
+        .user-name {
+            margin-top: 0;
+            font-size: 2em;
+            font-weight: bold;
+            color: #545454;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-.user-info p {
-    margin: 0;
-    margin-top: 10px;
-    font-size: 1.2em;
-    color: #666;
-}
+        p {
+            margin: 0;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #666;
+        }
 
-.grid-section {
-    margin-top: 20px;
-}
+        .grid-section {
+            margin-top: 20px;
 
+            .section-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
 
-.section-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
+            .section-title {
+                font-size: 1.5em;
+                font-weight: bold;
+                color: #545454;
+            }
 
-.section-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #545454;
-}
+            .grid-item {
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #fff;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                word-wrap: break-word;
 
-.grid-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    word-wrap: break-word;
-}
+                &:hover {
+                    transform: translateY(-5px);
+                }
+            }
+        }
+    }
 
-.grid-item:hover {
-    transform: translateY(-5px);
-}
+    .edit-user-btn {
+        height: 50px;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        font-size: 1.25em;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        grid-column: 1;
+        grid-row: 2;
 
-.edit-user-btn {
-    height: 50px;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    font-size: 1.25em;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    grid-column: 1;
-    grid-row: 2;
-}
+        &:hover {
+            background-color: #2980b9;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+    }
 
-.update-profile-image-btn:hover,
-.edit-user-btn:hover {
-    background-color: #2980b9;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
+    .update-profile-image-btn:hover {
+        background-color: #2980b9;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+    }
 }

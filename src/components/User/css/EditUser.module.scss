@@ -8,59 +8,59 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: grid;
     grid-gap: 20px;
-}
 
-.container h2 {
-    font-size: 35px;
-    text-align: center;
-    margin-bottom: 30px;
-}
+    h2 {
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-.inputContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-}
+    .inputContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
 
-.inputContainer label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
 
-.inputContainer input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    background-color: #fff;
-}
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            background-color: #fff;
 
-.inputContainer input:focus {
-    border-color: #007bff;
-    outline: none;
-}
+            &:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+        }
+    }
 
-.buttonContainer {
-    margin-top: 20px;
-    text-align: center;
-    grid-column: span 2;
-}
+    .buttonContainer {
+        margin-top: 20px;
+        text-align: center;
+        grid-column: span 2;
 
-.buttonContainer button {
-    width: 200px;
-    padding: 10px 20px;
-    grid-column: span 2;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color: #222;
-    color: #fff;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
+        button {
+            width: 200px;
+            padding: 10px 20px;
+            grid-column: span 2;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease;
 
-.inputContainer button:hover {
-    transform: scale(1.1);
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
 }
