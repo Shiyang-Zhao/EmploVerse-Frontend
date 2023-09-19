@@ -9,129 +9,122 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: #f7f7f7;
-}
 
-.employee-photo {
-    opacity: 0;
-    transform: scale(0.9);
-}
+    .employee-photo {
+        opacity: 0;
+        transform: scale(0.9);
 
-.loaded {
-    opacity: 1;
-    transition: opacity 1s ease, transform 0.3s ease;
-}
+        &.loaded {
+            opacity: 1;
+            transition: opacity 1s ease, transform 0.3s ease;
+        }
 
-.employee-photo:hover {
-    cursor: pointer;
-    transform: scale(1);
-}
+        &:hover {
+            cursor: pointer;
+            transform: scale(1);
+        }
 
-.employee-photo img {
-    width: 30vw;
-    height: 30vw;
-    min-width: 200px;
-    min-height: 200px;
-    border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    font-size: 1rem;
-    text-align: center;
-    line-height: 160px;
-}
+        img {
+            width: 30vw;
+            height: 30vw;
+            min-width: 200px;
+            min-height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            text-align: center;
+            line-height: 160px;
+        }
+    }
 
-.employee-info {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-}
+    .employee-info {
+        grid-column: 2;
+        grid-row: 1 / span 3;
 
-.employee-name {
-    margin-top: 0;
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #545454;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
+        .employee-name {
+            margin-top: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #545454;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-.info-item {
-    word-wrap: break-word;
-}
+        .info-item {
+            word-wrap: break-word;
 
-.info-item p {
-    font-size: 1.2em;
-    color: #666;
-}
+            p {
+                font-size: 1.2em;
+                color: #666;
+            }
+        }
+    }
 
-/* Style the info sections */
-.info-section {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-    /* Add rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Add a subtle box-shadow for a 3D effect */
-    transition: all 0.3s ease;
-    /* Add transition for smooth hover effect */
-}
+    .info-section {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
 
-/* Change border color on hover */
-.info-section:hover {
-    transform: translateY(-5px);
-    border-color: #3498db;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+        &:hover {
+            transform: translateY(-5px);
+            border-color: #3498db;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-.info-section h2 {
-    font-size: 1.5rem;
-}
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
 
-.edit-employee-btn {
-    height: 50px;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    font-size: 1.25em;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    grid-column: 1;
-    grid-row: 2;
-}
+    .edit-employee-btn {
+        height: 50px;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        font-size: 1.25em;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        grid-column: 1;
+        grid-row: 2;
 
-.edit-employee-btn:hover {
-    background-color: #2980b9;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
-}
+        &:hover {
+            background-color: #2980b9;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+    }
 
-.nav-bar {
-    background-color: #ccc;
-    display: flex;
-    justify-content: space-between;
-    /* grid-column: 2;
-    grid-row: 1; */
-}
+    .nav-bar {
+        background-color: #ccc;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.nav-btn {
-    flex: 1;
-    padding: 10px 0;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+    .nav-btn {
+        flex: 1;
+        padding: 10px 0;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
 
-.nav-btn:hover,
-.nav-btn:focus {
-    background-color: #a0a0a0;
+        &:hover,
+        &:focus {
+            background-color: #a0a0a0;
+        }
+    }
 }

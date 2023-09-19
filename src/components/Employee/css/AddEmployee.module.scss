@@ -9,12 +9,51 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: grid;
     grid-gap: 20px;
-}
 
-.container h2 {
-    font-size: 35px;
-    text-align: center;
-    margin-bottom: 30px;
+    h2 {
+        font-size: 35px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    &.editEmployeeForm {
+        width: 100%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        input,
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #222;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 50%;
+
+            &:hover {
+                background-color: #545454;
+                transform: scale(1.3);
+            }
+        }
+    }
 }
 
 .link-account-btn {
@@ -25,14 +64,14 @@
     border-radius: 5px;
     font-size: 18px;
     transition: all 0.3s ease;
-}
 
-.link-account-btn:hover {
-    background-color: #2980b9;
-}
+    &:hover {
+        background-color: #2980b9;
+    }
 
-.link-account-btn:active {
-    transform: scale(0.95);
+    &:active {
+        transform: scale(0.95);
+    }
 }
 
 .searchContainer {
@@ -62,23 +101,20 @@
 .searchIcon {
     transition: all 0.3s ease;
     cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.6);
+    }
 }
 
-.searchIcon:hover {
-    transform: scale(1.1);
-}
-
-.searchIcon:active {
-    transform: scale(0.6);
-}
-
-/* Add this scss to your stylesheet */
 .searchResultsContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Two columns with equal width */
     gap: 20px;
-    /* Add some spacing between items */
 }
 
 .searchResult {
@@ -88,16 +124,16 @@
     transition: all 0.3s ease;
     border: none;
     outline: none;
-}
 
-.searchResult:focus,
-.searchResult:hover {
-    background-color: #a0a0a0;
-    cursor: pointer;
-}
+    &:focus,
+    &:hover {
+        background-color: #a0a0a0;
+        cursor: pointer;
+    }
 
-.searchResult:active {
-    transform: scale(0.9);
+    &:active {
+        transform: scale(0.9);
+    }
 }
 
 .searchResult img {
@@ -128,11 +164,11 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-}
 
-.nav-btn:hover,
-.nav-btn:focus {
-    background-color: #a0a0a0;
+    &:hover,
+    &:focus {
+        background-color: #a0a0a0;
+    }
 }
 
 .addEmployeeForm {
@@ -141,40 +177,40 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
-}
 
-.addEmployeeForm .form-column {
-    display: grid;
-    grid-gap: 20px;
-}
+    .form-column {
+        display: grid;
+        grid-gap: 20px;
+    }
 
-.addEmployeeForm label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
 
-.addEmployeeForm input,
-.addEmployeeForm button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
+    input,
+    button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
 
-.addEmployeeForm button {
-    background-color: #222;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0 50%;
-    transition: all 0.3s ease;
-}
+    button {
+        background-color: #222;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0 50%;
+        transition: all 0.3s ease;
 
-.addEmployeeForm button:hover {
-    background-color: #545454;
-    transform: scale(1.3);
+        &:hover {
+            background-color: #545454;
+            transform: scale(1.3);
+        }
+    }
 }
