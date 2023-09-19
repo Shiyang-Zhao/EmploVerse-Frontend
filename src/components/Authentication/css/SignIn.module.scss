@@ -1,61 +1,60 @@
 .container {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
 
-.header {
-    margin-top: 20vh;
-    text-align: center;
-}
+    .header {
+        margin-top: 20vh;
+        text-align: center;
 
-.header h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-    color: #2f2f2f;
-}
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #2f2f2f;
+        }
+    }
 
-.inputContainer {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    .inputContainer {
+        text-align: center;
+        margin-bottom: 20px;
 
-.inputContainer label {
-    display: flex;
-    font-size: 25px;
-    color: #2f2f2f;
-    margin-bottom: 5px;
-    transform: translateX(35%);
-}
+        label {
+            display: flex;
+            font-size: 25px;
+            color: #2f2f2f;
+            margin-bottom: 5px;
+            transform: translateX(35%);
+        }
 
-.inputContainer input {
-    width: 30%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 2px solid #d8d8d8;
+        input {
+            width: 30%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 2px solid #d8d8d8;
+        }
+    }
 }
 
 .buttonContainer {
     text-align: center;
     margin-bottom: 20px;
-}
 
-.buttonContainer button {
-    background-color: #222;
-    color: #fff;
-    font-size: 18px;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
+    button {
+        background-color: #222;
+        color: #fff;
+        font-size: 18px;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
 
-.buttonContainer button:hover {
-    background-color: #333;
-}
+        &:hover {
+            background-color: #333;
 
-/* SignIn.module.scss */
+        }
+    }
+}
 
 .roleContainer {
     display: flex;
@@ -63,31 +62,31 @@
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
-}
 
-.roleContainer label {
-    margin-left: 60px;
-}
+    label {
+        margin-left: 60px;
+    }
 
-.roleContainer input {
-    display: inline-block;
-    width: 20px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid #bbb;
-    margin-right: 6px;
+    input {
+        display: inline-block;
+        width: 20px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid #bbb;
+        margin-right: 6px;
+    }
 }
 
 .linkContainer {
     text-align: center;
-}
 
-.linkContainer a {
-    color: #2f2f2f;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-}
+    a {
+        color: #2f2f2f;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
 
-.linkContainer a:hover {
-    color: #0000FF;
+        &:hover {
+            color: #0000FF;
+        }
+    }
 }

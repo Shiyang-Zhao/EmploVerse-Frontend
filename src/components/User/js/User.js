@@ -18,8 +18,6 @@ export default function User({ state }) {
       if (state.cookies.selectedRole[0] === 'ROLE_ADMIN' && userId) {
         response = await API.getUserById(userId);
       } else {
-        console.log(state.cookies.selectedRole[0] === 'ROLE_ADMIN')
-        console.log(userId)
         response = await API.getCurrentUser();
       }
       setUser(response.data);
@@ -37,6 +35,7 @@ export default function User({ state }) {
     }
   }
 
+  //Add another api here
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -51,7 +50,7 @@ export default function User({ state }) {
 
   return (
     <main>
-      {user && <div className={styles.container}>
+      {user && <div className={styles['container']}>
         <div className={`${styles['user-photo']} ${isLoaded ? styles.loaded : ''}`} onLoad={() => setIsLoaded(true)}>
           <img src={profileImageFile} alt='User Profile' loading="lazy" onClick={() => imageInputRef.current.click()} />
         </div>
