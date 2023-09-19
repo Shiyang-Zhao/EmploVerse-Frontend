@@ -7,184 +7,189 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 100px;
-}
 
-.employeeImage {
-  max-width: 60px;
-  aspect-ratio: 1/1;
-}
+  .employeeImage {
+    max-width: 60px;
+    aspect-ratio: 1/1;
+  }
 
-.Edit,
-.Delete {
-  margin: 3px;
-  background-color: transparent;
-  border-radius: 3px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  border: none;
-}
+  .Edit,
+  .Delete {
+    margin: 3px;
+    background-color: transparent;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
 
-.Edit {
-  color: #3498db;
-}
+    &.Edit {
+      color: #3498db;
 
-.Delete {
-  color: #d81818;
-}
+      &:hover {
+        color: #00aeff;
+      }
+    }
 
-.Edit:hover {
-  color: #00aeff;
-}
+    &.Delete {
+      color: #d81818;
 
-.Delete:hover {
-  color: #ff0000;
-}
+      &:hover {
+        color: #ff0000;
+      }
+    }
+  }
 
-.filter {
-  display: inline-block;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-}
+  .filter {
+    display: inline-block;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
 
-.searchBar {
-  display: inline-flex;
-  align-items: center;
-}
+    .searchBar {
+      display: inline-flex;
+      align-items: center;
 
-.searchInput,
-.searchField,
-.searchDir {
-  border: none;
-  outline: none;
-}
 
-.searchInput {
-  width: 200px;
-  height: 35px;
-  padding: 10px;
-  border-radius: 30px 0 0 30px;
-}
+    }
 
-.searchField,
-.searchDir {
-  cursor: pointer;
-}
+    .searchInput,
+    .searchField,
+    .searchDir {
+      border: none;
+      outline: none;
+    }
 
-.searchIcon {
-  width: 30px;
-  margin: 0 10px;
-  border-radius: 0 30px 30px 0;
-  vertical-align: center;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
+    .searchInput {
+      width: 200px;
+      height: 35px;
+      padding: 10px;
+      border-radius: 30px 0 0 30px;
+    }
 
-.searchIcon:hover {
-  transform: scale(1.2);
-}
+    .searchField,
+    .searchDir {
+      cursor: pointer;
+    }
 
-.addExport {
-  float: right;
-}
+    .searchIcon {
+      width: 30px;
+      margin: 0 10px;
+      border-radius: 0 30px 30px 0;
+      vertical-align: center;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
 
-.addButton,
-.exportButton {
-  width: 70px;
-  height: 40px;
-  margin-left: 15px;
-  border-radius: 30px;
-  border: none;
-  background-color: #3498db;
-  color: #fff;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
 
-.addButton {
-  float: right;
-  background-color: #28A745;
-}
+  .addExport {
+    float: right;
 
-.exportLink {
-  color: #fff;
-  text-decoration: none;
-}
+    .addButton,
+    .exportButton {
+      width: 70px;
+      height: 40px;
+      color: #fff;
+      margin-left: 15px;
+      border-radius: 30px;
+      border: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
 
-.exportButton:hover {
-  background-color: #00aeff;
-}
+      &.addButton {
+        float: right;
+        background-color: #28A745;
 
-.addButton:hover {
-  background-color: #4CAF50;
-}
+        &:hover {
+          background-color: #4CAF50;
+        }
+      }
 
-.EmployeeListTable {
-  width: 100%;
-  margin-top: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
+      &.exportButton {
+        background-color: #3498db;s
 
-.EmployeeListTable th,
-.EmployeeListTable td {
-  text-align: center;
-  padding: 0.2rem;
-  border-bottom: 1px solid #ddd;
-}
+        .exportLink {
+          color: #fff;
+          text-decoration: none;
+        }
 
-.EmployeeListTable th {
-  background-color: #222;
-  color: #fff;
-}
+        &:hover {
+          background-color: #00aeff;
+        }
+      }
+    }
+  }
 
-.EmployeeListTable span {
-  cursor: pointer;
-}
+  .EmployeeListTable {
+    width: 100%;
+    margin-top: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 
-.EmployeeListTable .information:hover {
-  cursor: pointer;
-  background-color: rgb(173, 173, 173);
-  transition: all 0.3s ease;
-}
+    th,
+    td {
+      text-align: center;
+      padding: 0.2rem;
+      border-bottom: 1px solid #ddd;
+    }
 
-.pagination {
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  font-weight: bold;
-}
+    th {
+      background-color: #222;
+      color: #fff;
+    }
 
-.pagination ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-}
+    span {
+      cursor: pointer;
+    }
 
-.pagination li {
-  margin: 0 5px;
-}
+    .information:hover {
+      cursor: pointer;
+      background-color: rgb(173, 173, 173);
+      transition: all 0.3s ease;
+    }
+  }
 
-.pagination a,
-.pagination .active a {
-  color: #333;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  background-color: #f2f2f2;
-  transition: all 0.3s ease;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
+  .pagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-weight: bold;
 
-.pagination a:hover {
-  background-color: #e0e0e0;
-}
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
 
-.page a:focus {
-  background-color: #00aeff;
+    li {
+      margin: 0 5px;
+    }
+
+    a,
+    .active a {
+      color: #333;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      background-color: #f2f2f2;
+      transition: all 0.3s ease;
+      border: 1px solid #ccc;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      &:focus {
+        background-color: #00aeff;
+      }
+    }
+  }
 }
