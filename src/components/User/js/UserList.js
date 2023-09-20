@@ -105,7 +105,7 @@ export default function UserList({ state }) {
                 previousLabel={"Previous"}
                 nextLabel={"Next"}
                 breakLabel={"..."}
-                pageCount={10} // Example: Replace with the actual number of pages
+                pageCount={10}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 onPageChange={(selectedPage) => {

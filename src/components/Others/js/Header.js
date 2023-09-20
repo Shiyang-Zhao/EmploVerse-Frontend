@@ -43,6 +43,10 @@ export default function Header({ state }) {
                 <li>
                   <Link to="current_employee" >Dashboard</Link>
                 </li>
+
+                <li>
+                  <Link to="" >Chat</Link>
+                </li>
                 {isAdmin && (
                   <li>
                     <Link to="users" >Users</Link>
