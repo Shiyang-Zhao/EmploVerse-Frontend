@@ -1,3 +1,4 @@
+import styles from "components/User/css/Chat.module.scss";
 import { useState } from "react";
 import { SOCK_URL } from "config";
 import SockJS from 'sockjs-client';
@@ -6,7 +7,6 @@ import { Stomp } from '@stomp/stompjs'
 export default function Chat() {
     const [messages, setMessages] = useState([]);
     const [currentMessage, setCurrentMessage] = useState('');
-
 
     // const [messages, setMessages] = useState([]);
     // var sock = new SockJS(SOCK_URL);
@@ -48,8 +48,8 @@ export default function Chat() {
 
     return (
         <main>
-            <div className="chat-room">
-                <div className="friends-list">
+            <div className={styles['chat-room']}>
+                <div className={styles['friends-list']}>
                     <h2>Friends List</h2>
                     {/* Add your list of friends here */}
                     <ul>
@@ -58,19 +58,19 @@ export default function Chat() {
                         <li>Friend 3</li>
                     </ul>
                 </div>
-                <div className="chat-area">
+                <div className={styles['chat-area']}>
                     <h2>Chat with Friend</h2>
-                    <div className="message-display">
+                    <div className={styles['message-display']}>
                         {messages.map((message, index) => (
                             <div key={index} className="message">{message}</div>
                         ))}
                     </div>
-                    <div className="message-input">
+                    <div className={styles['message-input']}>
                         <input
                             type="text"
                             value={currentMessage}
                             onChange={(e) => setCurrentMessage(e.target.value)}
-                            placeholder="Type your message..."
+                            placeholder="Type your message here..."
                         />
                         <button onClick={sendMessage}>Send</button>
                     </div>
