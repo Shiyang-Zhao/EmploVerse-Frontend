@@ -10,6 +10,7 @@ import SignIn from 'components/Authentication/js/SignIn';
 import { LogOut } from 'components/Authentication/js/LogOut'
 import Header from 'components/Others/js/Header';
 import Home from 'components/Others/js/Home';
+import Chat from 'components/User/js/Chat';
 import User from 'components/User/js/User';
 import UserList from 'components/User/js/UserList';
 import EmployeeList from 'components/Employee/js/EmployeeList';
@@ -67,6 +68,7 @@ export default function App() {
 
                   <Route path="current_user" element={<div ref={ref}><User state={state} /></div>} />
                   <Route path="current_user/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
+                  <Route path="chat" element={<div ref={ref}><Chat /></div>} />
 
                   <Route path="employees" element={<div ref={ref}><EmployeeList state={state} /></div>} />
                   <Route path="employees/add" element={<div ref={ref}><AddEmployee state={state} /></div>} />

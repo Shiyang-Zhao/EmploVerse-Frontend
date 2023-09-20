@@ -45,7 +45,7 @@ export default function Header({ state }) {
                 </li>
 
                 <li>
-                  <Link to="" >Chat</Link>
+                  <Link to="chat" >Chat</Link>
                 </li>
                 {isAdmin && (
                   <li>

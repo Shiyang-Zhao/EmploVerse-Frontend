@@ -1,48 +1,13 @@
 import styles from "components/User/css/UserList.module.scss";
 import Footer from "components/Others/js/Footer";
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { CSVLink } from "react-csv";
-import { SOCK_URL, formatPath } from "config";
-import SockJS from 'sockjs-client';
-import { Stomp } from '@stomp/stompjs'
+import { formatPath } from "config";
 import { API } from "api/API";
 
 export default function UserList({ state }) {
-    // const [messages, setMessages] = useState([]);
-    // var sock = new SockJS(SOCK_URL);
-    // let stompClient = Stomp.over(sock);
-
-    // sock.onopen = function () {
-    //     console.log('open');
-    // }
-
-    // // Function to handle incoming message
-    // const handleMessage = (message) => {
-    //     console.log('Handling message:', message);
-    //     setMessages(prevMessages => [...prevMessages, message]);
-    // }
-
-    // stompClient.connect({ 'Authorization': state.cookies.jwt }, function (frame) {
-    //     stompClient.subscribe("/toClient/greetings", function (greeting) {
-    //         handleMessage(greeting.body);
-    //     }, { 'Authorization': state.cookies.jwt });
-    // });
-
-    // const sendMessageToServer = () => {
-    //     stompClient.send('/toServer/hello', { 'Authorization': state.cookies.jwt }, "state.cookies.jwt");
-    // }
-
-    // // Cleanup WebSocket connection on component unmount
-    // useEffect(() => {
-    //     return () => {
-    //         stompClient.disconnect();
-    //     }
-    // }, [stompClient]);
-
-
-
 
     const navigate = useNavigate();
     const [allUsersList, setAllUsersList] = useState([]);
