@@ -125,7 +125,7 @@ export default function EmployeeList({ state }) {
       ) {
         alert("You don't have the privileges to edit employees");
       } else {
-        navigate("edit");
+        navigate(`employee/${employee.id}/edit`);
       }
     } catch (error) {
       console.error("Error editing employee:", error);

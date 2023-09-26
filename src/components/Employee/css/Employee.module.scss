@@ -59,31 +59,6 @@
         }
     }
 
-    .info-section {
-        border: 1px solid #ccc;
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-
-        &:hover {
-            transform: translateY(-5px);
-            border-color: #3498db;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        h2 {
-            font-size: 1.5rem;
-        }
-    }
-
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-    }
-
     .edit-employee-btn {
         height: 50px;
         padding: 10px 20px;
@@ -112,19 +87,45 @@
         background-color: #ccc;
         display: flex;
         justify-content: space-between;
+
+        .nav-btn {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover,
+            &:focus {
+                background-color: #a0a0a0;
+            }
+        }
     }
 
-    .nav-btn {
-        flex: 1;
-        padding: 10px 0;
-        border: none;
-        text-align: center;
-        cursor: pointer;
+    // New Styles
+    .info-section {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
 
-        &:hover,
-        &:focus {
-            background-color: #a0a0a0;
+        &:hover {
+            transform: translateY(-5px);
+            border-color: #3498db;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
     }
 }

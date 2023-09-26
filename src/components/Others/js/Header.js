@@ -64,9 +64,9 @@ export default function Header({ state }) {
                     <li>
                       <Link to="current_user" >Profile</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link to="/switch" >Switch</Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link to="/logout" >Log out</Link>
                     </li>
