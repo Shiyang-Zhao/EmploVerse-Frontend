@@ -251,11 +251,11 @@ export default function EmployeeList({ state }) {
         <ReactPaginate
           className={styles.pagination}
           breakLabel="..."
-          nextLabel=">"
+          nextLabel={"Next"}
           onPageChange={handlePageChange}
           pageRangeDisplayed={5}
           pageCount={pagination.totalPages}
-          previousLabel="<"
+          previousLabel={"Previous"}
           pageClassName={styles.page}
           renderOnZeroPageCount={null}
         />

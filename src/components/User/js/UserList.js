@@ -29,65 +29,49 @@ export default function UserList({ state }) {
     };
 
     return (
-
-        <div className={styles.userListContainer}>
-
-            {/* <div>
-                <button onClick={sendMessageToServer} className={styles.ws}>Send Message to Server</button>
-                <div>
-                    <h2>Received Messages</h2>
-                    <ul>
-                        {messages.map((message, index) => (
-                            <li key={index}>{message}</li>
-                        ))}
-                    </ul>
+        <main>
+            <div className={styles.container}>
+                <div className={styles.searchBar}>
+                    <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>
+                    <input type="text" placeholder="Search users..." />
                 </div>
-            </div> */}
-            <div className={styles.searchBar}>
-                <i className={`fa-solid fa-magnifying-glass fa-xl ${styles.searchIcon}`}></i>
-                <input type="text" placeholder="Search users..." />
-            </div>
 
-            <div className={styles.userList}>
-                {allUsersList.map((user) => (
-                    <div
-                        key={user.id}
-                        className={styles.userCard}
-                        onClick={() => handleUserClick(user.id)}
-                    >
-                        <div>
-                            <img src={formatPath(user.profileImage)} alt={`Avatar of ${user.name}`} className='rounded-circle img-fluid img-thumbnail' />
+                <CSVLink
+                    data={allUsersList}
+                    filename={"user_list.csv"}
+                    className={styles.exportButton}
+                >
+                    Export User List to CSV
+                </CSVLink>
+
+                <div className={styles.userList}>
+                    {allUsersList.map((user) => (
+                        <div key={user.id} className={styles.userCard} onClick={() => handleUserClick(user.id)}>
+                            <div>
+                                <img src={formatPath(user.profileImage)} alt={`Avatar of ${user.name}`}/>
+                            </div>
+                            <div className={styles.userInfo}>
+                                <h3>{user.name}</h3>
+                                <p>Email: {user.email}</p>
+                            </div>
                         </div>
-                        <div className={styles.userInfo}>
-                            <h3>{user.name}</h3>
-                            <p>Email: {user.email}</p>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                <ReactPaginate
+                    className={styles.pagination}
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    breakLabel={"..."}
+                    pageCount={10}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={(selectedPage) => {
+                    }}
+                    containerClassName={styles.paginationContainer}
+                    activeClassName={styles.paginationActive}
+                />
             </div>
-
-            <ReactPaginate
-                previousLabel={"Previous"}
-                nextLabel={"Next"}
-                breakLabel={"..."}
-                pageCount={10}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={(selectedPage) => {
-                }}
-                containerClassName={styles.paginationContainer}
-                activeClassName={styles.paginationActive}
-            />
-
-            <CSVLink
-                data={allUsersList}
-                filename={"user_list.csv"}
-                className={styles.exportButton}
-            >
-                Export User List to CSV
-            </CSVLink>
-
-            <Footer />
-        </div>
+        </main>
     );
 }
