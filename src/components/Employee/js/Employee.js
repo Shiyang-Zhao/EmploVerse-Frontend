@@ -52,12 +52,15 @@ export default function Employee({ state }) {
           </div>
 
           {Object.entries(activeSection).map(([name, value]) => (
-            <div className={styles['input-container']} key={name}>
-              {name !== 'id' && <label htmlFor={`employee-${name}`}>{name === 'ssn' || name === 'gpa' ? name.toUpperCase() : formatLabel(name)}</label>}
-              {name !== 'salaryInfo' && name !== 'id' && <p>{value}</p>}
-            </div>
+            name !== 'id' && (
+              <div className={`${styles['input-container']} ${styles['active']}`} key={name}>
+                <label htmlFor={`employee-${name}`}>
+                  {name === 'ssn' || name === 'gpa' ? name.toUpperCase() : formatLabel(name)}
+                </label>
+                {name !== 'salaryInfo' && <p>{value}</p>}
+              </div>
+            )
           ))}
-
         </div>)}
       </div>
     </main>

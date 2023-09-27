@@ -42,6 +42,14 @@ export const API = {
         });
     },
 
+    updateUserById: function (id, data) {
+        return Axios.post(`users/updateUserById/${id}`, data, {
+            headers: {
+                'Authorization': cookies.get('jwt')
+            }
+        });
+    },
+
     getPaginatedUsers: function (pagination) {
         return Axios.get(`/users/page/${pagination.currentPage}?pageSize=${pagination.pageSize}&sortField=${pagination.sortField}&sortDir=${pagination.sortDir}`, {
             headers: {

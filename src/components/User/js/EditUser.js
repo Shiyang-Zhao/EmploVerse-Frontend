@@ -36,10 +36,10 @@ export default function EditUser() {
     let response;
     if (userId) {
       response = await API.updateUserById(userId, formData);
-      navigate(`users/user/${userId}`);
+      navigate(`/users/user/${userId}`);
     } else {
       response = await API.updateCurrentUser(formData);
-      navigate("current_user");
+      navigate("/current_user");
     }
   };
 

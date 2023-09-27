@@ -103,29 +103,41 @@
         }
     }
 
-    // New Styles
-    .info-section {
+    .input-container {
+        margin-bottom: 15px;
+        padding: 10px;
         border: 1px solid #ccc;
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
         transition: all 0.3s ease;
+        animation: slideInFromTop 0.5s ease-in-out;
+        cursor: pointer;
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            display: block;
+        }
+
+        p {
+            margin: 0;
+            color: #333;
+        }
 
         &:hover {
-            transform: translateY(-5px);
-            border-color: #3498db;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #f0f0f0;
         }
 
-        h2 {
-            font-size: 1.5rem;
-        }
     }
 
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
+    @keyframes slideInFromTop {
+        from {
+            transform: translateY(-150%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 }
