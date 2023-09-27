@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import imageCompression from 'browser-image-compression';
 
 const Helper = {};
@@ -67,21 +65,5 @@ function formatDateFromArray(dateArray) {
 
     return `${year}-${month}-${day}`;
 }
-
-// const debounce = (func, delay) => {
-//     let timer;
-
-//     return function () {
-//         const context = this;
-//         const args = arguments;
-
-//         clearTimeout(timer);
-
-//         timer = setTimeout(() => {
-//             func.apply(context, args);
-//         }, delay);
-//     };
-// }
-
 
 export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage, formatDateFromArray }

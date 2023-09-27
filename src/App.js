@@ -5,6 +5,7 @@ import { Navigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { ParallaxProvider } from 'react-scroll-parallax';
+import { UserProvider } from 'components/Authentication/js/UserProvider';
 import SignUp from 'components/Authentication/js/SignUp';
 import SignIn from 'components/Authentication/js/SignIn';
 import { LogOut } from 'components/Authentication/js/LogOut'
@@ -38,51 +39,49 @@ export default function App() {
     });
   }, [cookies]);
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   return (
     <div>
-      <Header state={state} />
-      <TransitionGroup component={null}>
-        <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
-          <ParallaxProvider>
-            <Routes location={location}>
-              <Route path="/" element={<div ref={ref}><Home state={state} /></div>} />
-              <Route path="signin" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignIn setCookie={setCookie} /></div>} />
-              <Route path="signup" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignUp setCookie={setCookie} /></div>} />
+      <UserProvider>
+        <Header state={state} />
+        <TransitionGroup component={null}>
+          <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
+            <ParallaxProvider>
+              <Routes location={location}>
+                <Route path="/" element={<div ref={ref}><Home state={state} /></div>} />
+                <Route path="signin" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignIn setCookie={setCookie} /></div>} />
+                <Route path="signup" element={state.isSignedIn ? <Navigate to="/" /> : <div ref={ref}><SignUp setCookie={setCookie} /></div>} />
 
-              {state.isSignedIn && (
-                <React.Fragment>
-                  {state.cookies.selectedRole[0] !== 'ROLE_USER' && (
-                    <React.Fragment>
-                      <Route path="users" element={<div ref={ref}><UserList state={state} /></div>} />
-                      <Route path="users/user/:userId" element={<div ref={ref}><User state={state} /></div>} />
-                      <Route path="users/user/:userId/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
+                {state.isSignedIn && (
+                  <React.Fragment>
+                    {state.cookies.selectedRole[0] !== 'ROLE_USER' && (
+                      <React.Fragment>
+                        <Route path="users" element={<div ref={ref}><UserList state={state} /></div>} />
+                        <Route path="users/user/:userId" element={<div ref={ref}><User state={state} /></div>} />
+                        <Route path="users/user/:userId/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
 
-                      <Route path="employees/employee/:employeeId" element={<div ref={ref}><Employee state={state} /></div>} />
-                      <Route path="employees/employee/:employeeId/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
-                    </React.Fragment>
-                  )}
+                        <Route path="employees/employee/:employeeId" element={<div ref={ref}><Employee state={state} /></div>} />
+                        <Route path="employees/employee/:employeeId/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
+                      </React.Fragment>
+                    )}
 
-                  <Route path="current_user" element={<div ref={ref}><User state={state} /></div>} />
-                  <Route path="current_user/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
-                  <Route path="chat" element={<div ref={ref}><Chat /></div>} />
+                    <Route path="current_user" element={<div ref={ref}><User state={state} /></div>} />
+                    <Route path="current_user/edit" element={<div ref={ref}><EditUser state={state} /></div>} />
+                    <Route path="chat" element={<div ref={ref}><Chat /></div>} />
 
-                  <Route path="employees" element={<div ref={ref}><EmployeeList state={state} /></div>} />
-                  <Route path="employees/add" element={<div ref={ref}><AddEmployee state={state} /></div>} />
-                  <Route path="current_employee" element={<div ref={ref}><Employee state={state} /></div>} />
-                  <Route path="current_employee/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
+                    <Route path="employees" element={<div ref={ref}><EmployeeList state={state} /></div>} />
+                    <Route path="employees/add" element={<div ref={ref}><AddEmployee state={state} /></div>} />
+                    <Route path="current_employee" element={<div ref={ref}><Employee state={state} /></div>} />
+                    <Route path="current_employee/edit" element={<div ref={ref}><EditEmployee state={state} /></div>} />
 
-                  <Route path="/logout" element={<div ref={ref}><LogOut state={state} removeCookie={removeCookie} /></div>} />
-                  {/* <Route path="/switch" element={<div ref={ref}><Switch state={state} removeCookie={removeCookie} /></div>} /> */}
-                </React.Fragment>
-              )}
-            </Routes>
-          </ParallaxProvider>
-        </CSSTransition>
-      </TransitionGroup>
+                    <Route path="/logout" element={<div ref={ref}><LogOut state={state} removeCookie={removeCookie} /></div>} />
+                    {/* <Route path="/switch" element={<div ref={ref}><Switch state={state} removeCookie={removeCookie} /></div>} /> */}
+                  </React.Fragment>
+                )}
+              </Routes>
+            </ParallaxProvider>
+          </CSSTransition>
+        </TransitionGroup>
+      </UserProvider>
     </div>
   )
 }
