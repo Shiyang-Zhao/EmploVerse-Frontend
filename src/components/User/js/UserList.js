@@ -51,8 +51,11 @@ export default function UserList({ state }) {
                                 <img src={formatPath(user.profileImage)} alt={`Avatar of ${user.name}`}/>
                             </div>
                             <div className={styles.userInfo}>
-                                <h3>{user.name}</h3>
+                                <p>Name: {user.firstName} {user.lastName}</p>
+                                <p>Username: {user.username}</p>
                                 <p>Email: {user.email}</p>
+                                <p>Phone Number: {user.phoneNumber}</p>
+
                             </div>
                         </div>
                     ))}
