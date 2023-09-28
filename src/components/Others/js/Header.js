@@ -1,15 +1,21 @@
 import styles from "components/Others/css/Header.module.scss";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import UserContext from "components/Authentication/js/UserProvider";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Header({ state }) {
-  const { isSignedIn, cookies } = state;
-  const isAdmin = cookies.selectedRole?.[0] === 'ROLE_ADMIN';
+export default function Header() {
+  const navigate = useNavigate();
+  const { logout, isSignedIn, isAdmin } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 700);
   const isAtHome = window.location.pathname === "/" ? `${styles['atHome']}` : `${styles['notAtHome']}`;
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
   };
 
   useEffect(() => {
@@ -38,7 +44,7 @@ export default function Header({ state }) {
               <Link to="/" >Home</Link>
             </li>
 
-            {isSignedIn ? (
+            {isSignedIn() ? (
               <React.Fragment>
                 <li>
                   <Link to="current_employee" >Dashboard</Link>
@@ -47,7 +53,7 @@ export default function Header({ state }) {
                 <li>
                   <Link to="chat" >Chat</Link>
                 </li>
-                {isAdmin && (
+                {isAdmin() && (
                   <li>
                     <Link to="users" >Users</Link>
                   </li>
@@ -64,21 +70,18 @@ export default function Header({ state }) {
                     <li>
                       <Link to="current_user" >Profile</Link>
                     </li>
-                    {/* <li>
-                      <Link to="/switch" >Switch</Link>
-                    </li> */}
                     <li>
-                      <Link to="/logout" >Log out</Link>
+                      <Link onClick={handleLogout} >Log out</Link>
                     </li>
                   </ul>
                 </li>
               </React.Fragment>
             ) :
-              <React.Fragment>
+              (<React.Fragment>
                 <li>
                   <Link to="signin" >Sign in</Link>
                 </li>
-              </React.Fragment>
+              </React.Fragment>)
             }
           </ul>}
       </nav>

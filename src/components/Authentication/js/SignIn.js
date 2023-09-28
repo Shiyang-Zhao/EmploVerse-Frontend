@@ -1,10 +1,12 @@
 import styles from 'components/Authentication/css/SignIn.module.scss';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { API } from 'api/API';
+import UserContext from './UserProvider';
 
-export default function SignIn({ setCookie }) {
+export default function SignIn() {
   const navigate = useNavigate();
+  const { signin } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -23,18 +25,14 @@ export default function SignIn({ setCookie }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await API.signIn({
+      await signin({
         usernameOrEmail: formData.username,
         password: formData.password,
         roles: formData.selectedRole,
       });
-      console.log(response)
-
-      setCookie("jwt", `Bearer ${response.data.token}`);
-      setCookie("selectedRole", response.data.roles);
       navigate('/');
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

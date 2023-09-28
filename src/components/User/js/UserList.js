@@ -1,5 +1,4 @@
 import styles from "components/User/css/UserList.module.scss";
-import Footer from "components/Others/js/Footer";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";

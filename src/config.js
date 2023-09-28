@@ -1,11 +1,9 @@
 import imageCompression from 'browser-image-compression';
 
-const Helper = {};
+const API_URL = 'https://emploverse-backend-44b450c4a01a.herokuapp.com/EmploVerse';
+// const API_URL = 'http://localhost:8080/EmploVerse';
 
-// const API_URL = 'http://54.153.123.3:8080/EmploVerse';
-const API_URL = 'http://localhost:8080/EmploVerse';
-
-const SOCK_URL = 'http://localhost:8080/EmploVerse/ws';
+const SOCK_URL = 'https://localhost:8080/EmploVerse/ws';
 
 const inputTypes = {
     ssn: 'password',

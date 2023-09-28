@@ -1,16 +1,12 @@
-//import "App.scss";
 import styles from 'components/Authentication/css/SignUp.module.scss';
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import imageCompression from 'browser-image-compression';
-import { API_URL, inputTypes, formatLabel, compressImage } from 'config';
-import { API } from 'api/API';
+import { inputTypes, formatLabel, compressImage } from 'config';
+import UserContext from './UserProvider';
 
-
-export default function SignUp({ setCookie }) {
-
+export default function SignUp() {
   const navigate = useNavigate();
+  const { signup } = useContext(UserContext); // Use the context
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -27,7 +23,6 @@ export default function SignUp({ setCookie }) {
 
   const handleChange = async (event) => {
     const { name, value, files } = event.target;
-    // If the input type is 'file', update the formData with the selected file if it's within the size limit
     if (event.target.type === 'file' && files.length > 0) {
       const file = await compressImage(files[0], 1);
       setFormData((prevFormData) => ({
@@ -54,14 +49,7 @@ export default function SignUp({ setCookie }) {
       if (formData.password1 !== formData.password2) {
         return console.error("Password does not match"); // Return an error message
       }
-      const registerResponse = await API.signUp({ ...formData, roles });
-      const authenticateResponse = await API.signIn({
-        usernameOrEmail: formData.username,
-        password: formData.password1,
-        roles: selectedRole,
-      });
-      setCookie("jwt", `Bearer ${authenticateResponse.data.token}`);
-      setCookie("selectedRole", authenticateResponse.data.roles);
+      await signup({ ...formData, roles });
       navigate('/');
     } catch (error) {
       console.log(error);
