@@ -71,7 +71,7 @@ export default function Header() {
                       <Link to="current_user" >Profile</Link>
                     </li>
                     <li>
-                      <Link onClick={handleLogout} >Log out</Link>
+                      <Link to='logout' >Log out</Link>
                     </li>
                   </ul>
                 </li>

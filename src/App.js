@@ -17,6 +17,7 @@ import AddEmployee from 'components/Employee/js/AddEmployee';
 import Employee from 'components/Employee/js/Employee';
 import EditEmployee from 'components/Employee/js/EditEmployee';
 import EditUser from 'components/User/js/EditUser';
+import { LogOut } from 'components/Authentication/js/LogOut';
 
 export default function App() {
   const ref = createRef();
@@ -37,6 +38,7 @@ export default function App() {
               <Route path="/" element={<div ref={ref}><Home /></div>} />
               <Route path="signin" element={<div ref={ref}><SignIn /></div>} />
               <Route path="signup" element={<div ref={ref}><SignUp /></div>} />
+              <Route path="logout" element={<div ref={ref}><LogOut /></div>} />
 
               {isSignedIn() && (<React.Fragment>
                 {isAdmin() && (<React.Fragment>

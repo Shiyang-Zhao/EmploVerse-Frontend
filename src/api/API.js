@@ -4,6 +4,7 @@ import { API_URL } from "config";
 const Axios = axios.create({
     baseURL: API_URL,
     timeout: 10000,
+    withCredentials: true,
 })
 
 export const API = {
@@ -40,7 +41,7 @@ export const API = {
     },
 
     getCurrentUser: function () {
-        return Axios.get('/users/getCurrentUser',);
+        return Axios.get('/users/getCurrentUser');
     },
 
     updateCurrentUser: function (data) {

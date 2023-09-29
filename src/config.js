@@ -37,6 +37,14 @@ const formatPath = (path) => {
     return path.replace(rootToRemove, '');
 };
 
+function formatDateFromArray(dateArray) {
+    const year = dateArray[0];
+    const month = dateArray[1] < 10 ? `0${dateArray[1]}` : dateArray[1];
+    const day = dateArray[2] < 10 ? `0${dateArray[2]}` : dateArray[2];
+
+    return `${year}-${month}-${day}`;
+}
+
 const compressImage = async (file, maxMB) => {
     try {
         // if (event.target.type === 'file' && files.length > 0) {
@@ -56,12 +64,19 @@ const compressImage = async (file, maxMB) => {
     }
 }
 
-function formatDateFromArray(dateArray) {
-    const year = dateArray[0];
-    const month = dateArray[1] < 10 ? `0${dateArray[1]}` : dateArray[1];
-    const day = dateArray[2] < 10 ? `0${dateArray[2]}` : dateArray[2];
 
-    return `${year}-${month}-${day}`;
+function debounce(func, delay) {
+    let timeout;
+
+    return function (...args) {
+        const context = this;
+
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, delay);
+    };
 }
+
 
 export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage, formatDateFromArray }
