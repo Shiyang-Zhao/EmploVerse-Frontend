@@ -6,11 +6,9 @@ import { UserProvider } from 'components/Authentication/js/UserProvider';
 
 ReactDOM.createRoot(document.getElementById('App'))
     .render(
-
-            <UserProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </UserProvider>
-
-        );
+        <UserProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </UserProvider>
+    );
