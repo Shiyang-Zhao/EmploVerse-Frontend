@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import { API } from 'api/API';
 
 const UserContext = createContext();
@@ -15,11 +15,6 @@ export const UserProvider = ({ children }) => {
   const signup = async (data) => {
     try {
       const response = await API.signUp(data);
-      await signin({
-        usernameOrEmail: data.username,
-        password: data.password1,
-        roles: data.selectedRole,
-      });
       return response;
     } catch (error) {
       throw new Error("Failed to sign up");
@@ -36,7 +31,7 @@ export const UserProvider = ({ children }) => {
       });
       return response;
     } catch (error) {
-      throw new Error("Failed to log in");
+      throw new Error("Failed to sign in");
     }
   };
 

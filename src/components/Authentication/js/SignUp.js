@@ -6,7 +6,7 @@ import UserContext from './UserProvider';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { signup } = useContext(UserContext);
+  const { signup, signin } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -51,6 +51,11 @@ export default function SignUp() {
       }
       console.log(formData)
       await signup({ ...formData, roles });
+      await signin({
+        usernameOrEmail: formData.username,
+        password: formData.password1,
+        roles: selectedRole,
+      })
       navigate('/');
     } catch (error) {
       console.log(error);
