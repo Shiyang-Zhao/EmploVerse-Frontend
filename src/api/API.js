@@ -74,7 +74,7 @@ export const API = {
     },
 
     getAllEmployees: function () {
-        return Axios.get('/employees',);
+        return Axios.get('/employees/',);
     },
 
     createEmployee: function (data) {
