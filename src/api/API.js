@@ -1,11 +1,6 @@
 import axios from 'axios';
 import { API_URL } from "config";
 
-const Auth = axios.create({
-    baseURL: API_URL,
-    timeout: 10000,
-})
-
 const Axios = axios.create({
     baseURL: API_URL,
     timeout: 10000,
@@ -14,7 +9,7 @@ const Axios = axios.create({
 
 export const API = {
     signUp: function (data) {
-        return Auth.post('/users/register', data, {
+        return Axios.post('/users/register', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -22,7 +17,7 @@ export const API = {
     },
 
     signIn: function (data) {
-        return Auth.post('/users/authenticate', data);
+        return Axios.post('/users/authenticate', data);
     },
 
     logOut: function () {
