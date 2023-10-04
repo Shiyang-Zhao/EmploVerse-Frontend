@@ -34,7 +34,6 @@ export const UserProvider = ({ children }) => {
         jwt: `Bearer ${response.data.token}`,
         selectedRole: credentials.selectedRole,
       });
-      console.log(response.data);
       return response;
     } catch (error) {
       throw new Error("Failed to log in");

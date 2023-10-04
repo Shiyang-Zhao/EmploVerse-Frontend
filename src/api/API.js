@@ -69,7 +69,11 @@ export const API = {
     },
 
     getAllEmployees: function () {
-        return Axios.get('/employees/',);
+        return Axios.get('/employees/', {
+            headers: {
+                withCredentials: true
+            }
+        });
     },
 
     createEmployee: function (data) {
@@ -84,7 +88,7 @@ export const API = {
         return Axios.post(`/employees/updateEmployeeById/${id}`, data,);
     },
 
-    deleteEmployeeById: function (id, data) {
+    deleteEmployeeById: function (id) {
         return Axios.post(`/employees/deleteEmployeeById/${id}`, null,);
     },
 
