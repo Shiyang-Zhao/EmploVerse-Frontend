@@ -6,7 +6,7 @@ import UserContext from './UserProvider';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const { signup } = useContext(UserContext); // Use the context
+  const { signup } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -49,6 +49,7 @@ export default function SignUp() {
       if (formData.password1 !== formData.password2) {
         return console.error("Password does not match"); // Return an error message
       }
+      console.log(formData)
       await signup({ ...formData, roles });
       navigate('/');
     } catch (error) {

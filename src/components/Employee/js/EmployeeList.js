@@ -1,14 +1,16 @@
 import styles from "components/Employee/css/EmployeeList.module.scss";
 import Footer from "components/Others/js/Footer";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { CSVLink } from "react-csv";
 import { formatPath } from "config";
 import { API } from 'api/API';
+import UserContext from "components/Authentication/js/UserProvider";
 
 export default function EmployeeList({ state }) {
   const navigate = useNavigate();
+  const { isUser } = useContext(UserContext);
   const [allEmployeesList, setAllEmployeesList] = useState([]);
 
   const [pagination, setPagination] = useState({
@@ -119,14 +121,7 @@ export default function EmployeeList({ state }) {
   const editEmployee = (employee, event) => {
     event.stopPropagation();
     try {
-      if (
-        state.cookies.selectedRole[0] !== "ROLE_ADMIN" &&
-        state.cookies.selectedRole[0] !== "ROLE_MANAGER"
-      ) {
-        alert("You don't have the privileges to edit employees");
-      } else {
-        navigate(`employee/${employee.id}/edit`);
-      }
+      navigate(`employee/${employee.id}/edit`);
     } catch (error) {
       console.error("Error editing employee:", error);
     }
@@ -181,7 +176,7 @@ export default function EmployeeList({ state }) {
         </div>
 
         <div className={styles.addExport}>
-          {state.cookies.selectedRole[0] === "ROLE_USER" ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
+          {isUser ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}

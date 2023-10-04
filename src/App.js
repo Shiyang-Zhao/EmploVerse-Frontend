@@ -52,7 +52,7 @@ export default function App() {
 
                 <Route path="current_user" element={<div ref={ref}><User /></div>} />
                 <Route path="current_user/edit" element={<div ref={ref}><EditUser /></div>} />
-                <Route path="chat" element={<div ref={ref}><Chat /></div>} />
+                {/* <Route path="chat" element={<div ref={ref}><Chat /></div>} /> */}
 
                 <Route path="employees" element={<div ref={ref}><EmployeeList /></div>} />
                 <Route path="employees/add" element={<div ref={ref}><AddEmployee /></div>} />

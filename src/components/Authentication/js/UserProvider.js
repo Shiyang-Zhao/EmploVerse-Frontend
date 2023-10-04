@@ -10,6 +10,8 @@ export const UserProvider = ({ children }) => {
 
   const isAdmin = () => user.selectedRole === 'ROLE_ADMIN';
 
+  const isUser = () => user.selectedRole === 'ROLE_USER';
+
   const signup = async (data) => {
     try {
       const response = await API.signUp(data);
@@ -48,7 +50,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, signup, signin, logout, isSignedIn, isAdmin}}>
+    <UserContext.Provider value={{ user, signup, signin, logout, isSignedIn, isAdmin, isUser}}>
       {children}
     </UserContext.Provider>
   );
