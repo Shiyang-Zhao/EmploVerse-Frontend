@@ -35,11 +35,11 @@ export default function App() {
         <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
           <ParallaxProvider>
             <Routes location={location}>
+              <Route path="/" element={<div ref={ref}><Home /></div>} />
+              <Route path="signin" element={<div ref={ref}><SignIn /></div>} />
+              <Route path="signup" element={<div ref={ref}><SignUp /></div>} />
+              <Route path="logout" element={<div ref={ref}><LogOut /></div>} />
               {isSignedIn && <React.Fragment>
-                <Route path="/" element={<div ref={ref}><Home /></div>} />
-                <Route path="signin" element={<div ref={ref}><SignIn /></div>} />
-                <Route path="signup" element={<div ref={ref}><SignUp /></div>} />
-                <Route path="logout" element={<div ref={ref}><LogOut /></div>} />
                 {auth.isAdmin && <React.Fragment>
                   <Route path="users" element={<div ref={ref}><UserList /></div>} />
                   <Route path="users/user/:userId" element={<div ref={ref}><User /></div>} />
