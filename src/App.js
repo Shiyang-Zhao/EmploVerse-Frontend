@@ -22,7 +22,7 @@ import { LogOut } from 'components/Authentication/js/LogOut';
 export default function App() {
   const ref = createRef();
   const location = useLocation();
-  const { isSignedIn, isAdmin } = useContext(UserContext);
+  const { isSignedIn, auth } = useContext(UserContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,27 +35,28 @@ export default function App() {
         <CSSTransition nodeRef={ref} key={location.key} timeout={500} classNames="fade">
           <ParallaxProvider>
             <Routes location={location}>
-              <Route path="/" element={<div ref={ref}><Home /></div>} />
-              <Route path="signin" element={<div ref={ref}><SignIn /></div>} />
-              <Route path="signup" element={<div ref={ref}><SignUp /></div>} />
-              <Route path="logout" element={<div ref={ref}><LogOut /></div>} />
+              {isSignedIn && <React.Fragment>
+                <Route path="/" element={<div ref={ref}><Home /></div>} />
+                <Route path="signin" element={<div ref={ref}><SignIn /></div>} />
+                <Route path="signup" element={<div ref={ref}><SignUp /></div>} />
+                <Route path="logout" element={<div ref={ref}><LogOut /></div>} />
+                {auth.isAdmin && <React.Fragment>
+                  <Route path="users" element={<div ref={ref}><UserList /></div>} />
+                  <Route path="users/user/:userId" element={<div ref={ref}><User /></div>} />
+                  <Route path="users/user/:userId/edit" element={<div ref={ref}><EditUser /></div>} />
 
-              <Route path="users" element={<div ref={ref}><UserList /></div>} />
-              <Route path="users/user/:userId" element={<div ref={ref}><User /></div>} />
-              <Route path="users/user/:userId/edit" element={<div ref={ref}><EditUser /></div>} />
+                  <Route path="employees/employee/:employeeId" element={<div ref={ref}><Employee /></div>} />
+                  <Route path="employees/employee/:employeeId/edit" element={<div ref={ref}><EditEmployee /></div>} />
+                </React.Fragment>}
+                <Route path="current_user" element={<div ref={ref}><User /></div>} />
+                <Route path="current_user/edit" element={<div ref={ref}><EditUser /></div>} />
+                {/* <Route path="chat" element={<div ref={ref}><Chat /></div>} /> */}
 
-              <Route path="employees/employee/:employeeId" element={<div ref={ref}><Employee /></div>} />
-              <Route path="employees/employee/:employeeId/edit" element={<div ref={ref}><EditEmployee /></div>} />
-
-              <Route path="current_user" element={<div ref={ref}><User /></div>} />
-              <Route path="current_user/edit" element={<div ref={ref}><EditUser /></div>} />
-              {/* <Route path="chat" element={<div ref={ref}><Chat /></div>} /> */}
-
-              <Route path="employees" element={<div ref={ref}><EmployeeList /></div>} />
-              <Route path="employees/add" element={<div ref={ref}><AddEmployee /></div>} />
-              <Route path="current_employee" element={<div ref={ref}><Employee /></div>} />
-              <Route path="current_employee/edit" element={<div ref={ref}><EditEmployee /></div>} />
-
+                <Route path="employees" element={<div ref={ref}><EmployeeList /></div>} />
+                <Route path="employees/add" element={<div ref={ref}><AddEmployee /></div>} />
+                <Route path="current_employee" element={<div ref={ref}><Employee /></div>} />
+                <Route path="current_employee/edit" element={<div ref={ref}><EditEmployee /></div>} />
+              </React.Fragment>}
             </Routes>
           </ParallaxProvider>
         </CSSTransition>
