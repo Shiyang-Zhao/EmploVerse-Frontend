@@ -5,12 +5,26 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(null);
+  const [auth, setAuth] = useState({
+    roles: null,
+    selectedRoles: null,
+    isAdmin: false,
+    isManager: false,
+    isUser: false
+  })
 
   useEffect(async () => {
     try {
       const response = await API.checkAuth();
       if (response.status === 200) {
         setIsSignedIn(true);
+        setAuth({
+          roles: response.data.roles,
+          selectedRoles: response.data.selectedRoles,
+          isAdmin: response.data.selectedRoles.includes('ROLE_ADMIN'),
+          isManager: response.data.selectedRoles.includes('ROLE_MANAGER'),
+          isUser: response.data.selectedRoles.includes('ROLE_USER'),
+        })
         console.log('User is authenticated');
       } else if (response.status === 401) {
         setIsSignedIn(false);
@@ -52,7 +66,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, signup, signin, logout, isSignedIn, }}>
+    <UserContext.Provider value={{ signup, signin, logout, isSignedIn, auth }}>
       {children}
     </UserContext.Provider>
   );

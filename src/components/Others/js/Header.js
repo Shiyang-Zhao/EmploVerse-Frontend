@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { logout, isSignedIn, isAdmin } = useContext(UserContext);
+  const { logout, isSignedIn, auth } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 700);
   const isAtHome = window.location.pathname === "/" ? `${styles['atHome']}` : `${styles['notAtHome']}`;
 
@@ -44,7 +44,7 @@ export default function Header() {
               <Link to="/" >Home</Link>
             </li>
 
-            {isSignedIn() ? (
+            {isSignedIn ? (
               <React.Fragment>
                 <li>
                   <Link to="current_employee" >Dashboard</Link>
@@ -53,7 +53,7 @@ export default function Header() {
                 <li>
                   <Link to="chat" >Chat</Link>
                 </li>
-                {isAdmin() && (
+                {auth.isAdmin && (
                   <li>
                     <Link to="users" >Users</Link>
                   </li>

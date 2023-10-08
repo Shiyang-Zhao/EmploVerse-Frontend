@@ -10,12 +10,12 @@ export default function SignIn() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    selectedRole: ['ROLE_USER']
+    selectedRoles: ['ROLE_USER']
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    const parsedValue = name === 'selectedRole' ? JSON.parse(value) : value;
+    const parsedValue = name === 'selectedRoles' ? JSON.parse(value) : value;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: parsedValue,
@@ -28,7 +28,7 @@ export default function SignIn() {
       await signin({
         usernameOrEmail: formData.username,
         password: formData.password,
-        roles: formData.selectedRole,
+        selectedRoles: formData.selectedRoles,
       });
       navigate('/');
     } catch (error) {
@@ -72,7 +72,7 @@ export default function SignIn() {
                 <input
                   type="radio"
                   id="ROLE_ADMIN"
-                  name="selectedRole"
+                  name="selectedRoles"
                   value={JSON.stringify(['ROLE_ADMIN'])}
                   onChange={handleChange}
                 />
@@ -82,7 +82,7 @@ export default function SignIn() {
                 <input
                   type="radio"
                   id="ROLE_MANAGER"
-                  name="selectedRole"
+                  name="selectedRoles"
                   value={JSON.stringify(['ROLE_MANAGER'])}
                   onChange={handleChange}
                 />
@@ -92,7 +92,7 @@ export default function SignIn() {
                 <input
                   type="radio"
                   id="ROLE_USER"
-                  name="selectedRole"
+                  name="selectedRoles"
                   value={JSON.stringify(['ROLE_USER'])}
                   onChange={handleChange}
                 />
