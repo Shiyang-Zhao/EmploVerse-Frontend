@@ -12,13 +12,13 @@ export default function User({ state }) {
   const [profileImageFile, setProfileImageFile] = useState(null);
   const [newProfileImageFile, setNewProfileImageFile] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { isSignedIn, isAdmin } = useContext(UserContext);
+  const { isSignedIn, auth } = useContext(UserContext);
 
 
   useEffect(() => {
     const getUser = async () => {
       let response;
-      if (isAdmin() && userId) {
+      if (auth.isAdmin && userId) {
         response = await API.getUserById(userId);
       } else {
         response = await API.getCurrentUser();

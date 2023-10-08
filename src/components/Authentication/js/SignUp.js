@@ -19,7 +19,7 @@ export default function SignUp() {
   });
 
   const [roles, setRoles] = useState(["ROLE_USER"]);
-  const [selectedRole, setSelectedRole] = useState(["ROLE_USER"]);
+  const [selectedRoles, setSelectedRoles] = useState(["ROLE_USER"]);
 
   const handleChange = async (event) => {
     const { name, value, files } = event.target;
@@ -40,7 +40,7 @@ export default function SignUp() {
   const handleRoleChange = (event) => {
     const parsedRoles = JSON.parse(event.target.value);
     setRoles(parsedRoles);
-    setSelectedRole([parsedRoles[0]]); // Set the selectedRole to the first element of the parsedRoles array
+    setSelectedRoles([parsedRoles[0]]); // Set the selectedRole to the first element of the parsedRoles array
   };
 
   const handleSubmit = async (event) => {
@@ -54,7 +54,7 @@ export default function SignUp() {
       await signin({
         usernameOrEmail: formData.username,
         password: formData.password1,
-        roles: selectedRole,
+        selectedRoles: selectedRoles,
       })
       navigate('/');
     } catch (error) {
