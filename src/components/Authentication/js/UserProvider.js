@@ -13,8 +13,8 @@ export const UserProvider = ({ children }) => {
     isUser: false
   })
 
-  useEffect(async () => {
-    try {
+  useEffect(() => {
+    const checkAuth = async () => {
       const response = await API.checkAuth();
       if (response.status === 200) {
         setIsSignedIn(true);
@@ -32,9 +32,8 @@ export const UserProvider = ({ children }) => {
       } else {
         console.log('Unhandled response status:', response.status);
       }
-    } catch (error) {
-      console.error('Error checking authentication:', error);
     }
+    checkAuth();
   }, []);
 
   const signup = async (data) => {
