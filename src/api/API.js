@@ -9,7 +9,7 @@ const Axios = axios.create({
 
 export const API = {
     signUp: function (data) {
-        return Axios.post('/users/register', data, {
+        return Axios.post('/auth/register', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -17,11 +17,15 @@ export const API = {
     },
 
     signIn: function (data) {
-        return Axios.post('/users/authenticate', data);
+        return Axios.post('/auth/authenticate', data);
+    },
+
+    checkAuth: function () {
+        return Axios.get('/auth/checkAuth');
     },
 
     logOut: function () {
-        return Axios.post('/users/logout', null,);
+        return Axios.post('/auth/logout', null,);
     },
 
     getAllUsers: function () {

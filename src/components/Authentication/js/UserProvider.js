@@ -1,16 +1,27 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { API } from 'api/API';
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [isSignedIn, setIsSignedIn] = useState(null);
 
-  const isSignedIn = () => user !== null;
-
-  const isAdmin = () => user.selectedRole === 'ROLE_ADMIN';
-
-  const isUser = () => user.selectedRole === 'ROLE_USER';
+  useEffect(async () => {
+    try {
+      const response = await API.checkAuth();
+      if (response.status === 200) {
+        setIsSignedIn(true);
+        console.log('User is authenticated');
+      } else if (response.status === 401) {
+        setIsSignedIn(false);
+        console.log('User is not authenticated');
+      } else {
+        console.log('Unhandled response status:', response.status);
+      }
+    } catch (error) {
+      console.error('Error checking authentication:', error);
+    }
+  }, []);
 
   const signup = async (data) => {
     try {
@@ -24,11 +35,7 @@ export const UserProvider = ({ children }) => {
   const signin = async (credentials) => {
     try {
       const response = await API.signIn(credentials);
-      setUser({
-        usernameOrEmail: credentials.usernameOrEmail,
-        jwt: `Bearer ${response.data.token}`,
-        selectedRole: credentials.selectedRole,
-      });
+      setIsSignedIn(true);
       return response;
     } catch (error) {
       throw new Error("Failed to sign in");
@@ -38,14 +45,14 @@ export const UserProvider = ({ children }) => {
   const logout = async () => {
     try {
       await API.logOut();
-      setUser(null);
+      setIsSignedIn(false);
     } catch (error) {
       throw new Error("Failed to log out");
     }
   };
 
   return (
-    <UserContext.Provider value={{ user, signup, signin, logout, isSignedIn, isAdmin, isUser}}>
+    <UserContext.Provider value={{ user, signup, signin, logout, isSignedIn, }}>
       {children}
     </UserContext.Provider>
   );
