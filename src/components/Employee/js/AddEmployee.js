@@ -48,6 +48,17 @@ export default function AddEmployee({ state }) {
     gpa: ''
   });
 
+  const [salaryInfo, setSalaryInfo] = useState({
+    amount: null,
+    payFrequency: "",
+    bonus: null,
+    taxDeduction: null,
+    overtimeHours: null,
+    overtimeRate: null,
+    deductions: "",
+    insuranceCoverage: "",
+  });
+
   const [activeSection, setActiveSection] = useState(personalInfo);
 
   const switchSection = (section) => {
@@ -80,7 +91,7 @@ export default function AddEmployee({ state }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo })
+    console.log({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo })
     const response = await API.createEmployee({ 'user': targetUser });
     navigate('/employees');
   };
@@ -129,9 +140,10 @@ export default function AddEmployee({ state }) {
         </div>
 
         <div className={styles['nav-bar']}>
-          <button className={`${styles['nav-btn']} ${styles.personalInfo}`} onClick={() => switchSection(personalInfo)}>Personal Infomation</button>
-          <button className={`${styles['nav-btn']} ${styles.employeeInfo}`} onClick={() => switchSection(employeeInfo)}>Employee Infomation</button>
-          <button className={`${styles['nav-btn']} ${styles.educationInfo}`} onClick={() => switchSection(educationInfo)}>Education Infomation</button>
+          <button className={`${styles['nav-btn']} ${styles.personalInfo}`} onClick={() => switchSection(personalInfo)}>Personal</button>
+          <button className={`${styles['nav-btn']} ${styles.employeeInfo}`} onClick={() => switchSection(employeeInfo)}>Employee</button>
+          <button className={`${styles['nav-btn']} ${styles.educationInfo}`} onClick={() => switchSection(educationInfo)}>Education</button>
+          <button className={`${styles['nav-btn']} ${styles.salaryInfo}`} onClick={() => switchSection(salaryInfo)}>Salary</button>
         </div>
 
         <form className={styles.addEmployeeForm} onSubmit={handleSubmit}>
