@@ -15,8 +15,8 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const response = await API.checkAuth();
-      if (response.status === 200) {
+      try {
+        const response = await API.checkAuth();
         setIsSignedIn(true);
         setAuth({
           roles: response.data.roles,
@@ -26,11 +26,9 @@ export const UserProvider = ({ children }) => {
           isUser: response.data.selectedRoles.includes('ROLE_USER'),
         })
         console.log('User is authenticated');
-      } else if (response.status === 401) {
+      } catch (error) {
         setIsSignedIn(false);
         console.log('User is not authenticated');
-      } else {
-        console.log('Unhandled response status:', response.status);
       }
     }
     checkAuth();

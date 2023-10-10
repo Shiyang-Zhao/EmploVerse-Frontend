@@ -13,14 +13,18 @@ export default function Employee({ state }) {
   const [activeSection, setActiveSection] = useState(null);
   useEffect(() => {
     const getEmployee = async () => {
-      let response;
-      if (employeeId) {
-        response = await API.getEmployeeById(employeeId);
-      } else {
-        response = await API.getCurrentEmployee();
+      try {
+        let response;
+        if (employeeId) {
+          response = await API.getEmployeeById(employeeId);
+        } else {
+          response = await API.getCurrentEmployee();
+        }
+        setEmployee(response.data);
+        setActiveSection(response.data.personalInfo);
+      } catch (error) {
+        console.log(error);
       }
-      setEmployee(response.data);
-      setActiveSection(response.data.personalInfo);
     }
     getEmployee();
   }, [employeeId]);
