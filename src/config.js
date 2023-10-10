@@ -32,10 +32,10 @@ const formatLabel = (name) => {
     return words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 };
 
-const formatPath = (path) => {
-    const rootToRemove = 'C:/Users/shiya/Downloads/Projects/EmploVerse/EmploVerse-Frontend/public';
-    return path.replace(rootToRemove, '');
-};
+// const formatPath = (path) => {
+//     const rootToRemove = 'C:/Users/shiya/Downloads/Projects/EmploVerse/EmploVerse-Frontend/public';
+//     return path.replace(rootToRemove, '');
+// };
 
 function formatDateFromArray(dateArray) {
     const year = dateArray[0];

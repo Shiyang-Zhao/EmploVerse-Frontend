@@ -1,7 +1,7 @@
 import styles from 'components/User/css/User.module.scss';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { formatPath, compressImage } from 'config';
+import { compressImage } from 'config';
 import { API } from 'api/API';
 import UserContext from 'components/Authentication/js/UserProvider';
 
@@ -25,7 +25,7 @@ export default function User({ state }) {
       }
       setUser(response.data);
       console.log(response.data)
-      setProfileImageFile(formatPath(response.data.profileImage));
+      setProfileImageFile(response.data.profileImage);
     }
     getUser();
   }, [userId])

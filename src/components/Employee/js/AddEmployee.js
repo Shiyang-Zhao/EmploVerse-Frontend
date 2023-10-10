@@ -2,8 +2,7 @@
 import styles from 'components/Employee/css/AddEmployee.module.scss';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formatLabel, inputTypes, formatPath } from 'config';
-import { useEffect } from "react";
+import { formatLabel, inputTypes } from 'config';
 import { API } from 'api/API';
 
 export default function AddEmployee({ state }) {
@@ -129,7 +128,7 @@ export default function AddEmployee({ state }) {
         <div className={styles.searchResultsContainer}>
           {search.searchResult && search.searchResult.map((user) => (
             <button className={styles.searchResult} key={user.id} onClick={() => setTargetUser(user)}>
-              <img src={formatPath(user.profileImage)} alt="Profile" />
+              <img src={user.profileImage} alt="Profile" />
               <div className={styles.userInfo}>
                 <p>ID: {user.id}</p>
                 <p>Username: {user.username}</p>

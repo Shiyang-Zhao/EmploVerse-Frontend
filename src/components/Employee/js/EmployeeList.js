@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { CSVLink } from "react-csv";
-import { formatPath } from "config";
 import { API } from 'api/API';
 import UserContext from "components/Authentication/js/UserProvider";
 
@@ -226,7 +225,7 @@ export default function EmployeeList({ state }) {
                     }}
                   >
                     <td>{employee.id}</td>
-                    <td><img src={formatPath(employee.user.profileImage)} className={`rounded-circle img-fluid img-thumbnail ${styles.employeeImage}`} /></td>
+                    <td><img src={employee.user.profileImage} className={`rounded-circle img-fluid img-thumbnail ${styles.employeeImage}`} /></td>
                     <td>{employee.user.firstName}</td>
                     <td>{employee.user.lastName}</td>
                     <td>{employee.user.username}</td>

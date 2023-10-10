@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { CSVLink } from "react-csv";
-import { formatPath } from "config";
 import { API } from "api/API";
 
 export default function UserList({ state }) {
@@ -47,7 +46,7 @@ export default function UserList({ state }) {
                     {allUsersList.map((user) => (
                         <div key={user.id} className={styles.userCard} onClick={() => handleUserClick(user.id)}>
                             <div>
-                                <img src={formatPath(user.profileImage)} alt={`Avatar of ${user.name}`}/>
+                                <img src={user.profileImage} alt={`Avatar of ${user.name}`} />
                             </div>
                             <div className={styles.userInfo}>
                                 <p>Name: {user.firstName} {user.lastName}</p>
