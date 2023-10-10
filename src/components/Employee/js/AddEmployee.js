@@ -92,7 +92,7 @@ export default function AddEmployee({ state }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo })
-    const response = await API.createEmployee({ 'user': targetUser });
+    const response = await API.createEmployee({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo });
     navigate('/employees');
   };
 
