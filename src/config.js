@@ -79,4 +79,4 @@ function debounce(func, delay) {
 }
 
 
-export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, formatPath, compressImage, formatDateFromArray }
+export { API_URL, SOCK_URL, inputTypes, labelNames, errorTypes, formatLabel, compressImage, formatDateFromArray }
