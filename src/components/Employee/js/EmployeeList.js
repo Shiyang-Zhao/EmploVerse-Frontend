@@ -174,7 +174,7 @@ export default function EmployeeList({ state }) {
         </div>
 
         <div className={styles.addExport}>
-          {!auth.isAdmin && auth.isManager ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
+          {!auth.isAdmin && !auth.isManager ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}
