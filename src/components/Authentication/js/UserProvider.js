@@ -14,30 +14,31 @@ export const UserProvider = ({ children }) => {
   })
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await API.checkAuth();
-        setIsSignedIn(true);
-        setAuth({
-          roles: response.data.roles,
-          selectedRoles: response.data.selectedRoles,
-          isAdmin: response.data.selectedRoles.includes('ROLE_ADMIN'),
-          isManager: response.data.selectedRoles.includes('ROLE_MANAGER'),
-          isUser: response.data.selectedRoles.includes('ROLE_USER'),
-        })
-        console.log(response.data);
-        console.log('User is authenticated');
-      } catch (error) {
-        setIsSignedIn(false);
-        console.log('User is not authenticated');
-      }
-    }
     checkAuth();
-  }, []);
+  }, [isSignedIn]);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(auth);
   })
+
+  const checkAuth = async () => {
+    try {
+      const response = await API.checkAuth();
+      setIsSignedIn(true);
+      setAuth({
+        roles: response.data.roles,
+        selectedRoles: response.data.selectedRoles,
+        isAdmin: response.data.selectedRoles.includes('ROLE_ADMIN'),
+        isManager: response.data.selectedRoles.includes('ROLE_MANAGER'),
+        isUser: response.data.selectedRoles.includes('ROLE_USER'),
+      })
+      console.log(response.data);
+      console.log('User is authenticated');
+    } catch (error) {
+      setIsSignedIn(false);
+      console.log('User is not authenticated');
+    }
+  }
 
   const signup = async (data) => {
     try {
