@@ -1,4 +1,3 @@
-////import "App.scss";
 import styles from 'components/Employee/css/AddEmployee.module.scss';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +7,6 @@ import { API } from 'api/API';
 export default function AddEmployee({ state }) {
   const navigate = useNavigate();
   const [targetUser, setTargetUser] = useState({});
-  const [profileImageFile, setProfileImageFile] = useState('');
   const [search, setSearch] = useState({
     keyword: '',
     searchField: 'id',
@@ -49,13 +47,13 @@ export default function AddEmployee({ state }) {
 
   const [salaryInfo, setSalaryInfo] = useState({
     amount: null,
-    payFrequency: "",
+    payFrequency: '',
     bonus: null,
     taxDeduction: null,
     overtimeHours: null,
     overtimeRate: null,
-    deductions: "",
-    insuranceCoverage: "",
+    deductions: '',
+    insuranceCoverage: '',
   });
 
   const [activeSection, setActiveSection] = useState(personalInfo);
@@ -90,9 +88,13 @@ export default function AddEmployee({ state }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo })
-    const response = await API.createEmployee({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo });
-    navigate('/employees');
+    try {
+      console.log({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo })
+      const response = await API.createEmployee({ 'user': targetUser, 'personalInfo': personalInfo, 'employeeInfo': employeeInfo, 'educationInfo': educationInfo, 'salaryInfo': salaryInfo });
+      navigate('/employees');
+    } catch (error) {
+      console.error("Error adding the employee:", error);
+    }
   };
 
   return (

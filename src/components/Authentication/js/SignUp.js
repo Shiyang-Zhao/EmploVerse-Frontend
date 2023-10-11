@@ -40,14 +40,14 @@ export default function SignUp() {
   const handleRoleChange = (event) => {
     const parsedRoles = JSON.parse(event.target.value);
     setRoles(parsedRoles);
-    setSelectedRoles([parsedRoles[0]]); // Set the selectedRole to the first element of the parsedRoles array
+    setSelectedRoles([parsedRoles[0]]);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (formData.password1 !== formData.password2) {
-        return console.error("Password does not match"); // Return an error message
+        return console.error("Password does not match");
       }
       console.log(formData)
       await signup({ ...formData, roles });
