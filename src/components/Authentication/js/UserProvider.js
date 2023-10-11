@@ -25,6 +25,7 @@ export const UserProvider = ({ children }) => {
           isManager: response.data.selectedRoles.includes('ROLE_MANAGER'),
           isUser: response.data.selectedRoles.includes('ROLE_USER'),
         })
+        console.log(response.data);
         console.log('User is authenticated');
       } catch (error) {
         setIsSignedIn(false);
