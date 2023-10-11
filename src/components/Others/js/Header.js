@@ -5,17 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { logout, isSignedIn, auth } = useContext(UserContext);
+  const { isSignedIn, auth } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 700);
   const isAtHome = window.location.pathname === "/" ? `${styles['atHome']}` : `${styles['notAtHome']}`;
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
   };
 
   useEffect(() => {

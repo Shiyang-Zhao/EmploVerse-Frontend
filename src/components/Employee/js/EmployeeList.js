@@ -9,7 +9,7 @@ import UserContext from "components/Authentication/js/UserProvider";
 
 export default function EmployeeList({ state }) {
   const navigate = useNavigate();
-  const { isUser } = useContext(UserContext);
+  const { auth } = useContext(UserContext);
   const [allEmployeesList, setAllEmployeesList] = useState([]);
 
   const [pagination, setPagination] = useState({
@@ -30,7 +30,6 @@ export default function EmployeeList({ state }) {
 
   useEffect(() => {
     getPaginatedEmployeesList();
-    console.log(pagination.employeeList)
   }, [pagination.currentPage, pagination.sortField, pagination.sortDir]);
 
   useEffect(() => {
@@ -175,7 +174,7 @@ export default function EmployeeList({ state }) {
         </div>
 
         <div className={styles.addExport}>
-          {isUser ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
+          {!auth.isAdmin && auth.isManager ? (<button className={styles.addButton} onClick={addCurrentUserToEmployees}>Join</button>) : (<button className={styles.addButton} onClick={() => navigate("add")}>Add</button>)}
           <button key="export-button" className={styles.exportButton}>
             <CSVLink
               className={styles.exportLink}
@@ -220,7 +219,6 @@ export default function EmployeeList({ state }) {
                     className={styles.information}
                     key={employee.id}
                     onClick={() => {
-                      sessionStorage.setItem("selectedEmployeeId", employee.id);
                       navigate(`employee/${employee.id}`);
                     }}
                   >

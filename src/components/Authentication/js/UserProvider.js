@@ -34,6 +34,10 @@ export const UserProvider = ({ children }) => {
     checkAuth();
   }, []);
 
+  useEffect(()=>{
+    console.log(auth);
+  })
+
   const signup = async (data) => {
     try {
       const response = await API.signUp(data);
